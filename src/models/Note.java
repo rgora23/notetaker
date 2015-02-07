@@ -1,4 +1,4 @@
-package functionality;
+package models;
 
 
 public class Note {
