@@ -1,19 +1,19 @@
 package main;
-import models.Note;
 import models.User;
+
 
 
 public class NoteTakerMain {
 
 	static User currentUser;
 	
-	public static void main(String[] args) {
-
-		// User clicks to create a note
-		String title = "Physics";
-		Note thisNote = new Note(title);
-
-	}
+//	public static void main(String[] args) {
+//
+//		// User clicks to create a note
+//		String title = "Physics";
+//		Note thisNote = new Note(title);
+//
+//	}
 	
 	// Try to log in
 	public static boolean tryLogin() {
