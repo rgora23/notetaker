@@ -1,4 +1,5 @@
 package main;
+import models.Note;
 import models.User;
 
 
@@ -9,10 +10,10 @@ public class NoteTakerMain {
 	
 //	public static void main(String[] args) {
 //
+//		System.out.println("hi");
 //		// User clicks to create a note
 //		String title = "Physics";
 //		Note thisNote = new Note(title);
-//
 //	}
 	
 	// Try to log in
