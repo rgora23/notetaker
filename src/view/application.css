@@ -19,3 +19,19 @@
    -fx-effect: innershadow( three-pass-box , rgba(0,0,0,0.7) , 6, 0.0 , 0 , 2 );
 	
 }
+
+#modifiedbutton{
+	-fx-font-size: 9px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #333333;
+    -fx-effect:dropshadow( gaussian, rgba(255,255,255,0.5), 0,0,0,1);
+	
+}
+
+#datebutton{
+	-fx-font-size: 9px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #333333;
+    -fx-effect:dropshadow( gaussian, rgba(255,255,255,0.5), 0,0,0,1);
+	
+	}
