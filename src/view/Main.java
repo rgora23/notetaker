@@ -2,12 +2,12 @@ package view;
 
 import java.io.IOException;
 
-import controllers.EventController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import controllers.EventController;
 
 
 public class Main extends Application {
@@ -59,7 +59,7 @@ public class Main extends Application {
 
 
 	public void transitionLoginSuccess() throws IOException {
-		System.out.println("THIS WORKED!");
+	//	System.out.println("THIS WORKED!");
 	}
 
 
