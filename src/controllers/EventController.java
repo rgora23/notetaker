@@ -1,4 +1,6 @@
 package controllers;
+import helpers.LoginRequest;
+
 import java.io.IOException;
 
 import javafx.event.ActionEvent;
@@ -6,10 +8,13 @@ import javafx.fxml.FXML;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
+import models.User;
 public class EventController extends EventControllerParent {
 
 	@FXML private Label noteTaker_text;
@@ -25,24 +30,23 @@ public class EventController extends EventControllerParent {
 	@FXML private Button tags_button;
 	@FXML private Label create_account;
 	@FXML private Text login_fail_text;
+	@FXML private TextField username_input;
+	@FXML private PasswordField password_input;
 	
 	
-	
-	@FXML protected void changeText(ActionEvent e) throws IOException {
-		changeText();
-	}
-	@FXML protected void changeText(MouseEvent e) throws IOException {
-		changeText();
-	}
-	
-	protected void changeText() throws IOException {
-		noteTaker_text.setText("NoteTaker");
-		// Check db for correct un/pw
-		//dashboard.setDisable(false);
-		//loginPane.setVisible(false); 
-		login_fail_text.setVisible(true);
-		getMain().transitionLoginSuccess();
-	   
+	@FXML protected void tryLogin(ActionEvent e) throws IOException {
+		String username = username_input.getText();
+		String password = password_input.getText();
+		LoginRequest loginRequest = new LoginRequest(username, password);
+		
+		if (User.authenticate(loginRequest).isAuthenticated()) {
+			User currentUser = User.getUserById(loginRequest.getUserID());
+			getMain().setCurrentUser(currentUser);
+			getMain().transitionLoginSuccess();
+		}
+		else {
+			getMain().transitionLoginFailed(login_fail_text);
+		}
 	}
 
   
