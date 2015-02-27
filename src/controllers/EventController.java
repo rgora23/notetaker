@@ -9,6 +9,7 @@ import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.text.Text;
 public class EventController extends EventControllerParent {
 
 	@FXML private Label noteTaker_text;
@@ -22,6 +23,10 @@ public class EventController extends EventControllerParent {
 	@FXML private Button createNote_button;
 	@FXML private Button settings_button;
 	@FXML private Button tags_button;
+	@FXML private Label create_account;
+	@FXML private Text login_fail_text;
+	
+	
 	
 	@FXML protected void changeText(ActionEvent e) throws IOException {
 		changeText();
@@ -33,9 +38,9 @@ public class EventController extends EventControllerParent {
 	protected void changeText() throws IOException {
 		noteTaker_text.setText("NoteTaker");
 		// Check db for correct un/pw
-		dashboard.setDisable(false);
-		loginPane.setVisible(false); 
-		
+		//dashboard.setDisable(false);
+		//loginPane.setVisible(false); 
+		login_fail_text.setVisible(true);
 		getMain().transitionLoginSuccess();
 	   
 	}
@@ -67,5 +72,10 @@ public class EventController extends EventControllerParent {
    
 	@FXML protected void settingsButtonClicked(MouseEvent e) throws IOException {
 		  noteTaker_text.setText("viewSettings!");
+	}
+
+	@FXML protected void createAccount(MouseEvent e) throws IOException {
+		  // open window to gather account info
+		 noteTaker_text.setText("New account!");
 	}
 }
