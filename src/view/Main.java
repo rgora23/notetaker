@@ -6,13 +6,16 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import models.User;
 import controllers.EventController;
 
 
 public class Main extends Application {
 
 	Stage stage;
+	User currentUser;
 
 	@Override
 	public void start(Stage primaryStage) throws IOException {
@@ -59,7 +62,12 @@ public class Main extends Application {
 
 
 	public void transitionLoginSuccess() throws IOException {
-	//	System.out.println("THIS WORKED!");
+		// At this point the scene needs to load for the logged in user
+		System.out.println("LOGIN SUCCESS");
+	}
+	
+	public void transitionLoginFailed(Text login_fail_text) throws IOException {
+		login_fail_text.setVisible(true);
 	}
 
 
@@ -71,4 +79,14 @@ public class Main extends Application {
 	public Stage getStage() {
 		return this.stage;
 	}
+
+	public User getCurrentUser() {
+		return currentUser;
+	}
+
+	public void setCurrentUser(User currentUser) {
+		this.currentUser = currentUser;
+	}
+	
+	
 }

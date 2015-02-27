@@ -21,7 +21,7 @@
 			<children>
             <Pane layoutX="325.0" layoutY="271.0">
                <children>
-      				<Label id="NOTETAKER_text" fx:id="noteTaker_text" alignment="CENTER" blendMode="OVERLAY" onMouseClicked="#changeText" textAlignment="CENTER" AnchorPane.leftAnchor="325.0" />
+      				<Label id="NOTETAKER_text" fx:id="noteTaker_text" alignment="CENTER" blendMode="OVERLAY" textAlignment="CENTER" AnchorPane.leftAnchor="325.0" />
                </children>
             </Pane>
 				<GridPane fx:id="loginPane" alignment="center" gridLinesVisible="false" hgap="10" vgap="3" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="5.0">
@@ -29,12 +29,12 @@
 						<Label Text="Username" GridPane.columnIndex="0" GridPane.rowIndex="0" />
             			<Label Text="Password" GridPane.columnIndex="1" GridPane.rowIndex="0" />
             			<Text fx:id="login_fail_text" fill="A70000" text="Sorry, this account did not match our records" visible="false" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="2" />
-            			<PasswordField id="password_input" onAction="#changeText" promptText="Password" GridPane.columnIndex="1" GridPane.rowIndex="1">
+						<TextField fx:id="username_input" id="username_input" onAction="#tryLogin" promptText="User Name" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+            			<PasswordField fx:id="password_input" id="password_input" onAction="#tryLogin" promptText="Password" GridPane.columnIndex="1" GridPane.rowIndex="1">
 							<GridPane.margin>
 								<Insets right="10.0" />
 							</GridPane.margin>
 						</PasswordField>
-						<TextField id="username_input" promptText="User Name" GridPane.columnIndex="0" GridPane.rowIndex="1" />
 					</children>
 					<columnConstraints>
 						<ColumnConstraints />
