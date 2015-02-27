@@ -10,6 +10,19 @@ public class EventController extends EventControllerParent {
 
 	@FXML private Label noteTaker_text;
 	@FXML private Parent root;
+<<<<<<< Updated upstream
+=======
+	@FXML private AnchorPane dashboard;
+	@FXML private Button notes_button;
+	@FXML private Button title_button;
+	@FXML private Button modified_button; 
+	@FXML private Button date_button;
+	@FXML private GridPane loginPane;
+	@FXML private Button createNote_button;
+	@FXML private Button settings_button;
+	@FXML private Button tags_button;
+	
+>>>>>>> Stashed changes
 	@FXML protected void changeText(ActionEvent e) throws IOException {
 		changeText();
 	}
