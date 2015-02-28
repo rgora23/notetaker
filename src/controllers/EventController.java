@@ -1,5 +1,5 @@
 package controllers;
-import helpers.LoginRequest;
+//import helpers.LoginRequest;
 
 import java.io.IOException;
 
@@ -9,6 +9,7 @@ import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
+import javafx.scene.control.ProgressIndicatorBuilder;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -18,26 +19,27 @@ import models.User;
 public class EventController extends EventControllerParent {
 
 	@FXML private Label noteTaker_text;
+	@FXML private Label create_account;
 	@FXML private Parent root;
 	@FXML private AnchorPane dashboard;
 	@FXML private Button notes_button;
 	@FXML private Button title_button;
 	@FXML private Button modified_button; 
 	@FXML private Button date_button;
-	@FXML private GridPane loginPane; 
 	@FXML private Button createNote_button;
 	@FXML private Button settings_button;
 	@FXML private Button tags_button;
-	@FXML private Label create_account;
 	@FXML private Text login_fail_text;
 	@FXML private TextField username_input;
 	@FXML private PasswordField password_input;
-	
-	
+	@FXML private GridPane loginPane; 
+	@FXML private Button create_account_button;
+	@FXML private AnchorPane create_account_pane;
+//	@FXML private ProgressIndicatorBuilder ProgressIndicator;
 	@FXML protected void tryLogin(ActionEvent e) throws IOException {
 		String username = username_input.getText();
 		String password = password_input.getText();
-		LoginRequest loginRequest = new LoginRequest(username, password);
+	/*  LoginRequest loginRequest = new LoginRequest(username, password);
 		
 		if (User.authenticate(loginRequest).isAuthenticated()) {
 			User currentUser = User.getUserById(loginRequest.getUserID());
@@ -47,7 +49,7 @@ public class EventController extends EventControllerParent {
 		else {
 			getMain().transitionLoginFailed(login_fail_text);
 		}
-	}
+*/	}
 
   
 	@FXML protected void noteButtonClicked(MouseEvent e) throws IOException{
@@ -78,8 +80,14 @@ public class EventController extends EventControllerParent {
 		  noteTaker_text.setText("viewSettings!");
 	}
 
-	@FXML protected void createAccount(MouseEvent e) throws IOException {
+	@FXML protected void createAccountWindow(MouseEvent e) throws IOException {
 		  // open window to gather account info
 		 noteTaker_text.setText("New account!");
 	}
+	
+   @FXML protected void addAccount(MouseEvent e) throws IOException {
+	    // progressIndicator.setVisible(true);
+	   create_account_pane.setVisible(false);
+   }
+
 }

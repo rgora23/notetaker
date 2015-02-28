@@ -4,12 +4,19 @@
 	 -fx-background-image: url("paperBackground.jpg");
 }
 
-.label {
+#username {
 	-fx-font-size: 12px;
     -fx-font-weight: bold;
     -fx-text-fill: #333333;
     -fx-effect:dropshadow( gaussian, rgba(255,255,255,0.5), 0,0,0,1);
     }
+#password {
+	-fx-font-size: 12px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #333333;
+    -fx-effect:dropshadow( gaussian, rgba(255,255,255,0.5), 0,0,0,1);
+    }
+
 
 #NOTETAKER_text {
 	
@@ -36,7 +43,7 @@
 	
 	}
 	
-	#new_account {
+	#newaccount {
 	-fx-font-size: 12px;
     -fx-font-weight: bold;
     -fx-text-fill: #0283CF;
