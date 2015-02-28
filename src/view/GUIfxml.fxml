@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.effect.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.geometry.*?>
@@ -26,11 +27,11 @@
             </Pane>
 				<GridPane fx:id="loginPane" alignment="center" gridLinesVisible="false" hgap="10" vgap="3" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="5.0">
             		<children>
-						<Label Text="Username" GridPane.columnIndex="0" GridPane.rowIndex="0" />
-            			<Label Text="Password" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+						<Label id="username" Text="Username" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+            			<Label id="password" Text="Password" GridPane.columnIndex="1" GridPane.rowIndex="0" />
             			<Text fx:id="login_fail_text" fill="A70000" text="Sorry, this account did not match our records" visible="false" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="2" />
-						<TextField fx:id="username_input" id="username_input" onAction="#tryLogin" promptText="User Name" GridPane.columnIndex="0" GridPane.rowIndex="1" />
-            			<PasswordField fx:id="password_input" id="password_input" onAction="#tryLogin" promptText="Password" GridPane.columnIndex="1" GridPane.rowIndex="1">
+						<TextField id="username_input" fx:id="username_input" editable="true" onAction="#tryLogin" promptText="User Name" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+            			<PasswordField id="password_input" fx:id="password_input" editable="true" onAction="#tryLogin" promptText="Password" GridPane.columnIndex="1" GridPane.rowIndex="1">
 							<GridPane.margin>
 								<Insets right="10.0" />
 							</GridPane.margin>
@@ -62,6 +63,9 @@
                            <font>
                               <Font size="18.0" />
                            </font>
+                           <cursor>
+                              <Cursor fx:constant="TEXT" />
+                           </cursor>
                         </Button>
                      <Button fx:id="tags_button" minWidth="-Infinity" onMouseClicked="#tagsButtonClicked" prefHeight="61.0" prefWidth="43.0" text="+" GridPane.columnIndex="0" GridPane.rowIndex="1">
                            <font>
@@ -107,11 +111,53 @@
                   </AnchorPane>
                </children>
             </AnchorPane>
-            <Label id="new_account" fx:id="create_account" onMouseClicked="#createAccount" text="New Account" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="20.0">
+            <Label id="newaccount" fx:id="create_account" onMouseClicked="#createAccountWindow" text="New Account" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="20.0">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor></Label>
 			</children>  
 		</AnchorPane>
+      <AnchorPane fx:id="create_account_pane" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #ADBEC2 ; -fx-border-color: grey;" AnchorPane.rightAnchor="475.0" AnchorPane.topAnchor="150.0">
+         <children>
+            <GridPane id="new_account_window" layoutX="2.0" prefHeight="261.0" prefWidth="244.0" AnchorPane.leftAnchor="1.0" AnchorPane.topAnchor="-1.0">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="35.0" />
+              </columnConstraints>
+              <rowConstraints>
+                  <RowConstraints maxHeight="146.0" minHeight="10.0" prefHeight="46.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="146.0" minHeight="10.0" prefHeight="66.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="104.0" minHeight="0.0" prefHeight="52.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="72.0" minHeight="0.0" prefHeight="35.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="67.0" minHeight="10.0" prefHeight="10.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="70.0" minHeight="10.0" prefHeight="63.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Button fx:id="create_account_button" onMouseClicked="#addAccount" mnemonicParsing="false" text="Create" GridPane.rowIndex="5" />
+                  <TextField fx:id="new_userName" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="26.0" prefWidth="145.0" promptText="User Name" GridPane.columnSpan="2" GridPane.rowIndex="1" />
+                  <TextField fx:id="new_password" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="26.0" prefWidth="145.0" promptText="password" GridPane.rowIndex="2" />
+                  <TextField fx:id="confirm_password" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="26.0" prefWidth="145.0" promptText="confirm password" GridPane.columnSpan="2" GridPane.rowIndex="3" />
+                  <Label alignment="CENTER" contentDisplay="CENTER" text="New Account" textAlignment="CENTER" GridPane.columnSpan="2">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <padding>
+                        <Insets left="37.0" />
+                     </padding>
+                  </Label>
+                  <ProgressIndicator fx:id="progressIndicator" visible="false" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER" />
+                  <Label text="user name" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <Label text="password" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <Label text="confirm" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+               </children>
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding>
+            </GridPane>
+         </children>
+      </AnchorPane>
 	</children>
 </AnchorPane>
