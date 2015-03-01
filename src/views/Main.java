@@ -1,6 +1,8 @@
 package views;
 
+import java.io.File;
 import java.io.IOException;
+import java.util.Scanner;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -68,6 +70,10 @@ public class Main extends Application {
 	
 	public void transitionLoginFailed(Text login_fail_text) throws IOException {
 		login_fail_text.setVisible(true);
+		new Scanner(new File("filename")).useDelimiter("\\Z").next();
+		String[] shit = {"fuck", "this", "shit"};
+		String fuck = shit[shit.length - 1];
+		
 	}
 
 
