@@ -68,19 +68,11 @@ public class CsvWriter extends CsvReader {
 			return false;
 		}
 		
-		// The correct amount of headers have been provided, so
+		// The correct amount of fields have been provided, so
 		// attempt to write the new record as long as the id is unique.
 		boolean uniqueId = true;
 		CsvRecord newRecord = new CsvRecord(row);
-		newRecord.setHeaders(this.headers);
-		String rowId = newRecord.getValueAtField("id");
-		for (CsvRecord record : table) {
-			if (record.getValueAtField("id").equals(rowId)) {
-				uniqueId = false;
-				break;
-			}
-		}
-		if (uniqueId) table.add(new CsvRecord(row));
+		if (validateUniqueness("id", newRecord.getId())) table.add(new CsvRecord(row));
 		else System.out.println("The id " + row.get(0) + " has already been allocated.");
 		return uniqueId;
 	}
@@ -95,8 +87,7 @@ public class CsvWriter extends CsvReader {
 		String idString = id + "";
 		CsvRecord removedRecord = null;
 		for (CsvRecord record : table) {
-			String recordId = record.getValueAtField("id");
-			if (idString.equals(recordId)) {
+			if ( CsvHelpers.checkEquality(idString, record.getId()) ) {
 				removedRecord = record;
 				table.remove(record);
 				break;

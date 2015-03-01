@@ -36,4 +36,8 @@ public class CsvHelpers {
 		return join(record.getRow(), separator);
 	}
 	
+	protected static boolean checkEquality(String a, String b) {
+		return ( a != null && b != null && a.trim().equalsIgnoreCase(b.trim()) );
+	}
+	
 }

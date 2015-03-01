@@ -37,8 +37,8 @@ public class RegistrationRequest {
 		return confirmPassword;
 	}
 
-	public void setConfirmPassword(String confirm_password) {
-		this.confirmPassword = confirm_password;
+	public void setConfirmPassword(String confirmPassword) {
+		this.confirmPassword = confirmPassword;
 	}
 
 	public ArrayList<String> getErrors() {

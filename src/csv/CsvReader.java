@@ -52,14 +52,34 @@ public class CsvReader extends CsvParser {
 		return createTableFromFile();
 	}
 	
+	/**
+	 * Finds the next ID to use in order to append a record to the table.
+	 * @return String representation of the next ID to use in the table.
+	 */
 	public String getNextId() {
-		CsvRecord lastRecord = table.get(table.size() - 1);
-		String lastIdString = lastRecord.getValueAtField("id");
 		int lastId = -1;
 		try {
-			lastId = Integer.parseInt(lastIdString);			
+			lastId = Integer.parseInt(lastRecord().getId());			
 		} catch (NumberFormatException e) { }
 		return (lastId + 1) + "";
+	}
+	
+	/**
+	 * Gets the last record in the table
+	 * @return CsvRecord object of last record in the table.
+	 * @author Brian Maxwell
+	 */
+	public CsvRecord lastRecord() {
+		return table.get(table.size() - 1);
+	}
+	
+	/**
+	 * Gets the first record in the table
+	 * @return CsvRecord object of first record in the table.
+	 * @author Brian Maxwell
+	 */
+	public CsvRecord firstRecord() {
+		return table.get(0);
 	}
 	
 	/**
@@ -84,16 +104,30 @@ public class CsvReader extends CsvParser {
 	 * </pre>
 	 * 
 	 * @param header   The header of each record to compare the value to
-	 * @param value    The value to match against
+	 * @param value   The value to match against
 	 * @return A new CsvTable object holding matched records
 	 * @author Brian Maxwell
 	 */
 	public ArrayList<CsvRecord> where(String header, String value) {
 		ArrayList<CsvRecord> filteredTable = new ArrayList<CsvRecord>();
 		for (CsvRecord record : table) {
-			if (value.equals(record.getValueAtField(header))) filteredTable.add(record);
+			String headerValue = record.getValueAtField(header);
+			if ( CsvHelpers.checkEquality(headerValue, value) ) filteredTable.add(record);
 		}
 		return filteredTable;
+	}
+	
+	/**
+	 * Checks if the given value for a header has been taken for any
+	 * of the records in the table.
+	 * 
+	 * @param header   The header of each record to compare the value to
+	 * @param value   The value to match against
+	 * @return returns if the value for the given header is unique.
+	 * @author Brian Maxwell
+	 */
+	public boolean validateUniqueness(String header, String value) {
+		return where(header, value).isEmpty();
 	}
 	
 	/**
@@ -116,7 +150,7 @@ public class CsvReader extends CsvParser {
 		CsvRecord match = null;
 		for (CsvRecord record : table) {
 			String value = record.getValueAtField("id");
-			if (value != null && value.equals(id)) {
+			if (CsvHelpers.checkEquality(id, value)) {
 				match = record;
 				break;
 			}
@@ -181,6 +215,7 @@ public class CsvReader extends CsvParser {
 			while ((line = reader.readLine()) != null) {
 				ArrayList<String> row = CsvHelpers.StringArrayToArrayList(line.split(delimiter));
 				CsvRecord record = new CsvRecord(row);
+				record.setHeaders(this.headers);
 				table.add(record);
 			}
 			reader.close();

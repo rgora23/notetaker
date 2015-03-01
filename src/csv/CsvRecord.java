@@ -41,6 +41,17 @@ public class CsvRecord extends CsvParser {
 	}
 	
 	/**
+	 * Shorthand method for retrieving the id of the method. Identical to calling:
+	 * <div><pre>record.{@link #getValueAtField}("id")</pre></div>
+	 * @param header   the header corresponding to the field that needs to be retrieved.
+	 * @return The value at the current field or null if the field does not exist.
+	 * @author Brian Maxwell
+	 */
+	public String getId() {
+		return getValueAtField("id");
+	}
+	
+	/**
 	 * Get the record as a ArrayList<String> object.
 	 * @return ArrayList<String> object representing the record information.
 	 * @author Brian Maxwell
