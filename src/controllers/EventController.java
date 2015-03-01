@@ -64,7 +64,12 @@ public class EventController extends EventControllerParent {
 		String confirmPassword = confirm_password.getText();
 		RegistrationRequest request = new RegistrationRequest(username, password, confirmPassword);
 		if ( User.register(request).getErrors().isEmpty() ) {
-			
+			System.out.println("Account Created");
+		}
+		else {
+			for (String error : request.getErrors() ) {
+				System.out.println(error);
+			}
 		}
 		
 		
