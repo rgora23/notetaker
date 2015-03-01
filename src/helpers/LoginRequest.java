@@ -9,7 +9,7 @@ public class LoginRequest {
 
 	String username;
 	String password;
-	int userID;
+	String userID;
 	boolean authenticated;
 	ArrayList<String> errorMessages;
 	
@@ -51,11 +51,11 @@ public class LoginRequest {
 		this.errorMessages.add(message);
 	}
 
-	public int getUserID() {
+	public String getUserID() {
 		return userID;
 	}
 
-	public void setUserID(int userID) {
+	public void setUserID(String userID) {
 		this.userID = userID;
 	}
 

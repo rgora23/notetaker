@@ -67,10 +67,8 @@ public class Main extends Application {
 	}
 	
 	public void transitionLoginFailed(Text login_fail_text) throws IOException {
-		login_fail_text.setVisible(true);
+		login_fail_text.setVisible(true);		
 	}
-
-
 
 	public void setStage(Stage stage) {
 		this.stage = stage;
