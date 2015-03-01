@@ -1,6 +1,7 @@
 package models;
 
 import helpers.LoginRequest;
+import helpers.RegistrationRequest;
 
 import java.util.ArrayList;
 
@@ -24,6 +25,12 @@ public class User {
 		int userID = 0;
 		request.setAuthenticated(true);
 		request.setUserID(userID);
+		return request;
+	}
+	
+	public static RegistrationRequest register(RegistrationRequest request) {
+		
+		
 		return request;
 	}
 	

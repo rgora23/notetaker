@@ -1,6 +1,9 @@
 package controllers;
 //import helpers.LoginRequest;
 
+import helpers.LoginRequest;
+import helpers.RegistrationRequest;
+
 import java.io.IOException;
 
 import javafx.event.ActionEvent;
@@ -9,7 +12,6 @@ import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
-import javafx.scene.control.ProgressIndicatorBuilder;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -35,11 +37,16 @@ public class EventController extends EventControllerParent {
 	@FXML private GridPane loginPane; 
 	@FXML private Button create_account_button;
 	@FXML private AnchorPane create_account_pane;
+	@FXML private TextField new_username;
+	@FXML private PasswordField new_password;
+	@FXML private PasswordField confirm_password;
 //	@FXML private ProgressIndicatorBuilder ProgressIndicator;
+	
+	
 	@FXML protected void tryLogin(ActionEvent e) throws IOException {
 		String username = username_input.getText();
 		String password = password_input.getText();
-	/*  LoginRequest loginRequest = new LoginRequest(username, password);
+	  LoginRequest loginRequest = new LoginRequest(username, password);
 		
 		if (User.authenticate(loginRequest).isAuthenticated()) {
 			User currentUser = User.getUserById(loginRequest.getUserID());
@@ -49,8 +56,19 @@ public class EventController extends EventControllerParent {
 		else {
 			getMain().transitionLoginFailed(login_fail_text);
 		}
-*/	}
+	}
 
+	@FXML protected void tryRegistration(ActionEvent e) throws IOException {
+		String username = new_username.getText();
+		String password = new_password.getText();
+		String confirmPassword = confirm_password.getText();
+		RegistrationRequest request = new RegistrationRequest(username, password, confirmPassword);
+		if ( User.register(request).getErrors().isEmpty() ) {
+			
+		}
+		
+		
+	}
   
 	@FXML protected void noteButtonClicked(MouseEvent e) throws IOException{
 		  noteTaker_text.setText("YES");
