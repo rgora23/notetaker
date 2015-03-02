@@ -6,13 +6,13 @@ public class RegistrationRequest {
 
 	String username;
 	String password;
-	String confirm_password;
+	String confirmPassword;
 	ArrayList<String> errors;
 	
 	public RegistrationRequest(String username, String password, String confirm_password) {
 		this.username = username;
 		this.password = password;
-		this.confirm_password = confirm_password;
+		this.confirmPassword = confirm_password;
 		this.errors = new ArrayList<String>();
 		
 	}
@@ -33,12 +33,12 @@ public class RegistrationRequest {
 		this.password = password;
 	}
 
-	public String getConfirm_password() {
-		return confirm_password;
+	public String getConfirmPassword() {
+		return confirmPassword;
 	}
 
-	public void setConfirm_password(String confirm_password) {
-		this.confirm_password = confirm_password;
+	public void setConfirmPassword(String confirmPassword) {
+		this.confirmPassword = confirmPassword;
 	}
 
 	public ArrayList<String> getErrors() {
