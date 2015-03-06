@@ -25,11 +25,11 @@
       				<Label id="NOTETAKER_text" fx:id="noteTaker_text" alignment="CENTER" blendMode="OVERLAY" textAlignment="CENTER" AnchorPane.leftAnchor="325.0" />
                </children>
             </Pane>
-				<GridPane fx:id="loginPane" alignment="center" gridLinesVisible="false" hgap="10" vgap="3" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="5.0">
+				<GridPane id="login_pane" fx:id="loginPane" alignment="center" gridLinesVisible="false" hgap="10" vgap="3" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="5.0">
             		<children>
 						<Label id="username" Text="Username" GridPane.columnIndex="0" GridPane.rowIndex="0" />
             			<Label id="password" Text="Password" GridPane.columnIndex="1" GridPane.rowIndex="0" />
-            			<Text fx:id="login_fail_text" fill="A70000" text="Sorry, this account did not match our records" visible="false" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="2" />
+            			<Text id="login_fail_text" fx:id="login_fail" fill="A70000" text="Sorry, this account did not match our records" visible="false" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="2" />
 						<TextField id="username_input" fx:id="username_input" editable="true" onAction="#tryLogin" promptText="User Name" GridPane.columnIndex="0" GridPane.rowIndex="1" />
             			<PasswordField id="password_input" fx:id="password_input" editable="true" onAction="#tryLogin" promptText="Password" GridPane.columnIndex="1" GridPane.rowIndex="1">
 							<GridPane.margin>
@@ -111,13 +111,13 @@
                   </AnchorPane>
                </children>
             </AnchorPane>
-            <Label id="newaccount" fx:id="create_account" onMouseClicked="#createAccountWindow" text="New Account" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="20.0">
+            <Label id="newaccount" fx:id="create_account" onMouseClicked="#createAccountClicked" text="New Account" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="20.0">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor></Label>
 			</children>  
 		</AnchorPane>
-      <AnchorPane fx:id="create_account_pane" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #ADBEC2 ; -fx-border-color: grey;" AnchorPane.rightAnchor="475.0" AnchorPane.topAnchor="150.0">
+      <AnchorPane id="create_account_pane" fx:id="create_account_window" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #ADBEC2 ; -fx-border-color: grey;" visible="false" AnchorPane.rightAnchor="475.0" AnchorPane.topAnchor="150.0">
          <children>
             <GridPane id="new_account_window" layoutX="2.0" prefHeight="261.0" prefWidth="244.0" AnchorPane.leftAnchor="1.0" AnchorPane.topAnchor="-1.0">
               <columnConstraints>
@@ -129,14 +129,14 @@
                 <RowConstraints maxHeight="146.0" minHeight="10.0" prefHeight="66.0" vgrow="SOMETIMES" />
                 <RowConstraints maxHeight="104.0" minHeight="0.0" prefHeight="52.0" vgrow="SOMETIMES" />
                   <RowConstraints maxHeight="72.0" minHeight="0.0" prefHeight="35.0" vgrow="SOMETIMES" />
-                  <RowConstraints maxHeight="67.0" minHeight="10.0" prefHeight="10.0" vgrow="SOMETIMES" />
-                  <RowConstraints maxHeight="70.0" minHeight="10.0" prefHeight="63.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="67.0" minHeight="10.0" prefHeight="34.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="70.0" minHeight="0.0" prefHeight="33.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Button fx:id="create_account_button" onMouseClicked="#addAccount" mnemonicParsing="false" text="Create" GridPane.rowIndex="5" />
-                  <TextField onAction="#tryRegistration" fx:id="new_username" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="26.0" prefWidth="145.0" promptText="User Name" GridPane.columnSpan="2" GridPane.rowIndex="1" />
-                  <PasswordField onAction="#tryRegistration" fx:id="new_password" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="26.0" prefWidth="145.0" promptText="password" GridPane.rowIndex="2" />
-                  <PasswordField onAction="#tryRegistration" fx:id="confirm_password" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="26.0" prefWidth="145.0" promptText="confirm password" GridPane.columnSpan="2" GridPane.rowIndex="3" />
+                  <Button fx:id="create_account_button" mnemonicParsing="false" onMouseClicked="#tryAccount" text="Create" GridPane.rowIndex="5" />
+                  <TextField fx:id="new_username" maxHeight="-Infinity" maxWidth="-Infinity" onAction="#tryRegistration" prefHeight="26.0" prefWidth="145.0" promptText="User Name" GridPane.columnSpan="2" GridPane.rowIndex="1" />
+                  <PasswordField fx:id="new_password" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#tryRegistration" prefHeight="26.0" prefWidth="145.0" promptText="password" GridPane.rowIndex="2" />
+                  <PasswordField fx:id="confirm_password" maxHeight="-Infinity" maxWidth="-Infinity" onAction="#tryRegistration" prefHeight="26.0" prefWidth="145.0" promptText="confirm password" GridPane.columnSpan="2" GridPane.rowIndex="3" />
                   <Label alignment="CENTER" contentDisplay="CENTER" text="New Account" textAlignment="CENTER" GridPane.columnSpan="2">
                      <font>
                         <Font size="24.0" />
@@ -148,10 +148,15 @@
                         <Insets left="37.0" />
                      </padding>
                   </Label>
-                  <ProgressIndicator fx:id="progressIndicator" visible="false" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER" />
                   <Label text="user name" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                   <Label text="password" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                   <Label text="confirm" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <Button fx:id="cancel_create_account_button" contentDisplay="RIGHT" mnemonicParsing="false" onMouseClicked="#cancelAccountButtonClicked" text="Cancel" textAlignment="RIGHT" GridPane.halignment="RIGHT" GridPane.rowIndex="5" />
+                  <Label fx:id="create_account_error_text" text="" textFill="#d02424" GridPane.columnSpan="2" GridPane.rowIndex="4">
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </Label>
                </children>
                <padding>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
