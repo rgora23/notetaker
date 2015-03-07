@@ -10,6 +10,15 @@
     -fx-text-fill: #333333;
     -fx-effect:dropshadow( gaussian, rgba(255,255,255,0.5), 0,0,0,1);
     }
+
+#settings_text{
+	-fx-font-size: 15px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #333333;
+    -fx-effect:dropshadow( gaussian, rgba(255,255,255,0.5), 0,0,0,1);
+    }
+
+
 #password {
 	-fx-font-size: 12px;
     -fx-font-weight: bold;
@@ -28,12 +37,21 @@
 }
 
 #modifiedbutton{
+	-fx-font-size: 12px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #333333;
+    -fx-effect:dropshadow( gaussian, rgba(255,255,255,0.5), 0,0,0,1);
+	
+}
+
+#saveSettingsButton{
 	-fx-font-size: 9px;
     -fx-font-weight: bold;
     -fx-text-fill: #333333;
     -fx-effect:dropshadow( gaussian, rgba(255,255,255,0.5), 0,0,0,1);
 	
 }
+
 
 #datebutton{
 	-fx-font-size: 9px;

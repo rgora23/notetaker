@@ -85,6 +85,10 @@ public class Main extends Application {
 		getElementById("login_fail_text").setVisible(true);		
 	}
 
+	public void transitionSaveSettings() throws IOException {
+		
+	}
+	
 	public void setStage(Stage stage) {
 		this.stage = stage;
 	}
@@ -104,5 +108,6 @@ public class Main extends Application {
 	public Node getElementById(String id) {
 		 return getStage().getScene().lookup("#" + id); 
 	}
+	
 	
 }

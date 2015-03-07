@@ -25,6 +25,7 @@ public class EventController extends EventControllerParent {
 	@FXML private Label create_account_error_text;
 	@FXML private Parent root;
 	@FXML private AnchorPane dashboard;
+	@FXML private Button settings_save_button;
 	@FXML private Button notes_button;
 	@FXML private Button title_button;
 	@FXML private Button modified_button; 
@@ -117,4 +118,8 @@ public class EventController extends EventControllerParent {
 	  
   }
 
+  @FXML protected void saveSettingsButtonClicked(MouseEvent e) throws IOException {
+	  
+  }
+  
 }

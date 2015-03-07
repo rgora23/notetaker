@@ -20,9 +20,39 @@
 	<children>
 		<AnchorPane layoutX="0.5" styleClass="root" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
 			<children>
-            <Pane layoutX="325.0" layoutY="271.0">
+            <Pane layoutX="325.0" layoutY="271.0" style="-fx-background-color: #ADBEC2 ; -fx-border-color: grey;" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="500.0" AnchorPane.topAnchor="150.0">
                <children>
-      				<Label id="NOTETAKER_text" fx:id="noteTaker_text" alignment="CENTER" blendMode="OVERLAY" textAlignment="CENTER" AnchorPane.leftAnchor="325.0" />
+      				<Label id="NOTETAKER_text" fx:id="noteTaker_text" alignment="BOTTOM_CENTER" blendMode="OVERLAY" contentDisplay="CENTER" textAlignment="CENTER" />
+                  <GridPane alignment="TOP_CENTER" layoutX="30.0" layoutY="20.0" prefHeight="363.0" prefWidth="292.0" vgap="15.0">
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints />
+                      <RowConstraints />
+                      <RowConstraints />
+                        <RowConstraints />
+                        <RowConstraints maxHeight="18.0" minHeight="0.0" prefHeight="0.0" />
+                        <RowConstraints maxHeight="18.0" minHeight="0.0" prefHeight="18.0" />
+                        <RowConstraints />
+                        <RowConstraints maxHeight="18.0" minHeight="18.0" prefHeight="18.0" />
+                        <RowConstraints maxHeight="0.0" minHeight="0.0" prefHeight="0.0" />
+                        <RowConstraints />
+                        <RowConstraints />
+                        <RowConstraints />
+                    </rowConstraints>
+                     <children>
+                        <RadioButton mnemonicParsing="false" text="another setting" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                        <RadioButton mnemonicParsing="false" text="Matt Yeager is awesome (default)" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+                        <RadioButton mnemonicParsing="false" text="setting" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+                        <RadioButton mnemonicParsing="false" text="setting" GridPane.columnIndex="0" GridPane.rowIndex="9" />
+                        <RadioButton mnemonicParsing="false" text="setting" GridPane.columnIndex="0" GridPane.rowIndex="10" />
+                        <RadioButton mnemonicParsing="false" text="setting" GridPane.columnIndex="0" GridPane.rowIndex="11" />
+                        <Label id="settings_text" Text="Set Awesomeness" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                        <Label id="settings_text" Text="Sort Style" GridPane.columnIndex="0" GridPane.rowIndex="8" />
+                     </children>
+                  </GridPane>
+                  <Button id="saveSettingsButton" fx:id="settings_save_button" layoutX="370.0" layoutY="360.0" mnemonicParsing="false" onMouseClicked="#saveSettingsButtonClicked" prefHeight="26.0" prefWidth="105.0" text="SAVE" />
                </children>
             </Pane>
 				<GridPane id="login_pane" fx:id="loginPane" alignment="center" gridLinesVisible="false" hgap="10" vgap="3" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="5.0">
