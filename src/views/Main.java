@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.text.Text;
@@ -63,13 +64,31 @@ public class Main extends Application {
 
 	public void transitionLoginSuccess() throws IOException {
 		// At this point the scene needs to load for the logged in user
+		
+		getElementById("login_pane").setVisible(false);
+		getElementById("dashboard").setDisable(false);
+		
 		System.out.println("LOGIN SUCCESS");
 	}
 	
-	public void transitionLoginFailed(Text login_fail_text) throws IOException {
-		login_fail_text.setVisible(true);		
+	//This method is called when User clicks "create account" in the program
+	public void transitionCreateAccount() throws IOException {
+		getElementById("create_account_pain").setVisible(true);
+		
+	}
+	
+	public void transitionCancelCreateAccount() throws IOException {
+		getElementById("create_account_pain").setVisible(false);
+	}
+	
+	public void transitionLoginFailed() throws IOException {
+		getElementById("login_fail_text").setVisible(true);		
 	}
 
+	public void transitionSaveSettings() throws IOException {
+		
+	}
+	
 	public void setStage(Stage stage) {
 		this.stage = stage;
 	}
@@ -84,6 +103,10 @@ public class Main extends Application {
 
 	public void setCurrentUser(User currentUser) {
 		this.currentUser = currentUser;
+	}
+	
+	public Node getElementById(String id) {
+		 return getStage().getScene().lookup("#" + id); 
 	}
 	
 	

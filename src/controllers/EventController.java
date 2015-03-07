@@ -22,8 +22,10 @@ public class EventController extends EventControllerParent {
 
 	@FXML private Label noteTaker_text;
 	@FXML private Label create_account;
+	@FXML private Label create_account_error_text;
 	@FXML private Parent root;
 	@FXML private AnchorPane dashboard;
+	@FXML private Button settings_save_button;
 	@FXML private Button notes_button;
 	@FXML private Button title_button;
 	@FXML private Button modified_button; 
@@ -31,16 +33,16 @@ public class EventController extends EventControllerParent {
 	@FXML private Button createNote_button;
 	@FXML private Button settings_button;
 	@FXML private Button tags_button;
-	@FXML private Text login_fail_text;
+    @FXML private Button cancel_create_account_button;    
+	@FXML private Text login_fail;
 	@FXML private TextField username_input;
 	@FXML private PasswordField password_input;
 	@FXML private GridPane loginPane; 
 	@FXML private Button create_account_button;
-	@FXML private AnchorPane create_account_pane;
+	@FXML private AnchorPane create_account_window;
 	@FXML private TextField new_username;
 	@FXML private PasswordField new_password;
 	@FXML private PasswordField confirm_password;
-//	@FXML private ProgressIndicatorBuilder ProgressIndicator;
 	
 	
 	@FXML protected void tryLogin(ActionEvent e) throws IOException {
@@ -54,7 +56,7 @@ public class EventController extends EventControllerParent {
 			getMain().transitionLoginSuccess();
 		}
 		else {
-			getMain().transitionLoginFailed(login_fail_text);
+			getMain().transitionLoginFailed();
 		}
 	}
 
@@ -103,14 +105,21 @@ public class EventController extends EventControllerParent {
 		  noteTaker_text.setText("viewSettings!");
 	}
 
-	@FXML protected void createAccountWindow(MouseEvent e) throws IOException {
-		  // open window to gather account info
-		 noteTaker_text.setText("New account!");
+	@FXML protected void createAccountClicked(MouseEvent e) throws IOException {
+		  getMain().transitionCreateAccount();
 	}
 	
-   @FXML protected void addAccount(MouseEvent e) throws IOException {
-	    // progressIndicator.setVisible(true);
-	   create_account_pane.setVisible(false);
+   @FXML protected void tryAccount(MouseEvent e) throws IOException {
+	
+	  
    }
 
+  @FXML protected void cancelAccountButtonClicked(MouseEvent e) throws IOException {
+	  
+  }
+
+  @FXML protected void saveSettingsButtonClicked(MouseEvent e) throws IOException {
+	  
+  }
+  
 }
