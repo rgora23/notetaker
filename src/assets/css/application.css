@@ -1,7 +1,5 @@
-
-
 .root{
-	 -fx-background-image: url("paperBackground.jpg");
+	 -fx-background-image: url("../images/paperBackground.jpg");
 }
 
 #username {
@@ -24,11 +22,10 @@
     -fx-font-weight: bold;
     -fx-text-fill: #333333;
     -fx-effect:dropshadow( gaussian, rgba(255,255,255,0.5), 0,0,0,1);
-    }
+}
 
 
 #NOTETAKER_text {
-	
    -fx-font-size: 96.0px;
    -fx-font-family: "Arial Black";
    -fx-fill: #818181;
@@ -48,8 +45,7 @@
 	-fx-font-size: 9px;
     -fx-font-weight: bold;
     -fx-text-fill: #333333;
-    -fx-effect:dropshadow( gaussian, rgba(255,255,255,0.5), 0,0,0,1);
-	
+    -fx-effect:dropshadow( gaussian, rgba(255,255,255,0.5), 0,0,0,1);	
 }
 
 
@@ -57,17 +53,16 @@
 	-fx-font-size: 9px;
     -fx-font-weight: bold;
     -fx-text-fill: #333333;
-    -fx-effect:dropshadow( gaussian, rgba(255,255,255,0.5), 0,0,0,1);
+    -fx-effect:dropshadow( gaussian, rgba(255,255,255,0.5), 0,0,0,1);	
+}
 	
-	}
-	
-	#newaccount {
+#newaccount {
 	-fx-font-size: 12px;
     -fx-font-weight: bold;
     -fx-text-fill: #0283CF;
     -fx-effect:dropshadow( gaussian, rgba(255,255,255,0.5), 0,0,0,1);
-    }
+}
 	
-	.button:hover {
+.button:hover {
 	-fx-background-color: linear-gradient(#2A5058, #61a2b1);
 }

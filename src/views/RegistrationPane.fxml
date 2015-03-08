@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import java.net.*?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.text.TextFlow?>
+
+<AnchorPane id="create_account_pane" prefHeight="200.0"
+	prefWidth="200.0" style="-fx-background-color: #ADBEC2 ; -fx-border-color: grey;"
+	xmlns:fx="http://javafx.com/fxml/1" fx:controller="viewControllers.EventController"
+	visible="false" AnchorPane.rightAnchor="475.0" AnchorPane.topAnchor="150.0">
+	<children>
+		<GridPane id="new_account_window" layoutX="2.0" prefHeight="261.0"
+			prefWidth="244.0" AnchorPane.leftAnchor="1.0" AnchorPane.topAnchor="-1.0">
+			<columnConstraints>
+				<ColumnConstraints hgrow="SOMETIMES" minWidth="10.0"
+					prefWidth="100.0" />
+				<ColumnConstraints hgrow="SOMETIMES" minWidth="10.0"
+					prefWidth="35.0" />
+			</columnConstraints>
+			<rowConstraints>
+				<RowConstraints maxHeight="146.0" minHeight="10.0"
+					prefHeight="46.0" vgrow="SOMETIMES" />
+				<RowConstraints maxHeight="146.0" minHeight="10.0"
+					prefHeight="66.0" vgrow="SOMETIMES" />
+				<RowConstraints maxHeight="104.0" minHeight="0.0"
+					prefHeight="52.0" vgrow="SOMETIMES" />
+				<RowConstraints maxHeight="72.0" minHeight="0.0"
+					prefHeight="35.0" vgrow="SOMETIMES" />
+				<RowConstraints maxHeight="67.0" minHeight="10.0"
+					prefHeight="34.0" vgrow="SOMETIMES" />
+				<RowConstraints maxHeight="70.0" minHeight="0.0"
+					prefHeight="33.0" vgrow="SOMETIMES" />
+			</rowConstraints>
+			<children>
+				<Label alignment="CENTER" contentDisplay="CENTER" text="New Account"
+					textAlignment="CENTER" GridPane.columnSpan="2">
+					<font>
+						<Font size="24.0" />
+					</font>
+					<opaqueInsets>
+						<Insets />
+					</opaqueInsets>
+					<padding>
+						<Insets left="37.0" />
+					</padding>
+				</Label>
+
+				<Label text="user name" GridPane.columnIndex="0"
+					GridPane.rowIndex="1" />
+				<Label text="password" GridPane.columnIndex="0"
+					GridPane.rowIndex="2" />
+				<Label text="confirm" GridPane.columnIndex="0"
+					GridPane.rowIndex="3" />
+
+				<TextField id="new_username" maxHeight="-Infinity"
+					maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+					onAction="#tryRegistration" prefHeight="26.0" prefWidth="145.0"
+					promptText="User Name" GridPane.rowIndex="1" GridPane.columnIndex="1"
+					GridPane.columnSpan="2" />
+				<PasswordField id="new_password" maxHeight="-Infinity"
+					maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+					onAction="#tryRegistration" prefHeight="26.0" prefWidth="145.0"
+					promptText="password" GridPane.rowIndex="2" GridPane.columnIndex="1"
+					GridPane.columnSpan="2" />
+				<PasswordField id="confirm_password" maxHeight="-Infinity"
+					maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+					onAction="#tryRegistration" prefHeight="26.0" prefWidth="145.0"
+					promptText="confirm password" GridPane.rowIndex="3"
+					GridPane.columnIndex="1" GridPane.columnSpan="2" />
+
+				<Button id="cancel_create_account_button" contentDisplay="RIGHT"
+					mnemonicParsing="false" onMouseClicked="#cancelAccountButtonClicked"
+					text="Cancel" textAlignment="RIGHT" GridPane.halignment="LEFT"
+					GridPane.columnIndex="0" GridPane.rowIndex="5" />
+				<Button id="create_account_button" mnemonicParsing="false"
+					onMouseClicked="#tryRegistration" text="Create" GridPane.columnIndex="1"
+					GridPane.rowIndex="5" />
+
+				<Label id="create_account_error_text" text="" textFill="#d02424"
+					GridPane.columnSpan="2" GridPane.rowIndex="4">
+					<font>
+						<Font size="10.0" />
+					</font>
+				</Label>
+			</children>
+			<padding>
+				<Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+			</padding>
+		</GridPane>
+	</children>
+</AnchorPane>
