@@ -1,17 +1,15 @@
-package helpers;
+package requestHelpers;
 
-import java.util.ArrayList;
 
 // This is an object that holds the value of a login request. 
 // It can be referenced to get authentication status and possible error messages.
 
-public class LoginRequest {
+public class LoginRequest extends Request {
 
 	String username;
 	String password;
 	String userID;
 	boolean authenticated;
-	ArrayList<String> errorMessages;
 	
 	public LoginRequest(String username, String password) {
 		setAuthenticated(false);
@@ -41,14 +39,6 @@ public class LoginRequest {
 
 	public void setAuthenticated(boolean authenticated) {
 		this.authenticated = authenticated;
-	}
-
-	public ArrayList<String> getErrorMessages() {
-		return errorMessages;
-	}
-	
-	public void addErrorMessage(String message) {
-		this.errorMessages.add(message);
 	}
 
 	public String getUserID() {

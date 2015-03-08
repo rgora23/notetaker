@@ -1,12 +1,11 @@
 package viewControllers;
-import helpers.RegistrationRequest;
-
 import java.io.IOException;
 
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.input.MouseEvent;
+import requestHelpers.RegistrationRequest;
 import controllers.AccountsController;
 public class EventController extends ViewControllerParent {
 
@@ -18,7 +17,7 @@ public class EventController extends ViewControllerParent {
 	
 	@FXML protected void tryLogin(ActionEvent e) throws IOException {
 		
-		String username = getTextFieldById("username_input").getText();
+//		String username = getTextFieldById("username_input").getText();
 		
 //		String password = ( getPasswordFieldById("password_input") ).getText();
 //		LoginRequest loginRequest = new LoginRequest(username, password);
