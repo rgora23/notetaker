@@ -10,25 +10,25 @@ import csv.CsvReader;
 import csv.CsvRecord;
 import csv.CsvWriter;
 
-public class User {
+public class Account {
 
 	ArrayList<Note> myNotes;
 	String id;
 	String username;
 	String password;
 	static String tablePath = "database/accounts_table";
-	public User(ArrayList<String> row) {
+	public Account(ArrayList<String> row) {
 		this.id = row.get(0);
 		this.username = row.get(1);
 		this.password = row.get(2);
 	}
 	
-	public static User getUserById(String id) {
+	public static Account getUserById(String id) {
 		// This needs to query the users table for the username with ID
 		CsvReader reader = new CsvReader(tablePath);
 		reader.setHeaders("id", "username", "password");
 		ArrayList<String> row = reader.getRecordById(id).getRow();
-		return new User(row);
+		return new Account(row);
 	}
 
 	public static LoginRequest authenticate(LoginRequest request) {
