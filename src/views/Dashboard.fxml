@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import java.net.*?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.text.TextFlow?>
+
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" id="dashboard"
+	disable="true" layoutX="44.0" prefHeight="200.0" prefWidth="200.0"
+	fx:controller="viewControllers.EventController"
+	AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="870.0"
+	AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="150.0">
+	<children>
+		<GridPane layoutX="55.0" layoutY="14.0" prefHeight="54.0"
+			prefWidth="330.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+			<columnConstraints>
+				<ColumnConstraints />
+				<ColumnConstraints />
+			</columnConstraints>
+			<rowConstraints>
+				<RowConstraints />
+				<RowConstraints />
+				<RowConstraints />
+			</rowConstraints>
+			<children>
+				<Button id="notes_button" mnemonicParsing="false"
+					onMouseClicked="#noteButtonClicked" prefHeight="26.0" prefWidth="229.0"
+					text="Notes" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+				<Button id="title_button" mnemonicParsing="false"
+					onMouseClicked="#titleButtonClicked" prefHeight="26.0" prefWidth="229.0"
+					text="Title" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+				<Button id="modified_button"
+					onMouseClicked="#modifiedButtonClicked" prefHeight="15.0"
+					prefWidth="229.0" text="MODIFIED" GridPane.columnIndex="0"
+					GridPane.rowIndex="1">
+					<font>
+						<Font size="9.0" />
+					</font>
+				</Button>
+				<Button id="date_button" onMouseClicked="#dateButtonClicked"
+					prefHeight="0.0" prefWidth="165.0" text="DATE"
+					GridPane.columnIndex="1" GridPane.rowIndex="1">
+					<font>
+						<Font size="9.0" />
+					</font>
+				</Button>
+			</children>
+		</GridPane>
+		<ListView layoutX="74.0" layoutY="44.0" prefHeight="456.0"
+			prefWidth="330.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="42.0" />
+	</children>
+</AnchorPane>
+					

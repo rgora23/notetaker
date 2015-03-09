@@ -3,7 +3,7 @@ package csv;
 import java.util.ArrayList;
 
 
-public class CsvRecord extends CsvParser {
+public class CSVRecord extends CSVParser {
 
 	ArrayList<String> row;
 	
@@ -12,7 +12,7 @@ public class CsvRecord extends CsvParser {
 	 * @param row   The ArrayList<String> object representing a table record.
 	 * @author Brian Maxwell
 	 */
-	public CsvRecord(ArrayList<String> row) {
+	public CSVRecord(ArrayList<String> row) {
 		super();
 		this.row = row;
 	}
@@ -21,7 +21,7 @@ public class CsvRecord extends CsvParser {
 	 * Construct a new CsvRecord object from the supplied String arguments.
 	 * @param values   The arguments that represent each field of the record
 	 */
-	public CsvRecord(String... values) {
+	public CSVRecord(String... values) {
 		this.row = new ArrayList<String>();
 		for (String value : values) this.row.add(value);
 	}
@@ -37,6 +37,18 @@ public class CsvRecord extends CsvParser {
 		String value = null;
 		int columnIndex = this.headers.indexOf(header);
 		if (columnIndex >= 0) value = row.get(columnIndex);
+		return value;
+	}
+	
+	/**
+	 * Set the value at the specified field to a specified value.
+	 * @param value   the value to change the field to.
+	 * @param header   the field to store the new value.
+	 * @return The value that was set to the current field.
+	 */
+	public String setValueAtField(String value, String header) {
+		int columnIndex = this.headers.indexOf(header);
+		row.set(columnIndex, value);
 		return value;
 	}
 	

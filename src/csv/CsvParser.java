@@ -2,21 +2,21 @@ package csv;
 
 import java.util.ArrayList;
 
-abstract class CsvParser {
+abstract class CSVParser {
 
 	ArrayList<String> headers;
 	
-	public CsvParser() {
+	public CSVParser() {
 		headers = new ArrayList<String>();
 		setHeaders("id");
 	}
 	
-	public CsvParser(String... headers) {
+	public CSVParser(String... headers) {
 		this();
 		setHeaders(headers);
 	}
 	
-	public CsvParser(ArrayList<String> headers) {
+	public CSVParser(ArrayList<String> headers) {
 		this();
 		setHeaders(headers);
 	}

@@ -5,7 +5,7 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 
 
-public class CsvWriter extends CsvReader {
+public class CSVWriter extends CSVReader {
 
 	/**
 	 * Creates a new object that can write changes to the database
@@ -13,7 +13,7 @@ public class CsvWriter extends CsvReader {
 	 * @param path   The path to the table location.
 	 * @author Brian Maxwell
 	 */
-	public CsvWriter(String path) {
+	public CSVWriter(String path) {
 		super(path);
 	}
 	
@@ -24,7 +24,7 @@ public class CsvWriter extends CsvReader {
 	 * @param headers   The table headers.
 	 * @author Brian Maxwell
 	 */
-	public CsvWriter(String path, String... headers) {
+	public CSVWriter(String path, String... headers) {
 		super(path, headers);
 	}
 
@@ -71,8 +71,8 @@ public class CsvWriter extends CsvReader {
 		// The correct amount of fields have been provided, so
 		// attempt to write the new record as long as the id is unique.
 		boolean uniqueId = true;
-		CsvRecord newRecord = new CsvRecord(row);
-		if (validateUniqueness("id", newRecord.getId())) table.add(new CsvRecord(row));
+		CSVRecord newRecord = new CSVRecord(row);
+		if (validateUniqueness("id", newRecord.getId())) table.add(new CSVRecord(row));
 		else System.out.println("The id " + row.get(0) + " has already been allocated.");
 		return uniqueId;
 	}
@@ -83,11 +83,11 @@ public class CsvWriter extends CsvReader {
 	 * @return The removed record or null if none is found.
 	 * @author Brian Maxwell
 	 */
-	public CsvRecord removeRecord(int id) {
+	public CSVRecord removeRecord(int id) {
 		String idString = id + "";
-		CsvRecord removedRecord = null;
-		for (CsvRecord record : table) {
-			if ( CsvHelpers.checkEquality(idString, record.getId()) ) {
+		CSVRecord removedRecord = null;
+		for (CSVRecord record : table) {
+			if ( CSVHelper.checkEquality(idString, record.getId()) ) {
 				removedRecord = record;
 				table.remove(record);
 				break;
@@ -101,7 +101,7 @@ public class CsvWriter extends CsvReader {
 	 * must be called in order for any changes to take effect.
 	 * @author Brian Maxwell
 	 */
-	public void save() {
+	public void write() {
 		PrintWriter writer;
 		try {
 			writer = new PrintWriter(file);
