@@ -114,6 +114,81 @@
 						<RowConstraints />
 					</rowConstraints>
 				</GridPane>
+<<<<<<<< HEAD 
+            <Pane>
+               <children>
+                  <AnchorPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <GridPane prefHeight="142.0" prefWidth="44.0" AnchorPane.rightAnchor="328.0" AnchorPane.topAnchor="150.0">
+                          <columnConstraints>
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <children>
+                           	<Button fx:id="settings_button" minWidth="-Infinity" onMouseClicked="#settingsButtonClicked" prefHeight="61.0" prefWidth="43.0" text="+" GridPane.columnIndex="0" GridPane.rowIndex="0">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                                 <cursor>
+                                    <Cursor fx:constant="TEXT" />
+                                 </cursor>
+                              </Button>
+                           <Button fx:id="tags_button" minWidth="-Infinity" onMouseClicked="#tagsButtonClicked" prefHeight="61.0" prefWidth="43.0" text="+" GridPane.columnIndex="0" GridPane.rowIndex="1">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="createNote_button" minWidth="-Infinity" onMouseClicked="#createNoteButtonClicked" prefHeight="61.0" prefWidth="43.0" text="+" GridPane.columnIndex="0" GridPane.rowIndex="2">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Button>
+                           </children>
+                        </GridPane>
+                        <AnchorPane id="dashboard" fx:id="dashboard" disable="true" layoutX="44.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="870.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="150.0">
+                           <children>
+                              <GridPane layoutX="55.0" layoutY="14.0" prefHeight="54.0" prefWidth="330.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                <columnConstraints>
+                                  <ColumnConstraints />
+                                  <ColumnConstraints /> 
+                                </columnConstraints>
+                                <rowConstraints>
+                                  <RowConstraints />
+                                  <RowConstraints />
+                                  <RowConstraints />
+                                </rowConstraints>
+                                 <children>
+                                    <Button fx:id="notes_button" mnemonicParsing="false" onMouseClicked="#noteButtonClicked" prefHeight="26.0" prefWidth="229.0" text="Notes" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                                    <Button fx:id="title_button" mnemonicParsing="false" onMouseClicked="#titleButtonClicked" prefHeight="26.0" prefWidth="229.0" text="Title" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+                                 	<Button id="modifiedbutton" fx:id="modified_button" onMouseClicked="#modifiedButtonClicked" prefHeight="15.0" prefWidth="229.0" text="MODIFIED" GridPane.columnIndex="0" GridPane.rowIndex="1">
+                                       <font>
+                                          <Font size="9.0" />
+                                       </font>
+                                    </Button>
+                                    <Button id="datebutton" fx:id="date_button" onMouseClicked="#dateButtonClicked" prefHeight="0.0" prefWidth="165.0" text="DATE" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                       <font>
+                                          <Font size="9.0" />
+                                       </font>
+                                    </Button>
+                                 </children>
+                              </GridPane>
+                              <ListView layoutX="74.0" layoutY="44.0" prefHeight="456.0" prefWidth="330.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="42.0" />
+                           </children>
+                        </AnchorPane>
+                     </children>
+                  </AnchorPane>
+               </children>
+            </Pane>
+            <Label id="newaccount" fx:id="create_account" onMouseClicked="#createAccountClicked" text="New Account" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="20.0">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></Label>
+			</children>  
+========= 
 				<AnchorPane layoutX="826.0" layoutY="150.0"
 					AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
 					AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -213,6 +288,7 @@
 						</AnchorPane>
 					</children>
 				</AnchorPane>
+				<children>
 				<Label id="newaccount" fx:id="create_account" onMouseClicked="#createAccountClicked"
 					text="New Account" AnchorPane.leftAnchor="30.0"
 					AnchorPane.topAnchor="20.0">
@@ -299,6 +375,7 @@
 					</padding>
 				</GridPane>
 			</children>
+>>>>>>> a0a9f58503c81bf2ef8df000bb6d2f9d5ba6994b
 		</AnchorPane>
 	</children>
 </AnchorPane>
