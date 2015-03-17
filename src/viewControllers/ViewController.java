@@ -12,18 +12,14 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
-import javafx.stage.Stage;
+import noteTaker.Session;
 
 // This is the parent controller class that will be extended by all view controllers.
 // It holds common methods and variables that all controllers in this application
 // will need access to.
-public abstract class ViewControllerParent implements Initializable {
-
-	// A static stage value set by the application start method. It can be referenced
-	// So that child controllers can look up nodes from this stage's current scene.
-	public static Stage stage;
+public abstract class ViewController implements Initializable {
 	
-	public ViewControllerParent() {
+	public ViewController() {
 		
 	}
 	@Override
@@ -33,7 +29,7 @@ public abstract class ViewControllerParent implements Initializable {
 
 	
 	public Scene getScene() {
-		return ViewControllerParent.stage.getScene();
+		return Session.getStage().getScene();
 	}
 
 	public Node getNodeById(String id) {

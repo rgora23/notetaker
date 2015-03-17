@@ -2,7 +2,7 @@ package controllers;
 
 import java.io.IOException;
 
-import requestHelpers.RegistrationRequest;
+import connections.RegistrationRequest;
 import models.Account;
 
 public class AccountsController extends Controller {
