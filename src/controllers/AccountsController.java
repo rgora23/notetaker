@@ -1,9 +1,9 @@
 package controllers;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import models.Account;
+import noteTaker.ErrorMessages;
 import noteTaker.Session;
 import requestHelpers.LoginRequest;
 import requestHelpers.RegistrationRequest;
@@ -15,17 +15,19 @@ public class AccountsController extends Controller {
 
 	}
 
-	public RegistrationRequest register(String username, String password, String confirmPassword) throws IOException {
+	public String[] register(String username, String password, String confirmPassword) throws IOException {
 		RegistrationRequest request = new RegistrationRequest(username, password, confirmPassword);
-		return Account.register(request);
+		Account.register(request);
+		String[] errors = ArrayListToStringArray(request.getErrors());
+		return errors;
 	}
 
 	public static String[] login(String username, String password) {
 		LoginRequest loginRequest = new LoginRequest(username, password);
 
 		// Validate the provided fields before querying database.
-		if (username.isEmpty()) loginRequest.addError("You must provide a username.");
-		if (password.isEmpty()) loginRequest.addError("You must provide a password.");
+		if (username.isEmpty()) loginRequest.addError(ErrorMessages.LOGIN_PROVIDE_USERNAME);
+		if (password.isEmpty()) loginRequest.addError(ErrorMessages.LOGIN_PROVIDE_PASSWORD);
 
 		// Try to authenticate user if provided fields are valid.
 		if (loginRequest.noErrors()) {
@@ -34,14 +36,12 @@ public class AccountsController extends Controller {
 				Session.create(loginRequest.getAccount());
 			}
 			else {
-				loginRequest.addError("The account specified was not found");
+				loginRequest.addError(ErrorMessages.LOGIN_ACCOUNT_NOT_FOUND);
 			}
 		}
-
-		ArrayList<String> errorsArrayList = loginRequest.getErrors();
 		
 		// Send String array of errors back to the view controller
-		String[] errors = errorsArrayList.toArray(new String[errorsArrayList.size()]);
+		String[] errors = ArrayListToStringArray(loginRequest.getErrors());
 		return errors;
 	}
 

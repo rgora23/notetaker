@@ -1,13 +1,13 @@
 package viewControllers;
 import java.io.IOException;
 
-import noteTaker.Session;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.input.MouseEvent;
-import requestHelpers.RegistrationRequest;
+import noteTaker.Session;
 import controllers.AccountsController;
+import controllers.NotesController;
 public class EventController extends ViewController {
 
 	AccountsController accountsController;
@@ -23,7 +23,6 @@ public class EventController extends ViewController {
 		
 		// AccountsController tries to login with these credentials
 		String[] errors = AccountsController.login(username, password);
-		AccountsController.login(username, password);
 		if (errors.length == 0) {
 			// Change GUI to show logged in user
 			// Can reference account for info by referencing Session class.
@@ -41,15 +40,25 @@ public class EventController extends ViewController {
 		String password = getPasswordFieldById("new_password").getText();
 		String confirmPassword = getPasswordFieldById("confirm_password").getText();
 		
-		RegistrationRequest request = accountsController.register(username, password, confirmPassword);
-		if ( request.getErrors().isEmpty() ) {
+		String[] errors = accountsController.register(username, password, confirmPassword);
+		if ( errors.length == 0 ) {
 			System.out.println("Account Created");
 		}
 		else {
-			for (String error : request.getErrors() ) {
+			for (String error : errors ) {
 				System.out.println(error);
 			}
 		}		
+	}
+	
+	@FXML protected void noteCreationAction(Event e) throws IOException {
+		String noteTitle = getTextFieldById("note_title_input").getText();
+		NotesController.create(noteTitle);
+	}
+	
+	
+	@FXML protected void createNoteButtonClicked(MouseEvent e) throws IOException {
+		getLabelById("noteTaker_text").setText("new Note!");
 	}
 
 	@FXML protected void noteButtonClicked(MouseEvent e) throws IOException{
@@ -66,10 +75,6 @@ public class EventController extends ViewController {
 
 	@FXML protected void dateButtonClicked(MouseEvent e) throws IOException{
 		getLabelById("noteTaker_text").setText("..YES");
-	}
-
-	@FXML protected void createNoteButtonClicked(MouseEvent e) throws IOException {
-		getLabelById("noteTaker_text").setText("new Note!");
 	}
 
 	@FXML protected void tagsButtonClicked(MouseEvent e) throws IOException {
