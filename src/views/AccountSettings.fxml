@@ -21,7 +21,7 @@
 	style="-fx-background-color: #ADBEC2 ; -fx-border-color: grey;"
 	AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="200.0"
 	AnchorPane.rightAnchor="500.0" AnchorPane.topAnchor="150.0"
-	fx:controller="viewControllers.EventController">
+	fx:controller="viewControllers.EventController" visible="false">
 	<children>
 		<Label id="noteTaker_text" alignment="BOTTOM_CENTER"
 			blendMode="OVERLAY" contentDisplay="CENTER" textAlignment="CENTER" />

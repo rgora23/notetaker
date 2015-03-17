@@ -30,7 +30,9 @@ public class EventController extends ViewControllerParent {
 //		else {
 //			getMain().transitionLoginFailed();
 //		}
-		System.out.println("This Worked");
+//		System.out.println("This Worked");
+		getGridPaneById("login_pane_root").setVisible(false);
+		getAnchorPaneById("dashboard").setDisable(false);
 	}
 
 	@FXML protected void tryRegistration(Event e) throws IOException {
@@ -45,6 +47,7 @@ public class EventController extends ViewControllerParent {
 		else {
 			for (String error : request.getErrors() ) {
 				System.out.println(error);
+			    getLabelById("create_account_error_text").setText(error); 
 			}
 		}		
 	}
@@ -74,12 +77,11 @@ public class EventController extends ViewControllerParent {
 	}
 
 	@FXML protected void settingsButtonClicked(MouseEvent e) throws IOException {
-		getLabelById("noteTaker_text").setText("viewSettings!");
+		getNodeById("account_settings_pane").setVisible(true);
 	}
 
 	@FXML protected void createAccountClicked(MouseEvent e) throws IOException {
 		getAnchorPaneById("create_account_pane").setVisible(true);
-		getNodeById("account_settings_pane").setVisible(false);
 	}
 
 	@FXML protected void tryAccount(MouseEvent e) throws IOException {
@@ -88,11 +90,11 @@ public class EventController extends ViewControllerParent {
 
 	@FXML protected void cancelAccountButtonClicked(MouseEvent e) throws IOException {
 		getAnchorPaneById("create_account_pane").setVisible(false);
-		getNodeById("account_settings_pane").setVisible(true);
+
 	}
 
 	@FXML protected void saveSettingsButtonClicked(MouseEvent e) throws IOException {
-
+		getNodeById("account_settings_pane").setVisible(false);
 	}
 
 }
