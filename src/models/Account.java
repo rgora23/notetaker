@@ -3,13 +3,14 @@ package models;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import noteTaker.ErrorMessages;
 import requestHelpers.LoginRequest;
 import requestHelpers.RegistrationRequest;
 import csv.CSVReader;
 import csv.CSVRecord;
 import csv.CSVWriter;
 
-public class Account {
+public class Account extends Model {
 
 	ArrayList<Note> myNotes;
 	String id;
@@ -64,9 +65,14 @@ public class Account {
 	public static void authenticate(LoginRequest request) {
 		// Try to find specified account
 		CSVReader reader = constructReader();
-		ArrayList<CSVRecord> records = reader.where("username", request.getUsername());
-		if (records.size() >= 1) {
-			CSVRecord record = records.get(0);
+		
+		CSVReader filteredReader = reader
+				.where("username").is(request.getUsername())
+				.where("password").is(request.getPassword());
+		
+		ArrayList<CSVRecord> matchingRecords = filteredReader.getTable();
+		if (matchingRecords.size() >= 1) {
+			CSVRecord record = matchingRecords.get(0);
 			
 			// this needs to be password salt/hashified
 			// for now, it's just comparing the two plain text passwords
@@ -80,27 +86,27 @@ public class Account {
 	}
 		
 	
-	public static RegistrationRequest register(RegistrationRequest request) throws IOException {
+	public static void register(RegistrationRequest request) throws IOException {
 		CSVWriter accountTableWriter = constructWriter();
 		
 		if ( !request.getPassword().equals(request.getConfirmPassword()) ) {
-			request.getErrors().add("Passwords don't match");
+			request.getErrors().add(ErrorMessages.REGISTRATION_PASSWORD_MISMATCH);
 		}
 		
 		if ( request.getUsername().isEmpty() ) {
-			request.getErrors().add("Username field is empty");
+			request.getErrors().add(ErrorMessages.REGISTRATION_PROVIDE_USERNAME);
 		}
 		
 		if ( request.getPassword().isEmpty() ) {
-			request.getErrors().add("Password field is empty");
+			request.getErrors().add(ErrorMessages.REGISTRATION_PROVIDE_PASSWORD);
 		}
 		
 		if ( request.getConfirmPassword().isEmpty() ) {
-			request.getErrors().add("Password confirmation field is empty");
+			request.getErrors().add(ErrorMessages.REGISTRATION_PROVIDE_CONFIRM_PASSWORD);
 		}
 		
 		if ( !accountTableWriter.validateUniqueness("username", request.getUsername()) ) {
-			request.getErrors().add("Username is taken.");			
+			request.getErrors().add(ErrorMessages.REGISTRATION_USERNAME_TAKEN);			
 		}
 		
 		if ( request.getErrors().isEmpty() ) {
@@ -108,21 +114,14 @@ public class Account {
 			accountTableWriter.write();
 		}
 		
-		return request;
-	}
-
-	private static CSVReader constructReader() {
-		CSVReader reader = new CSVReader(tablePath);
-		reader.setHeaders(tableHeaders);
-		reader.parse();
-		return reader;
 	}
 	
 	private static CSVWriter constructWriter() {
-		CSVWriter writer = new CSVWriter(tablePath);
-		writer.setHeaders(tableHeaders);
-		writer.parse();
-		return writer;
+		return Model.constructWriter(tablePath, tableHeaders);
+	}
+	
+	private static CSVReader constructReader() {
+		return Model.constructReader(tablePath, tableHeaders);
 	}
 		
 }

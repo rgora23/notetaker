@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import java.net.*?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.text.TextFlow?>
+
+<AnchorPane id="create_note_pane" prefHeight="200.0"
+	prefWidth="200.0" xmlns:fx="http://javafx.com/fxml/1" fx:controller="viewControllers.EventController"
+	visible="true" AnchorPane.rightAnchor="475.0" AnchorPane.topAnchor="150.0">
+
+	<children>
+
+		<GridPane id="create_note_form">
+			<children>
+				<Label id="form_title" text="New Note" GridPane.columnIndex="0"
+					GridPane.rowIndex="0" />
+				<Label text="Note Title" GridPane.columnIndex="0"
+					GridPane.rowIndex="1" />
+				<TextField id="note_title_input" GridPane.columnIndex="1" GridPane.rowIndex="1"
+					promptText="Note Title" onAction="#noteCreationAction" />
+				<Button id="settings_save_button" layoutX="370.0" layoutY="360.0"
+					mnemonicParsing="false" onMouseClicked="#noteCreationAction"
+					prefHeight="26.0" prefWidth="105.0" text="SAVE" GridPane.rowIndex="2"
+					GridPane.columnIndex="0" />
+			</children>
+
+
+		</GridPane>
+
+	</children>
+
+</AnchorPane>
+
