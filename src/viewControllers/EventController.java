@@ -1,6 +1,7 @@
 package viewControllers;
 import java.io.IOException;
 
+import noteTaker.Session;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
@@ -16,21 +17,23 @@ public class EventController extends ViewController {
 	}
 	
 	@FXML protected void tryLogin(ActionEvent e) throws IOException {
-		
+		// Get username and password input values to give to controller
 		String username = getTextFieldById("username_input").getText();
+		String password = ( getPasswordFieldById("password_input") ).getText();
 		
-//		String password = ( getPasswordFieldById("password_input") ).getText();
-//		LoginRequest loginRequest = new LoginRequest(username, password);
-//
-//		if (User.authenticate(loginRequest).isAuthenticated()) {
-//			User currentUser = User.getUserById(loginRequest.getUserID());
-//			getMain().setCurrentUser(currentUser);
-//			getMain().transitionLoginSuccess();
-//		}
-//		else {
-//			getMain().transitionLoginFailed();
-//		}
-		System.out.println("This Worked");
+		// AccountsController tries to login with these credentials
+		String[] errors = AccountsController.login(username, password);
+		AccountsController.login(username, password);
+		if (errors.length == 0) {
+			// Change GUI to show logged in user
+			// Can reference account for info by referencing Session class.
+			// Session.getAccount().getUsername();
+			System.out.println("Welcome " + Session.getAccount().getUsername() + "!");
+		}
+		else {
+			// Change GUI to present errors to user
+			System.out.println(errors[0]);
+		}
 	}
 
 	@FXML protected void tryRegistration(Event e) throws IOException {

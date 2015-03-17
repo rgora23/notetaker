@@ -45,19 +45,14 @@ public class Account {
 		writer.write();
 	}
 	
-	private static CSVReader constructReader() {
-		CSVReader reader = new CSVReader(tablePath);
-		reader.setHeaders(tableHeaders);
-		reader.parse();
-		return reader;
+	public String getUsername() {
+		return this.username;
 	}
 	
-	private static CSVWriter constructWriter() {
-		CSVWriter writer = new CSVWriter(tablePath);
-		writer.setHeaders(tableHeaders);
-		writer.parse();
-		return writer;
+	public String getID() {
+		return this.id;
 	}
+	
 	
 	public static Account getAccountById(String id) {
 		// Query the users table for the username with ID
@@ -66,20 +61,24 @@ public class Account {
 		return new Account(row);
 	}
 
-	public static LoginRequest authenticate(LoginRequest request) {
-		// This is the part where I actually need to reference the users table
-		// and determine whether the current user provided legitimate account credentials.
-		// If valid, set request's authenticated to true and userID to the matching userID.
+	public static void authenticate(LoginRequest request) {
+		// Try to find specified account
 		CSVReader reader = constructReader();
 		ArrayList<CSVRecord> records = reader.where("username", request.getUsername());
-		CSVRecord record = records.get(0);
-		Account account = new Account(record);
-		// logic for authentication goes here
-		request.setAuthenticated(true);
-		return request;
+		if (records.size() >= 1) {
+			CSVRecord record = records.get(0);
+			
+			// this needs to be password salt/hashified
+			// for now, it's just comparing the two plain text passwords
+			String recordPassword = record.getValueAtField("password");
+			boolean authenticated = recordPassword.equals(request.getPassword());
+			
+			request.setAuthenticated(authenticated);
+			if (authenticated) request.setAccount(new Account(record));
+		}
+		
 	}
-	
-	
+		
 	
 	public static RegistrationRequest register(RegistrationRequest request) throws IOException {
 		CSVWriter accountTableWriter = constructWriter();
@@ -112,5 +111,18 @@ public class Account {
 		return request;
 	}
 
+	private static CSVReader constructReader() {
+		CSVReader reader = new CSVReader(tablePath);
+		reader.setHeaders(tableHeaders);
+		reader.parse();
+		return reader;
+	}
+	
+	private static CSVWriter constructWriter() {
+		CSVWriter writer = new CSVWriter(tablePath);
+		writer.setHeaders(tableHeaders);
+		writer.parse();
+		return writer;
+	}
 		
 }

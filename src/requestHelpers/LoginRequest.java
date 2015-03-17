@@ -1,22 +1,27 @@
-package connections;
+package requestHelpers;
 
-import java.util.ArrayList;
+import models.Account;
 
-// This is an object that holds the value of a login request. 
+// This is an object that holds the values of a login request. 
 // It can be referenced to get authentication status and possible error messages.
 
-public class LoginRequest {
+public class LoginRequest extends Request {
 
 	String username;
 	String password;
 	String userID;
+	Account account;
 	boolean authenticated;
-	ArrayList<String> errorMessages;
 	
 	public LoginRequest(String username, String password) {
-		setAuthenticated(false);
 		setUsername(username);
 		setPassword(password);
+		
+		// These variables must be validated against Account model
+		// through its controller
+		setAuthenticated(false);
+		setAccount(null);
+		setUserID(null);
 	}
 
 	public String getUsername() {
@@ -42,13 +47,13 @@ public class LoginRequest {
 	public void setAuthenticated(boolean authenticated) {
 		this.authenticated = authenticated;
 	}
-
-	public ArrayList<String> getErrorMessages() {
-		return errorMessages;
+	
+	public void setAccount(Account account) {
+		this.account = account;
 	}
 	
-	public void addErrorMessage(String message) {
-		this.errorMessages.add(message);
+	public Account getAccount() {
+		return this.account;
 	}
 
 	public String getUserID() {

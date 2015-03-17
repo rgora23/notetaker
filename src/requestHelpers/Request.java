@@ -19,5 +19,12 @@ public abstract class Request {
 		this.errors.add(message);
 	}
 	
+	public boolean noErrors() {
+		return this.errors.isEmpty();
+	}
+
+	public boolean hasErrors() {
+		return (!noErrors());
+	}
 	
 }
