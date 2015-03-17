@@ -9,9 +9,9 @@ import java.util.ArrayList;
 
 public class CSVReader extends CSVParser {
 
-	File file;
-	String path;
-	ArrayList<CSVRecord> table;
+	protected File file;
+	private String path;
+	protected ArrayList<CSVRecord> table;
 	
 	static String delimiter = ",,";
 	/**
@@ -104,6 +104,11 @@ public class CSVReader extends CSVParser {
 		return filteredTable;
 	}
 	
+	public CSVRecordList where(String field) {
+		CSVRecordList fields = new CSVRecordList(headers, table, field, path);
+		return fields;
+	}
+	
 	/**
 	 * Checks if the given value for a header has been taken for any
 	 * of the records in the table.
@@ -183,6 +188,10 @@ public class CSVReader extends CSVParser {
 	/////////////////////////
 	//	Protected methods  //
 	/////////////////////////
+	
+	protected void setTable(ArrayList<CSVRecord> table) {
+		this.table = table;
+	}
 	
 	protected ArrayList<CSVRecord> createTableFromFile() {
 		table = null;

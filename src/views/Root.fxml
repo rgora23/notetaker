@@ -24,6 +24,7 @@
 		<fx:include fx:id="embeddedDashboard" source="Dashboard.fxml" />
 		<!-- <fx:include fx:id="embeddedDashboardButton" source="DashboardButtons.fxml" /> -->
 		<fx:include fx:id="embeddedAccountSettings" source="AccountSettings.fxml" />
+		<fx:include fx:id="embeddedNoteCreation" source="NoteCreation.fxml" />
 		
 		<Label id="newaccount" onMouseClicked="#createAccountClicked"
 			text="New Account" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="20.0">

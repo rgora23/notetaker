@@ -45,7 +45,7 @@
 	-fx-font-size: 9px;
     -fx-font-weight: bold;
     -fx-text-fill: #333333;
-    -fx-effect:dropshadow( gaussian, rgba(255,255,255,0.5), 0,0,0,1);	
+    -fx-effect:dropshadow( gaussian, rgba(255,255,255,0.5), 0,0,0,1);
 }
 
 
@@ -66,3 +66,32 @@
 .button:hover {
 	-fx-background-color: linear-gradient(#2A5058, #61a2b1);
 }
+
+
+/* For all labels used to title forms */
+#form_title {
+	-fx-font-size: 18px;
+	-fx-effect:dropshadow( gaussian, rgba(255,255,255,0.5), 0,0,0,1);
+	-fx-font-weight: bold;
+}
+
+#create_note_pane {	
+	
+}
+
+#create_note_form {
+	-fx-background-color: #ADBEC2;
+	-fx-padding: 35px;
+	-fx-border-color: #888;
+	-fx-border-radius: 6px;	
+}
+
+#create_note_form .label {
+	-fx-min-height: 50px;
+	
+}
+
+
+
+
+

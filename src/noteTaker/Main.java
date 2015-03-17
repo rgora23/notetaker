@@ -1,3 +1,4 @@
+package noteTaker;
 
 
 import java.io.IOException;
@@ -7,7 +8,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import viewControllers.ViewControllerParent;
 
 
 public class Main extends Application {
@@ -22,7 +22,7 @@ public class Main extends Application {
 		
 		// Set the stage for the EventControllerParent so that
 		// all view controllers have access to the stage.
-		ViewControllerParent.stage = primaryStage;
+		Session.setStage(primaryStage);
 		
 		// Set the title of the window
 		primaryStage.setTitle("Note Taker");

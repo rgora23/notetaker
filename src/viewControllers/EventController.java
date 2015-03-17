@@ -5,9 +5,10 @@ import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.input.MouseEvent;
-import requestHelpers.RegistrationRequest;
+import noteTaker.Session;
 import controllers.AccountsController;
-public class EventController extends ViewControllerParent {
+import controllers.NotesController;
+public class EventController extends ViewController {
 
 	AccountsController accountsController;
 	
@@ -16,21 +17,22 @@ public class EventController extends ViewControllerParent {
 	}
 	
 	@FXML protected void tryLogin(ActionEvent e) throws IOException {
+		// Get username and password input values to give to controller
+		String username = getTextFieldById("username_input").getText();
+		String password = ( getPasswordFieldById("password_input") ).getText();
 		
-//		String username = getTextFieldById("username_input").getText();
-		
-//		String password = ( getPasswordFieldById("password_input") ).getText();
-//		LoginRequest loginRequest = new LoginRequest(username, password);
-//
-//		if (User.authenticate(loginRequest).isAuthenticated()) {
-//			User currentUser = User.getUserById(loginRequest.getUserID());
-//			getMain().setCurrentUser(currentUser);
-//			getMain().transitionLoginSuccess();
-//		}
-//		else {
-//			getMain().transitionLoginFailed();
-//		}
-		System.out.println("This Worked");
+		// AccountsController tries to login with these credentials
+		String[] errors = AccountsController.login(username, password);
+		if (errors.length == 0) {
+			// Change GUI to show logged in user
+			// Can reference account for info by referencing Session class.
+			// Session.getAccount().getUsername();
+			System.out.println("Welcome " + Session.getAccount().getUsername() + "!");
+		}
+		else {
+			// Change GUI to present errors to user
+			System.out.println(errors[0]);
+		}
 	}
 
 	@FXML protected void tryRegistration(Event e) throws IOException {
@@ -38,15 +40,25 @@ public class EventController extends ViewControllerParent {
 		String password = getPasswordFieldById("new_password").getText();
 		String confirmPassword = getPasswordFieldById("confirm_password").getText();
 		
-		RegistrationRequest request = accountsController.register(username, password, confirmPassword);
-		if ( request.getErrors().isEmpty() ) {
+		String[] errors = accountsController.register(username, password, confirmPassword);
+		if ( errors.length == 0 ) {
 			System.out.println("Account Created");
 		}
 		else {
-			for (String error : request.getErrors() ) {
+			for (String error : errors ) {
 				System.out.println(error);
 			}
 		}		
+	}
+	
+	@FXML protected void noteCreationAction(Event e) throws IOException {
+		String noteTitle = getTextFieldById("note_title_input").getText();
+		NotesController.create(noteTitle);
+	}
+	
+	
+	@FXML protected void createNoteButtonClicked(MouseEvent e) throws IOException {
+		getLabelById("noteTaker_text").setText("new Note!");
 	}
 
 	@FXML protected void noteButtonClicked(MouseEvent e) throws IOException{
@@ -63,10 +75,6 @@ public class EventController extends ViewControllerParent {
 
 	@FXML protected void dateButtonClicked(MouseEvent e) throws IOException{
 		getLabelById("noteTaker_text").setText("..YES");
-	}
-
-	@FXML protected void createNoteButtonClicked(MouseEvent e) throws IOException {
-		getLabelById("noteTaker_text").setText("new Note!");
 	}
 
 	@FXML protected void tagsButtonClicked(MouseEvent e) throws IOException {

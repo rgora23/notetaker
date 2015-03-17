@@ -1,7 +1,8 @@
 package requestHelpers;
 
+import models.Account;
 
-// This is an object that holds the value of a login request. 
+// This is an object that holds the values of a login request. 
 // It can be referenced to get authentication status and possible error messages.
 
 public class LoginRequest extends Request {
@@ -9,12 +10,18 @@ public class LoginRequest extends Request {
 	String username;
 	String password;
 	String userID;
+	Account account;
 	boolean authenticated;
 	
 	public LoginRequest(String username, String password) {
-		setAuthenticated(false);
 		setUsername(username);
 		setPassword(password);
+		
+		// These variables must be validated against Account model
+		// through its controller
+		setAuthenticated(false);
+		setAccount(null);
+		setUserID(null);
 	}
 
 	public String getUsername() {
@@ -39,6 +46,14 @@ public class LoginRequest extends Request {
 
 	public void setAuthenticated(boolean authenticated) {
 		this.authenticated = authenticated;
+	}
+	
+	public void setAccount(Account account) {
+		this.account = account;
+	}
+	
+	public Account getAccount() {
+		return this.account;
 	}
 
 	public String getUserID() {
