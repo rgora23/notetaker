@@ -1,6 +1,7 @@
 package noteTaker;
 
 import javafx.stage.Stage;
+import models.Account;
 
 /*
  * The Session class serves to hold variables for both account sessions and application sessions.
@@ -25,31 +26,30 @@ public class Session {
 	
 	// Account session variables
 	private static boolean sessionCreated = false;
-	private static int userId = 0;
+	private static Account account = null;
 	
-	public static void reset() {
-		// need to set all variables to null
-		
-	}
-	
-	// 
-	public static void create(int userId) {
-		reset();
+	public static void create(Account account) {
+		Session.destroy();
 		Session.sessionCreated = true;
-		Session.userId = userId;
+		Session.account = account;
+		
 	}
 	
 	public static void destroy() {
 		Session.sessionCreated = false;
-		Session.userId = 0;
+		Session.account = null;
 	}
 	
 	public static boolean isCreated() {
-		return sessionCreated;
+		return Session.sessionCreated;
 	}
 	
 	public static Stage getStage() {
 		return Session.stage;
+	}
+	
+	public static Account getAccount() {
+		return Session.account;
 	}
 	
 	// This method can only be called once. Once a non-null
