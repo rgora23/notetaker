@@ -1,14 +1,13 @@
 package models;
 
-import helpers.LoginRequest;
-import helpers.RegistrationRequest;
-
 import java.io.IOException;
 import java.util.ArrayList;
 
-import csv.CsvReader;
-import csv.CsvRecord;
-import csv.CsvWriter;
+import connections.LoginRequest;
+import connections.RegistrationRequest;
+import csv.CSVReader;
+import csv.CSVRecord;
+import csv.CSVWriter;
 
 public class Account {
 
@@ -21,11 +20,12 @@ public class Account {
 		this.id = row.get(0);
 		this.username = row.get(1);
 		this.password = row.get(2);
+		
 	}
 	
 	public static Account getUserById(String id) {
 		// This needs to query the users table for the username with ID
-		CsvReader reader = new CsvReader(tablePath);
+		CSVReader reader = new CSVReader(tablePath);
 		reader.setHeaders("id", "username", "password");
 		ArrayList<String> row = reader.getRecordById(id).getRow();
 		return new Account(row);
@@ -36,9 +36,9 @@ public class Account {
 		// and determine whether the current user is valid.
 		// If valid, set authenticated to true and set userID to the matching userID
 		
-		CsvReader reader = new CsvReader(tablePath);
+		CSVReader reader = new CSVReader(tablePath);
 		reader.setHeaders("id", "username", "password");
-		ArrayList<CsvRecord> records = reader.where("username", request.getUsername());
+		ArrayList<CSVRecord> records = reader.where("username", request.getUsername());
 		String userID = records.get(0).getValueAtField("id");
 		request.setAuthenticated(true);
 		request.setUserID(userID);
@@ -47,7 +47,7 @@ public class Account {
 	
 	public static RegistrationRequest register(RegistrationRequest request) throws IOException {
 		
-		CsvWriter accountTableWriter = new CsvWriter(tablePath);
+		CSVWriter accountTableWriter = new CSVWriter(tablePath);
 		accountTableWriter.setHeaders("username", "password");
 		accountTableWriter.parse(",");
 		

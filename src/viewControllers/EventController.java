@@ -1,14 +1,13 @@
 package viewControllers;
-import helpers.RegistrationRequest;
-
 import java.io.IOException;
 
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.input.MouseEvent;
+import connections.RegistrationRequest;
 import controllers.AccountsController;
-public class EventController extends ViewControllerParent {
+public class EventController extends ViewController {
 
 	AccountsController accountsController;
 	

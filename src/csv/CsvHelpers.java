@@ -3,7 +3,7 @@ package csv;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class CsvHelpers {
+public class CSVHelpers {
 	
 	/////////////////////////
 	//	Protected methods  //
@@ -32,7 +32,7 @@ public class CsvHelpers {
 		return join(arr, separator);
 	}
 	
-	protected static String join(CsvRecord record, String separator) {
+	protected static String join(CSVRecord record, String separator) {
 		return join(record.getRow(), separator);
 	}
 	

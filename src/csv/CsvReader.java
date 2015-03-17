@@ -7,11 +7,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 
-public class CsvReader extends CsvParser {
+public class CSVReader extends CSVParser {
 
 	File file;
 	String path;
-	ArrayList<CsvRecord> table;
+	ArrayList<CSVRecord> table;
 	String delimiter;
 	
 	/**
@@ -21,7 +21,7 @@ public class CsvReader extends CsvParser {
 	 * @param path   the path to the table
 	 * @author Brian Maxwell
 	 */
-	public CsvReader(String path) {
+	public CSVReader(String path) {
 		super();
 		this.path = path;
 		setDelimiter(",");
@@ -35,7 +35,7 @@ public class CsvReader extends CsvParser {
 	 * @param headers   the
 	 * @author Brian Maxwell
 	 */
-	public CsvReader(String path, String... headers) {
+	public CSVReader(String path, String... headers) {
 		super(headers);
 		this.path = path;
 		setDelimiter(",");
@@ -47,7 +47,7 @@ public class CsvReader extends CsvParser {
 	 * @return The created CsvTable object
 	 * @author Brian Maxwell
 	 */
-	public ArrayList<CsvRecord> parse(String delimiter) {
+	public ArrayList<CSVRecord> parse(String delimiter) {
 		this.delimiter = delimiter;
 		return createTableFromFile();
 	}
@@ -69,7 +69,7 @@ public class CsvReader extends CsvParser {
 	 * @return CsvRecord object of last record in the table.
 	 * @author Brian Maxwell
 	 */
-	public CsvRecord lastRecord() {
+	public CSVRecord lastRecord() {
 		return table.get(table.size() - 1);
 	}
 	
@@ -78,7 +78,7 @@ public class CsvReader extends CsvParser {
 	 * @return CsvRecord object of first record in the table.
 	 * @author Brian Maxwell
 	 */
-	public CsvRecord firstRecord() {
+	public CSVRecord firstRecord() {
 		return table.get(0);
 	}
 	
@@ -88,7 +88,7 @@ public class CsvReader extends CsvParser {
 	 * @return The created CsvTable object
 	 * @author Brian Maxwell
 	 */
-	public ArrayList<CsvRecord> parse() {
+	public ArrayList<CSVRecord> parse() {
 		return createTableFromFile();
 	}
 	
@@ -108,11 +108,11 @@ public class CsvReader extends CsvParser {
 	 * @return A new CsvTable object holding matched records
 	 * @author Brian Maxwell
 	 */
-	public ArrayList<CsvRecord> where(String header, String value) {
-		ArrayList<CsvRecord> filteredTable = new ArrayList<CsvRecord>();
-		for (CsvRecord record : table) {
+	public ArrayList<CSVRecord> where(String header, String value) {
+		ArrayList<CSVRecord> filteredTable = new ArrayList<CSVRecord>();
+		for (CSVRecord record : table) {
 			String headerValue = record.getValueAtField(header);
-			if ( CsvHelpers.checkEquality(headerValue, value) ) filteredTable.add(record);
+			if ( CSVHelpers.checkEquality(headerValue, value) ) filteredTable.add(record);
 		}
 		return filteredTable;
 	}
@@ -136,7 +136,7 @@ public class CsvReader extends CsvParser {
 	 * @return the matching record or null if nothing is found
 	 * @author Brian Maxwell
 	 */
-	public CsvRecord getRecordById(int id) {
+	public CSVRecord getRecordById(int id) {
 		return getRecordById(id + "");
 	}
 	
@@ -146,11 +146,11 @@ public class CsvReader extends CsvParser {
 	 * @return the matching record or null if nothing is found
 	 * @author Brian Maxwell
 	 */
-	public CsvRecord getRecordById(String id) {
-		CsvRecord match = null;
-		for (CsvRecord record : table) {
+	public CSVRecord getRecordById(String id) {
+		CSVRecord match = null;
+		for (CSVRecord record : table) {
 			String value = record.getValueAtField("id");
-			if (CsvHelpers.checkEquality(id, value)) {
+			if (CSVHelpers.checkEquality(id, value)) {
 				match = record;
 				break;
 			}
@@ -161,8 +161,8 @@ public class CsvReader extends CsvParser {
 	@Override
 	public String toString() {
 		ArrayList<String> rows = new ArrayList<String>();
-		for (CsvRecord record : table) rows.add(CsvHelpers.join(record, getDelimiter()));
-		return CsvHelpers.join(rows, "\n");
+		for (CSVRecord record : table) rows.add(CSVHelpers.join(record, getDelimiter()));
+		return CSVHelpers.join(rows, "\n");
 	}
 	
 	///////////////////////////
@@ -175,7 +175,7 @@ public class CsvReader extends CsvParser {
 	 * @return CsvTable object holding CsvRecords
 	 * @author Brian Maxwell
 	 */
-	public ArrayList<CsvRecord> getTable() {
+	public ArrayList<CSVRecord> getTable() {
 		return this.table;
 	}
 	
@@ -202,19 +202,19 @@ public class CsvReader extends CsvParser {
 	//	Protected methods  //
 	/////////////////////////
 	
-	protected ArrayList<CsvRecord> createTableFromFile() {
+	protected ArrayList<CSVRecord> createTableFromFile() {
 		table = null;
 		BufferedReader reader = null;
 		file = new File(path);
 		try {
 			// Create file if it doesn't exist
 			file.createNewFile();
-			table = new ArrayList<CsvRecord>();
+			table = new ArrayList<CSVRecord>();
 			reader = new BufferedReader(new FileReader(file));
 			String line;
 			while ((line = reader.readLine()) != null) {
-				ArrayList<String> row = CsvHelpers.StringArrayToArrayList(line.split(delimiter));
-				CsvRecord record = new CsvRecord(row);
+				ArrayList<String> row = CSVHelpers.StringArrayToArrayList(line.split(delimiter));
+				CSVRecord record = new CSVRecord(row);
 				record.setHeaders(this.headers);
 				table.add(record);
 			}

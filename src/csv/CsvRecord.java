@@ -3,7 +3,7 @@ package csv;
 import java.util.ArrayList;
 
 
-public class CsvRecord extends CsvParser {
+public class CSVRecord extends CSVParser {
 
 	ArrayList<String> row;
 	
@@ -12,7 +12,7 @@ public class CsvRecord extends CsvParser {
 	 * @param row   The ArrayList<String> object representing a table record.
 	 * @author Brian Maxwell
 	 */
-	public CsvRecord(ArrayList<String> row) {
+	public CSVRecord(ArrayList<String> row) {
 		super();
 		this.row = row;
 	}
@@ -21,7 +21,7 @@ public class CsvRecord extends CsvParser {
 	 * Construct a new CsvRecord object from the supplied String arguments.
 	 * @param values   The arguments that represent each field of the record
 	 */
-	public CsvRecord(String... values) {
+	public CSVRecord(String... values) {
 		this.row = new ArrayList<String>();
 		for (String value : values) this.row.add(value);
 	}
