@@ -41,6 +41,18 @@ public class CSVRecord extends CSVParser {
 	}
 	
 	/**
+	 * Set the value at the specified field to a specified value.
+	 * @param value   the value to change the field to.
+	 * @param header   the field to store the new value.
+	 * @return The value that was set to the current field.
+	 */
+	public String setValueAtField(String value, String header) {
+		int columnIndex = this.headers.indexOf(header);
+		row.set(columnIndex, value);
+		return value;
+	}
+	
+	/**
 	 * Shorthand method for retrieving the id of the method. Identical to calling:
 	 * <div><pre>record.{@link #getValueAtField}("id")</pre></div>
 	 * @param header   the header corresponding to the field that needs to be retrieved.

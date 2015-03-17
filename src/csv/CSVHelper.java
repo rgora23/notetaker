@@ -3,7 +3,7 @@ package csv;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class CSVHelpers {
+public class CSVHelper {
 	
 	/////////////////////////
 	//	Protected methods  //

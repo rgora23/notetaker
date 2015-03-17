@@ -87,7 +87,7 @@ public class CSVWriter extends CSVReader {
 		String idString = id + "";
 		CSVRecord removedRecord = null;
 		for (CSVRecord record : table) {
-			if ( CSVHelpers.checkEquality(idString, record.getId()) ) {
+			if ( CSVHelper.checkEquality(idString, record.getId()) ) {
 				removedRecord = record;
 				table.remove(record);
 				break;
@@ -101,7 +101,7 @@ public class CSVWriter extends CSVReader {
 	 * must be called in order for any changes to take effect.
 	 * @author Brian Maxwell
 	 */
-	public void save() {
+	public void write() {
 		PrintWriter writer;
 		try {
 			writer = new PrintWriter(file);

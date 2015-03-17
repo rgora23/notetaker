@@ -12,8 +12,8 @@ public class CSVReader extends CSVParser {
 	File file;
 	String path;
 	ArrayList<CSVRecord> table;
-	String delimiter;
 	
+	static String delimiter = ",,";
 	/**
 	 * Creates a new object that can read the entire database and retrieve values.
 	 * This is only suitable for small databases. Default headers are ["id"].
@@ -24,7 +24,6 @@ public class CSVReader extends CSVParser {
 	public CSVReader(String path) {
 		super();
 		this.path = path;
-		setDelimiter(",");
 	}
 	
 	/**
@@ -38,18 +37,6 @@ public class CSVReader extends CSVParser {
 	public CSVReader(String path, String... headers) {
 		super(headers);
 		this.path = path;
-		setDelimiter(",");
-	}
-	
-	/**
-	 * Creates a CsvTable object from database table using the provided delimiter.
-	 * The table can be retrieved using a getter on the CsvReader object.
-	 * @return The created CsvTable object
-	 * @author Brian Maxwell
-	 */
-	public ArrayList<CSVRecord> parse(String delimiter) {
-		this.delimiter = delimiter;
-		return createTableFromFile();
 	}
 	
 	/**
@@ -112,7 +99,7 @@ public class CSVReader extends CSVParser {
 		ArrayList<CSVRecord> filteredTable = new ArrayList<CSVRecord>();
 		for (CSVRecord record : table) {
 			String headerValue = record.getValueAtField(header);
-			if ( CSVHelpers.checkEquality(headerValue, value) ) filteredTable.add(record);
+			if ( CSVHelper.checkEquality(headerValue, value) ) filteredTable.add(record);
 		}
 		return filteredTable;
 	}
@@ -150,7 +137,7 @@ public class CSVReader extends CSVParser {
 		CSVRecord match = null;
 		for (CSVRecord record : table) {
 			String value = record.getValueAtField("id");
-			if (CSVHelpers.checkEquality(id, value)) {
+			if (CSVHelper.checkEquality(id, value)) {
 				match = record;
 				break;
 			}
@@ -161,8 +148,21 @@ public class CSVReader extends CSVParser {
 	@Override
 	public String toString() {
 		ArrayList<String> rows = new ArrayList<String>();
-		for (CSVRecord record : table) rows.add(CSVHelpers.join(record, getDelimiter()));
-		return CSVHelpers.join(rows, "\n");
+		for (CSVRecord record : table) {
+			ArrayList<String> row = record.getRow();
+			for (int i = 0; i < row.size(); i++) {
+				// remove all instances of delimiter in field before converting to string.
+				String d = CSVReader.delimiter;
+				// first letter of the delimiter. The field cannot begin or end with 
+				// a character that the delimiter begins with.
+				char fl = d.charAt(0);
+				String regex = "(" + d + ")|(" + fl + "+$)|(^" + fl + "+)";
+				String newValue = row.get(i).replaceAll(regex, "");
+				row.set(i, newValue);
+			}
+			rows.add(CSVHelper.join(record, CSVReader.delimiter));
+		}
+		return CSVHelper.join(rows, "\n");
 	}
 	
 	///////////////////////////
@@ -177,24 +177,6 @@ public class CSVReader extends CSVParser {
 	 */
 	public ArrayList<CSVRecord> getTable() {
 		return this.table;
-	}
-	
-	/**
-	 * Set the delimiter to specified string. Default is ",".
-	 * @param delimiter   the delimiter to separate each record field.
-	 * @author Brian Maxwell
-	 */
-	public void setDelimiter(String delimiter) {
-		this.delimiter = delimiter;
-	}
-	
-	/**
-	 * Get the current delimiter
-	 * @return The current delimiter being used to parse table records.
-	 * @author Brian Maxwell
-	 */
-	public String getDelimiter() {
-		return this.delimiter;
 	}
 	
 	
@@ -213,7 +195,7 @@ public class CSVReader extends CSVParser {
 			reader = new BufferedReader(new FileReader(file));
 			String line;
 			while ((line = reader.readLine()) != null) {
-				ArrayList<String> row = CSVHelpers.StringArrayToArrayList(line.split(delimiter));
+				ArrayList<String> row = CSVHelper.StringArrayToArrayList(line.split(delimiter));
 				CSVRecord record = new CSVRecord(row);
 				record.setHeaders(this.headers);
 				table.add(record);

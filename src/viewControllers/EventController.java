@@ -5,7 +5,7 @@ import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.input.MouseEvent;
-import connections.RegistrationRequest;
+import requestHelpers.RegistrationRequest;
 import controllers.AccountsController;
 public class EventController extends ViewController {
 
