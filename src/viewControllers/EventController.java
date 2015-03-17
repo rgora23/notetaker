@@ -21,6 +21,7 @@ public class EventController extends ViewController {
 		String username = getTextFieldById("username_input").getText();
 		String password = ( getPasswordFieldById("password_input") ).getText();
 		
+<<<<<<< HEAD
 		// AccountsController tries to login with these credentials
 		String[] errors = AccountsController.login(username, password);
 		if (errors.length == 0) {
@@ -33,6 +34,24 @@ public class EventController extends ViewController {
 			// Change GUI to present errors to user
 			System.out.println(errors[0]);
 		}
+=======
+//		String username = getTextFieldById("username_input").getText();
+		
+//		String password = ( getPasswordFieldById("password_input") ).getText();
+//		LoginRequest loginRequest = new LoginRequest(username, password);
+//
+//		if (User.authenticate(loginRequest).isAuthenticated()) {
+//			User currentUser = User.getUserById(loginRequest.getUserID());
+//			getMain().setCurrentUser(currentUser);
+//			getMain().transitionLoginSuccess();
+//		}
+//		else {
+//			getMain().transitionLoginFailed();
+//		}
+//		System.out.println("This Worked");
+		getGridPaneById("login_pane_root").setVisible(false);
+		getAnchorPaneById("dashboard").setDisable(false);
+>>>>>>> matt
 	}
 
 	@FXML protected void tryRegistration(Event e) throws IOException {
@@ -47,6 +66,7 @@ public class EventController extends ViewController {
 		else {
 			for (String error : errors ) {
 				System.out.println(error);
+			    getLabelById("create_account_error_text").setText(error); 
 			}
 		}		
 	}
@@ -82,12 +102,11 @@ public class EventController extends ViewController {
 	}
 
 	@FXML protected void settingsButtonClicked(MouseEvent e) throws IOException {
-		getLabelById("noteTaker_text").setText("viewSettings!");
+		getNodeById("account_settings_pane").setVisible(true);
 	}
 
 	@FXML protected void createAccountClicked(MouseEvent e) throws IOException {
 		getAnchorPaneById("create_account_pane").setVisible(true);
-		getNodeById("account_settings_pane").setVisible(false);
 	}
 
 	@FXML protected void tryAccount(MouseEvent e) throws IOException {
@@ -96,11 +115,11 @@ public class EventController extends ViewController {
 
 	@FXML protected void cancelAccountButtonClicked(MouseEvent e) throws IOException {
 		getAnchorPaneById("create_account_pane").setVisible(false);
-		getNodeById("account_settings_pane").setVisible(true);
+
 	}
 
 	@FXML protected void saveSettingsButtonClicked(MouseEvent e) throws IOException {
-
+		getNodeById("account_settings_pane").setVisible(false);
 	}
 
 }

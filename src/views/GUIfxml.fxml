@@ -114,7 +114,7 @@
 						<RowConstraints />
 					</rowConstraints>
 				</GridPane>
-<<<<<<< HEAD
+<<<<<<<< HEAD 
             <Pane>
                <children>
                   <AnchorPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -188,7 +188,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor></Label>
 			</children>  
-=======
+========= 
 				<AnchorPane layoutX="826.0" layoutY="150.0"
 					AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
 					AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -288,6 +288,7 @@
 						</AnchorPane>
 					</children>
 				</AnchorPane>
+				<children>
 				<Label id="newaccount" fx:id="create_account" onMouseClicked="#createAccountClicked"
 					text="New Account" AnchorPane.leftAnchor="30.0"
 					AnchorPane.topAnchor="20.0">
