@@ -12,6 +12,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.text.Text;
 import noteTaker.Session;
 
 // This is the parent controller class that will be extended by all view controllers.
@@ -60,5 +61,8 @@ public abstract class ViewController implements Initializable {
 		return ((AnchorPane) getNodeById(id));
 	}
 
+	public Text getTextById(String id) {
+		return ((Text) getNodeById(id));
+	}
 
 }

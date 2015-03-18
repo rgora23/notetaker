@@ -22,7 +22,7 @@
 	visible="false" AnchorPane.rightAnchor="475.0" AnchorPane.topAnchor="150.0">
 	<children>
 		<GridPane id="new_account_window" layoutX="2.0" prefHeight="261.0"
-			prefWidth="244.0" AnchorPane.leftAnchor="1.0" AnchorPane.topAnchor="-1.0" gridLinesVisible="true">
+			prefWidth="244.0" AnchorPane.leftAnchor="1.0" AnchorPane.topAnchor="-1.0" gridLinesVisible="false">
 			<columnConstraints>
 				<ColumnConstraints hgrow="SOMETIMES" minWidth="10.0"
 					prefWidth="5.0" />
