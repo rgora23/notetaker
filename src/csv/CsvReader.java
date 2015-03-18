@@ -150,6 +150,18 @@ public class CSVReader extends CSVParser {
 		return match;
 	}
 	
+	public CSVRecord getRecordByNameField(String nameField) {
+		CSVRecord match = null;
+		for (CSVRecord record : table) {
+			String value = record.getValueAtField("name");
+			if (CSVHelper.checkEquality(nameField, value)) {
+				match = record;
+				break;
+			}
+		}
+		return match;
+	}
+	
 	@Override
 	public String toString() {
 		ArrayList<String> rows = new ArrayList<String>();
