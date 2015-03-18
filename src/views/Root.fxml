@@ -32,6 +32,8 @@
 				<Cursor fx:constant="HAND" />
 			</cursor>
 		</Label>
-		
+		<Button id="logout_button" onMouseClicked="#logoutButtonClicked" text="Log out" 
+			    AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="40" visible="false"> </Button>
+		<Label id="NOTETAKER_text" visible="false" AnchorPane.rightAnchor="30.0" BlendMode="OVERLAY" AnchorPane.topAnchor="20.0" text="#NoteTaker" ></Label>
 	</children>
 </AnchorPane>

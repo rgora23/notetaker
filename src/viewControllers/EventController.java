@@ -21,7 +21,7 @@ public class EventController extends ViewController {
 		String username = getTextFieldById("username_input").getText();
 		String password = ( getPasswordFieldById("password_input") ).getText();
 		
-<<<<<<< HEAD
+
 		// AccountsController tries to login with these credentials
 		String[] errors = AccountsController.login(username, password);
 		if (errors.length == 0) {
@@ -29,29 +29,19 @@ public class EventController extends ViewController {
 			// Can reference account for info by referencing Session class.
 			// Session.getAccount().getUsername();
 			System.out.println("Welcome " + Session.getAccount().getUsername() + "!");
+			getGridPaneById("login_pane_root").setVisible(false);
+			getAnchorPaneById("dashboard").setDisable(false);
+			getButtonById("logout_button").setVisible(true);
+			getLabelById("NOTETAKER_text").setVisible(true);
 		}
 		else {
 			// Change GUI to present errors to user
 			System.out.println(errors[0]);
+			getTextById("login_fail_text").setText(errors[0]);
+			getTextById("login_fail_text").setVisible(true); 
 		}
-=======
-//		String username = getTextFieldById("username_input").getText();
-		
-//		String password = ( getPasswordFieldById("password_input") ).getText();
-//		LoginRequest loginRequest = new LoginRequest(username, password);
-//
-//		if (User.authenticate(loginRequest).isAuthenticated()) {
-//			User currentUser = User.getUserById(loginRequest.getUserID());
-//			getMain().setCurrentUser(currentUser);
-//			getMain().transitionLoginSuccess();
-//		}
-//		else {
-//			getMain().transitionLoginFailed();
-//		}
-//		System.out.println("This Worked");
-		getGridPaneById("login_pane_root").setVisible(false);
-		getAnchorPaneById("dashboard").setDisable(false);
->>>>>>> matt
+
+
 	}
 
 	@FXML protected void tryRegistration(Event e) throws IOException {
@@ -76,6 +66,14 @@ public class EventController extends ViewController {
 		NotesController.create(noteTitle);
 	}
 	
+	@FXML protected void logoutButtonClicked(MouseEvent e) throws IOException {
+		  getGridPaneById("login_pane_root").setVisible(true);
+		  getLabelById("NOTETAKER_text").setVisible(false); 
+		  getAnchorPaneById("dashboard").setDisable(true);
+		  getButtonById("logout_button").setVisible(false);
+	}
+	
+   
 	
 	@FXML protected void createNoteButtonClicked(MouseEvent e) throws IOException {
 		getLabelById("noteTaker_text").setText("new Note!");
@@ -122,4 +120,9 @@ public class EventController extends ViewController {
 		getNodeById("account_settings_pane").setVisible(false);
 	}
 
+	@FXML protected void noteCancelAction(MouseEvent e) throws IOException {
+		  getAnchorPaneById("create_note_pane").setVisible(false); 
+		  
+	}
+	
 }
