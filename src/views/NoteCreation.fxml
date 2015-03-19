@@ -18,7 +18,7 @@
 
 <AnchorPane id="create_note_pane" prefHeight="200.0"
 	prefWidth="200.0" xmlns:fx="http://javafx.com/fxml/1" fx:controller="viewControllers.EventController"
-	visible="true" AnchorPane.rightAnchor="475.0" AnchorPane.topAnchor="150.0">
+	visible="false" AnchorPane.rightAnchor="475.0" AnchorPane.topAnchor="150.0">
 
 	<children>
 		<GridPane id="create_note_form" gridLinesVisible="false" vgap="15" AnchorPane.topAnchor="0.0">
