@@ -71,6 +71,7 @@ public class EventController extends ViewController {
 		  getLabelById("NOTETAKER_text").setVisible(false); 
 		  getAnchorPaneById("dashboard").setDisable(true);
 		  getButtonById("logout_button").setVisible(false);
+		  AccountsController.logout();
 	}
 	
    

@@ -46,7 +46,8 @@ public class CSVReader extends CSVParser {
 	public String getNextId() {
 		int lastId = -1;
 		try {
-			lastId = Integer.parseInt(lastRecord().getId());			
+			if (lastRecord() == null) lastId = 0;
+			else lastId = Integer.parseInt(lastRecord().getId());			
 		} catch (NumberFormatException e) { }
 		return (lastId + 1) + "";
 	}
@@ -57,7 +58,12 @@ public class CSVReader extends CSVParser {
 	 * @author Brian Maxwell
 	 */
 	public CSVRecord lastRecord() {
-		return table.get(table.size() - 1);
+		if ( table.size() == 0 ) {
+			return null;
+		}
+		else {
+			return table.get(table.size() - 1);
+		}
 	}
 	
 	/**
