@@ -116,8 +116,18 @@ public class Account extends Model {
 		}
 		
 		if ( request.getErrors().isEmpty() ) {
-			accountTableWriter.append(request.getUsername(), request.getPassword());
-			accountTableWriter.write();
+			String newSalt = null;
+			try {
+				newSalt = getSalt();
+			} catch (NoSuchAlgorithmException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			if(newSalt != null) {
+				String newHash = get_SHA_1_SecurePassword(request.getPassword(), newSalt);
+				accountTableWriter.append(request.getUsername(), newSalt, newHash);
+				accountTableWriter.write();
+			}
 		}
 		
 	}
