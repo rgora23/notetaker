@@ -44,5 +44,9 @@ public class AccountsController extends Controller {
 		String[] errors = ArrayListToStringArray(loginRequest.getErrors());
 		return errors;
 	}
+	
+	public static void logout() {
+		Session.destroy();
+	}
 
 }
