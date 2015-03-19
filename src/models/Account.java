@@ -67,25 +67,22 @@ public class Account extends Model {
 	public static void authenticate(LoginRequest request) {
 		// Try to find specified account
 		CSVReader reader = constructReader();
+		
+		// Get only the records that match the given username
+		CSVReader filteredReader = reader.where("username").is(request.getUsername());
 
-		CSVReader filteredReader = reader
-				.where("username").is(request.getUsername());
-
-		/*
-		 * 
-		 */
-
+		// Get the ArrayList of CSVRecord objects belonging to the filtered reader 
 		ArrayList<CSVRecord> matchingRecords = filteredReader.getTable();
-		if (matchingRecords.size() >= 1) {
+		if (matchingRecords.size() > 0) {
+			// Get first record in match (there should only be one)
 			CSVRecord record = matchingRecords.get(0);
-
 			String recordSalt = record.getValueAtField("salt");
 			String recordHash = record.getValueAtField("hash");
 			String hashGenerated = PasswordSecurityFactory.getSHA1Hash(request.getPassword(), recordSalt);
 			boolean authenticated = hashGenerated.equals(recordHash);
 
-			request.setAuthenticated(authenticated);
 			if (authenticated) request.setAccount(new Account(record));
+			request.setAuthenticated(authenticated);
 		}
 
 	}
