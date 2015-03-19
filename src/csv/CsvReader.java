@@ -12,7 +12,7 @@ public class CSVReader extends CSVParser {
 	protected File file;
 	private String path;
 	protected ArrayList<CSVRecord> table;
-	
+
 	static String delimiter = ",,";
 	/**
 	 * Creates a new object that can read the entire database and retrieve values.
@@ -25,7 +25,7 @@ public class CSVReader extends CSVParser {
 		super();
 		this.path = path;
 	}
-	
+
 	/**
 	 * Creates a new object that can read the entire database and retrieve values.
 	 * This is only suitable for small databases. Provided headers override default headers.
@@ -38,7 +38,7 @@ public class CSVReader extends CSVParser {
 		super(headers);
 		this.path = path;
 	}
-	
+
 	/**
 	 * Finds the next ID to use in order to append a record to the table.
 	 * @return String representation of the next ID to use in the table.
@@ -46,20 +46,26 @@ public class CSVReader extends CSVParser {
 	public String getNextId() {
 		int lastId = -1;
 		try {
-			lastId = Integer.parseInt(lastRecord().getId());			
+			if (lastRecord() == null) lastId = 0;
+			else lastId = Integer.parseInt(lastRecord().getId());			
 		} catch (NumberFormatException e) { }
 		return (lastId + 1) + "";
 	}
-	
+
 	/**
 	 * Gets the last record in the table
 	 * @return CsvRecord object of last record in the table.
 	 * @author Brian Maxwell
 	 */
 	public CSVRecord lastRecord() {
-		return table.get(table.size() - 1);
+		if ( table.size() == 0 ) {
+			return null;
+		}
+		else {
+			return table.get(table.size() - 1);
+		}
 	}
-	
+
 	/**
 	 * Gets the first record in the table
 	 * @return CsvRecord object of first record in the table.
@@ -68,7 +74,7 @@ public class CSVReader extends CSVParser {
 	public CSVRecord firstRecord() {
 		return table.get(0);
 	}
-	
+
 	/**
 	 * Creates a CsvTable object from database table using the set delimiter.
 	 * The table can be retrieved using a getter on the CsvReader object.
@@ -78,7 +84,7 @@ public class CSVReader extends CSVParser {
 	public ArrayList<CSVRecord> parse() {
 		return createTableFromFile();
 	}
-	
+
 	/**
 	 * Searches through the table and returns a new filtered table where all the values
 	 * of the supplied header hold the supplied value.
@@ -103,12 +109,12 @@ public class CSVReader extends CSVParser {
 		}
 		return filteredTable;
 	}
-	
+
 	public CSVRecordList where(String field) {
 		CSVRecordList fields = new CSVRecordList(headers, table, field, path);
 		return fields;
 	}
-	
+
 	/**
 	 * Checks if the given value for a header has been taken for any
 	 * of the records in the table.
@@ -121,7 +127,7 @@ public class CSVReader extends CSVParser {
 	public boolean validateUniqueness(String header, String value) {
 		return where(header, value).isEmpty();
 	}
-	
+
 	/**
 	 * Search the table for the record with the matching id
 	 * @param id   the integer id of the record to retrieve
@@ -131,7 +137,7 @@ public class CSVReader extends CSVParser {
 	public CSVRecord getRecordById(int id) {
 		return getRecordById(id + "");
 	}
-	
+
 	/**
 	 * Search the table for the record with the matching id
 	 * @param id   the string id of the record to retrieve
@@ -149,7 +155,19 @@ public class CSVReader extends CSVParser {
 		}
 		return match;
 	}
-	
+
+	public CSVRecord getRecordByNameField(String nameField) {
+		CSVRecord match = null;
+		for (CSVRecord record : table) {
+			String value = record.getValueAtField("name");
+			if (CSVHelper.checkEquality(nameField, value)) {
+				match = record;
+				break;
+			}
+		}
+		return match;
+	}
+
 	@Override
 	public String toString() {
 		ArrayList<String> rows = new ArrayList<String>();
@@ -169,12 +187,12 @@ public class CSVReader extends CSVParser {
 		}
 		return CSVHelper.join(rows, "\n");
 	}
-	
+
 	///////////////////////////
 	//	Getters and Setters  //
 	///////////////////////////
-	
-	
+
+
 	/**
 	 * Get the corresponding CsvTable object mapping of this database table.
 	 * @return CsvTable object holding CsvRecords
@@ -183,16 +201,16 @@ public class CSVReader extends CSVParser {
 	public ArrayList<CSVRecord> getTable() {
 		return this.table;
 	}
-	
-	
+
+
 	/////////////////////////
 	//	Protected methods  //
 	/////////////////////////
-	
+
 	protected void setTable(ArrayList<CSVRecord> table) {
 		this.table = table;
 	}
-	
+
 	protected ArrayList<CSVRecord> createTableFromFile() {
 		table = null;
 		BufferedReader reader = null;
@@ -214,5 +232,5 @@ public class CSVReader extends CSVParser {
 		return table;
 	}
 
-	
+
 }
