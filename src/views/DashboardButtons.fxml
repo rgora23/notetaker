@@ -39,29 +39,35 @@
 			<children>
 				<Button id="settings_button" minWidth="-Infinity"
 					onMouseClicked="#settingsButtonClicked" prefHeight="61.0"
-					prefWidth="43.0" text="+" GridPane.columnIndex="0"
+					prefWidth="43.0" text="" GridPane.columnIndex="0"
 					GridPane.rowIndex="0">
 					<font>
 						<Font size="18.0" />
 					</font>
 					<cursor>
-						<Cursor fx:constant="TEXT" />
+						<Cursor fx:constant="HAND" />
 					</cursor>
 				</Button>
 				<Button id="tags_button" minWidth="-Infinity"
 					onMouseClicked="#tagsButtonClicked" prefHeight="61.0" prefWidth="43.0"
-					text="+" GridPane.columnIndex="0" GridPane.rowIndex="1">
+					text="" GridPane.columnIndex="0" GridPane.rowIndex="1">
 					<font>
 						<Font size="18.0" />
 					</font>
+				<cursor>
+				<Cursor fx:constant="HAND" />
+			</cursor>	
 				</Button>
 				<Button id="createNote_button" minWidth="-Infinity"
 					onMouseClicked="#createNoteButtonClicked" prefHeight="61.0"
-					prefWidth="43.0" text="+" GridPane.columnIndex="0"
+					prefWidth="43.0" text="" GridPane.columnIndex="0"
 					GridPane.rowIndex="2">
 					<font>
 						<Font size="18.0" />
 					</font>
+				<cursor>
+				<Cursor fx:constant="HAND" />
+			</cursor>
 				</Button>
 			</children>
 		</GridPane>

@@ -77,7 +77,7 @@ public class EventController extends ViewController {
    
 	
 	@FXML protected void createNoteButtonClicked(MouseEvent e) throws IOException {
-		getLabelById("noteTaker_text").setText("new Note!");
+		getAnchorPaneById("create_note_pane").setVisible(true);
 	}
 
 	@FXML protected void noteButtonClicked(MouseEvent e) throws IOException{

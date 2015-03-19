@@ -22,18 +22,18 @@
 		<fx:include fx:id="embeddedLoginPane" source="LoginPane.fxml" />
 		<fx:include fx:id="embeddedRegistrationPane" source="RegistrationPane.fxml" />
 		<fx:include fx:id="embeddedDashboard" source="Dashboard.fxml" />
-		<!-- <fx:include fx:id="embeddedDashboardButton" source="DashboardButtons.fxml" /> -->
+	    <fx:include fx:id="embeddedDashboardButton" source="DashboardButtons.fxml" /> 
 		<fx:include fx:id="embeddedAccountSettings" source="AccountSettings.fxml" />
 		<fx:include fx:id="embeddedNoteCreation" source="NoteCreation.fxml" />
 		
 		<Label id="newaccount" onMouseClicked="#createAccountClicked"
-			text="New Account" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="20.0">
+			text="New Account" AnchorPane.rightAnchor="340.0" AnchorPane.topAnchor="28.0">
 			<cursor>
 				<Cursor fx:constant="HAND" />
 			</cursor>
 		</Label>
 		<Button id="logout_button" onMouseClicked="#logoutButtonClicked" text="Log out" 
 			    AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="40" visible="false"> </Button>
-		<Label id="NOTETAKER_text" visible="false" AnchorPane.rightAnchor="30.0" BlendMode="OVERLAY" AnchorPane.topAnchor="20.0" text="#NoteTaker" ></Label>
+		<Label id="NOTETAKER_text" visible="true" AnchorPane.leftAnchor="30.0" BlendMode="OVERLAY" AnchorPane.topAnchor="20.0" text="#NoteTaker" ></Label>
 	</children>
 </AnchorPane>
