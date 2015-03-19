@@ -1,6 +1,9 @@
 package models;
 
 import java.io.IOException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
 import java.util.ArrayList;
 
 import noteTaker.ErrorMessages;
@@ -17,7 +20,7 @@ public class Account extends Model {
 	String username;
 	String password;
 	static String tablePath = "database/accounts_table";
-	static String[] tableHeaders = {"id", "username", "password"};
+	static String[] tableHeaders = {"id", "username", "salt", "hash"};
 	
 	// This constructor is an example of an ORM.
 	// Every instance variable is mapped to a column in the table.
@@ -67,17 +70,20 @@ public class Account extends Model {
 		CSVReader reader = constructReader();
 		
 		CSVReader filteredReader = reader
-				.where("username").is(request.getUsername())
-				.where("password").is(request.getPassword());
+				.where("username").is(request.getUsername());
+		
+		/*
+		 * 
+		 */
 		
 		ArrayList<CSVRecord> matchingRecords = filteredReader.getTable();
 		if (matchingRecords.size() >= 1) {
 			CSVRecord record = matchingRecords.get(0);
 			
-			// this needs to be password salt/hashified
-			// for now, it's just comparing the two plain text passwords
-			String recordPassword = record.getValueAtField("password");
-			boolean authenticated = recordPassword.equals(request.getPassword());
+			String recordSalt = record.getValueAtField("salt");
+			String recordHash = record.getValueAtField("hash");
+			String hashGenerated = get_SHA_1_SecurePassword(request.getPassword(), recordSalt);
+			boolean authenticated = hashGenerated.equals(recordHash);
 			
 			request.setAuthenticated(authenticated);
 			if (authenticated) request.setAccount(new Account(record));
@@ -110,8 +116,18 @@ public class Account extends Model {
 		}
 		
 		if ( request.getErrors().isEmpty() ) {
-			accountTableWriter.append(request.getUsername(), request.getPassword());
-			accountTableWriter.write();
+			String newSalt = null;
+			try {
+				newSalt = getSalt();
+			} catch (NoSuchAlgorithmException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			if(newSalt != null) {
+				String newHash = get_SHA_1_SecurePassword(request.getPassword(), newSalt);
+				accountTableWriter.append(request.getUsername(), newSalt, newHash);
+				accountTableWriter.write();
+			}
 		}
 		
 	}
@@ -124,4 +140,34 @@ public class Account extends Model {
 		return Model.constructReader(tablePath, tableHeaders);
 	}
 		
+	//These are the functions used to create password salts and hashes
+		 private static String get_SHA_1_SecurePassword(String passwordToHash, String salt)
+		    {
+		        String generatedPassword = null;
+		        try {
+		            MessageDigest md = MessageDigest.getInstance("SHA-1");
+		            md.update(salt.getBytes());
+		            byte[] bytes = md.digest(passwordToHash.getBytes());
+		            StringBuilder sb = new StringBuilder();
+		            for(int i=0; i< bytes.length ;i++)
+		            {
+		                sb.append(Integer.toString((bytes[i] & 0xff) + 0x100, 16).substring(1));
+		            }
+		            generatedPassword = sb.toString();
+		        }
+		        catch (NoSuchAlgorithmException e)
+		        {
+		            e.printStackTrace();
+		        }
+		        return generatedPassword;
+		    }
+			
+			private static String getSalt() throws NoSuchAlgorithmException
+		    {
+		        SecureRandom sr = SecureRandom.getInstance("SHA1PRNG");
+		        byte[] salt = new byte[16];
+		        sr.nextBytes(salt);
+		        return salt.toString();
+		    }
+			
 }
