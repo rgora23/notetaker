@@ -25,18 +25,17 @@ public class EventController extends ViewController {
 		// AccountsController tries to login with these credentials
 		String[] errors = AccountsController.login(username, password);
 		if (errors.length == 0) {
-			// Change GUI to show logged in user
 			// Can reference account for info by referencing Session class.
-			// Session.getAccount().getUsername();
 			System.out.println("Welcome " + Session.getAccount().getUsername() + "!");
+			
+			// Change GUI to show logged in user
 			getGridPaneById("login_pane_root").setVisible(false);
 			getAnchorPaneById("dashboard").setDisable(false);
 			getButtonById("logout_button").setVisible(true);
 			getLabelById("NOTETAKER_text").setVisible(true);
 		}
 		else {
-			// Change GUI to present errors to user
-			System.out.println(errors[0]);
+			// Present errors to user
 			getTextById("login_fail_text").setText(errors[0]);
 			getTextById("login_fail_text").setVisible(true); 
 		}
