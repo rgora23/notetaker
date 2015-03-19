@@ -1,7 +1,7 @@
 .root{
 	 -fx-background-image: url("../images/paperBackground.jpg");
 }
-
+/*------------------------------>LABELS AND TEXT<---------------------------- */
 #username {
 	-fx-font-size: 12px;
     -fx-font-weight: bold;
@@ -33,6 +33,18 @@
 	
 }
 
+
+#newaccount {
+	-fx-font-size: 12px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #0283CF;
+    -fx-effect:dropshadow( gaussian, rgba(255,255,255,0.5), 0,0,0,1);
+}
+	
+
+
+/*---------------------> BUTTONS AND HOVERS <---------------------------- */
+
 #modifiedbutton{
 	-fx-font-size: 12px;
     -fx-font-weight: bold;
@@ -41,11 +53,38 @@
 	
 }
 
-#saveSettingsButton{
-	-fx-font-size: 9px;
-    -fx-font-weight: bold;
-    -fx-text-fill: #333333;
-    -fx-effect:dropshadow( gaussian, rgba(255,255,255,0.5), 0,0,0,1);
+#settings_button {          
+    -fx-background-image: url("../images/NoteTakerButtons.jpg"); 
+    -fx-background-size:100% 100%;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position:left;   
+}
+
+#settings_button:hover {
+	 -fx-effect:dropshadow( one-pass-box, rgba(255,255,255,0.5), 10,1,0,1);
+}
+
+
+#tags_button  {          
+    -fx-background-image: url("../images/tagButton.jpg"); 
+    -fx-background-size:100% 100%;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position:left;   
+}
+
+#tags_button:hover {
+	 -fx-effect:dropshadow( one-pass-box, rgba(255,255,255,0.5), 10,1,0,1);
+}
+
+#createNote_button {          
+    -fx-background-image: url("../images/newNoteButton.jpg"); 
+    -fx-background-size:100% 100%;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position:left;   
+} 
+
+#createNote_button:hover {
+	 -fx-effect:dropshadow( one-pass-box, rgba(255,255,255,0.5), 10,1,0,1);
 }
 
 
@@ -55,28 +94,20 @@
     -fx-text-fill: #333333;
     -fx-effect:dropshadow( gaussian, rgba(255,255,255,0.5), 0,0,0,1);	
 }
-	
-#newaccount {
-	-fx-font-size: 12px;
-    -fx-font-weight: bold;
-    -fx-text-fill: #0283CF;
-    -fx-effect:dropshadow( gaussian, rgba(255,255,255,0.5), 0,0,0,1);
-}
-	
+
+
 .button:hover {
-	-fx-background-color: linear-gradient(#2A5058, #61a2b1);
+	-fx-effect:dropshadow( one-pass-box, rgba(255,255,255,0.5), 6,1,0,1);
+
 }
 
 
-/* For all labels used to title forms */
+
+/* ---------------------->For all labels used to title forms<------------------------ */
 #form_title {
 	-fx-font-size: 18px;
 	-fx-effect:dropshadow( gaussian, rgba(255,255,255,0.5), 0,0,0,1);
 	-fx-font-weight: bold;
-}
-
-#create_note_pane {	
-	
 }
 
 #create_note_form {
