@@ -33,7 +33,12 @@ public class EventController extends ViewController {
 			getAnchorPaneById("dashboard").setDisable(false);
 			getButtonById("logout_button").setVisible(true);
 			getLabelById("NOTETAKER_text").setVisible(true);
+<<<<<<< HEAD
 			getPaneById("dashboard_buttons").setDisable(false);
+=======
+			getPaneById("note_buttons").setDisable(false);
+			getLabelById("newaccount").setVisible(false);
+>>>>>>> matt
 		}
 		else {
 			// Present errors to user
@@ -71,8 +76,13 @@ public class EventController extends ViewController {
 		  getLabelById("NOTETAKER_text").setVisible(false); 
 		  getAnchorPaneById("dashboard").setDisable(true);
 		  getButtonById("logout_button").setVisible(false);
+<<<<<<< HEAD
 		  getPaneById("dashboard_buttons").setDisable(true);
+=======
+		  getPaneById("note_buttons").setDisable(true);
+>>>>>>> matt
 		  AccountsController.logout();
+		  
 	}
 	
    

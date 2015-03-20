@@ -32,6 +32,7 @@
 				<Cursor fx:constant="HAND" />
 			</cursor>
 		</Label>
+<<<<<<< HEAD
 		<Button id="logout_button" onMouseClicked="#logoutButtonClicked"
 			text="Log out" AnchorPane.rightAnchor="25" AnchorPane.topAnchor="24"
 			visible="false">
@@ -41,6 +42,23 @@
 
 		<Pane id="dashboard_buttons" disable="true" layoutX="827.0" layoutY="150.0"
 			AnchorPane.topAnchor="150" AnchorPane.rightAnchor="328">
+=======
+		<Button id="logout_button" onMouseClicked="#logoutButtonClicked" text="Log out" 
+			    AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="40" visible="false"> </Button>
+		<Label id="NOTETAKER_text" visible="true" AnchorPane.leftAnchor="30.0" BlendMode="OVERLAY" AnchorPane.topAnchor="20.0" text="#NoteTaker" ></Label>
+	
+	<Pane id="note_buttons" disable="true" layoutX="827.0" layoutY="150.0" AnchorPane.topAnchor="150" AnchorPane.rightAnchor="328" >
+   <children>
+		<GridPane prefHeight="142.0" prefWidth="44.0" AnchorPane.rightAnchor="328.0" AnchorPane.topAnchor="150.0">
+			<columnConstraints>
+				<ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+			</columnConstraints>
+			<rowConstraints>
+				<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+				<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+				<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+			</rowConstraints>
+>>>>>>> matt
 			<children>
 				<GridPane prefHeight="142.0" prefWidth="44.0"
 					AnchorPane.rightAnchor="328.0" AnchorPane.topAnchor="150.0">
