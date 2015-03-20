@@ -7,6 +7,9 @@ import requestHelpers.NoteCreationRequest;
 
 public class Note {
 	
+	String title;
+	String id;
+	String account_id;
 	static String tablePath = "database/notes_table";
 	static String[] tableHeaders = {"id", "title", "account_id"};
 	
@@ -15,10 +18,9 @@ public class Note {
 	}
 
 	public static void create(NoteCreationRequest request) {
-		CSVWriter writer = constructWriter();
-		
-		
-		
+		CSVWriter noteTableWriter = constructWriter();
+		noteTableWriter.append(request.getTitle(), request.getAccountId());
+		noteTableWriter.write();
 	}
 	
 	
