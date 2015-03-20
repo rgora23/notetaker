@@ -33,6 +33,7 @@ public class EventController extends ViewController {
 			getAnchorPaneById("dashboard").setDisable(false);
 			getButtonById("logout_button").setVisible(true);
 			getLabelById("NOTETAKER_text").setVisible(true);
+			getPaneById("dashboard_buttons").setDisable(false);
 		}
 		else {
 			// Present errors to user
@@ -70,6 +71,7 @@ public class EventController extends ViewController {
 		  getLabelById("NOTETAKER_text").setVisible(false); 
 		  getAnchorPaneById("dashboard").setDisable(true);
 		  getButtonById("logout_button").setVisible(false);
+		  getPaneById("dashboard_buttons").setDisable(true);
 		  AccountsController.logout();
 	}
 	
@@ -77,6 +79,7 @@ public class EventController extends ViewController {
 	
 	@FXML protected void createNoteButtonClicked(MouseEvent e) throws IOException {
 		getAnchorPaneById("create_note_pane").setVisible(true);
+		System.out.println("FUCK");
 	}
 
 	@FXML protected void noteButtonClicked(MouseEvent e) throws IOException{
