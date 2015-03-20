@@ -1,6 +1,8 @@
 package noteTaker;
 
 
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.io.IOException;
 
 import javafx.application.Application;
@@ -25,12 +27,12 @@ public class Main extends Application {
 		Session.setStage(primaryStage);
 		
 		// Set the title of the window
-		primaryStage.setTitle("Note Taker");
+		primaryStage.setTitle("NoteTaker");
 
 		// Load filePath and create scene from it
 		Parent root = getRootFromFile("/views/Root.fxml");
-		scene = new Scene(root, 1200, 650);
-		
+		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+		scene = new Scene(root, screenSize.width, screenSize.height);
 
 		// Apply style to scene
 		String cssUrl = this.getClass().getResource("/assets/css/application.css").toExternalForm();
@@ -38,6 +40,8 @@ public class Main extends Application {
 		
 		// Set the newly created and styled scene to primaryStage and show it.
 		primaryStage.setScene(scene);
+		primaryStage.setMinWidth(800.0);
+		primaryStage.setMinHeight(500.0);
 		primaryStage.show();
 	}
 
