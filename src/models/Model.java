@@ -4,7 +4,28 @@ import csv.CSVReader;
 import csv.CSVWriter;
 
 public class Model {
+	String dateCreated;
+	String dateModified;
 	
+	public String getDateCreated()
+	{
+		return dateCreated;
+	}
+	
+	public void setDateCreated(String dateCreated)
+	{
+		this.dateCreated = dateCreated;
+	}
+	
+	public String getDateModified()
+	{
+		return dateModified;
+	}
+	
+	public void setDateModified(String dateModified)
+	{
+		this.dateModified = dateModified;
+	}
 	
 	protected static CSVReader constructReader(String tablePath, String[] tableHeaders) {
 		CSVReader reader = new CSVReader(tablePath);
