@@ -34,7 +34,7 @@
 }
 
 
-#newaccount {
+#new_account {
 	-fx-font-size: 12px;
     -fx-font-weight: bold;
     -fx-text-fill: #0283CF;
@@ -119,6 +119,11 @@
 
 #create_note_form .label {
 	-fx-min-height: 50px;
+	
+}
+
+/* Dashboard buttons  */
+#settings_button, #tags_button, #createNote_button {
 	
 }
 

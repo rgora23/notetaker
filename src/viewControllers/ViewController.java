@@ -12,6 +12,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import noteTaker.Session;
 
@@ -59,6 +60,10 @@ public abstract class ViewController implements Initializable {
 
 	public AnchorPane getAnchorPaneById(String id) {
 		return ((AnchorPane) getNodeById(id));
+	}
+	
+	public Pane getPaneById(String id) {
+		return ((Pane) getNodeById(id));
 	}
 
 	public Text getTextById(String id) {
