@@ -33,6 +33,8 @@ public class EventController extends ViewController {
 			getAnchorPaneById("dashboard").setDisable(false);
 			getButtonById("logout_button").setVisible(true);
 			getLabelById("NOTETAKER_text").setVisible(true);
+			getPaneById("note_buttons").setDisable(false);
+			getLabelById("newaccount").setVisible(false);
 		}
 		else {
 			// Change GUI to present errors to user
@@ -71,7 +73,9 @@ public class EventController extends ViewController {
 		  getLabelById("NOTETAKER_text").setVisible(false); 
 		  getAnchorPaneById("dashboard").setDisable(true);
 		  getButtonById("logout_button").setVisible(false);
+		  getPaneById("note_buttons").setDisable(true);
 		  AccountsController.logout();
+		  
 	}
 	
    

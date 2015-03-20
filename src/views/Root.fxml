@@ -36,7 +36,7 @@
 			    AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="40" visible="false"> </Button>
 		<Label id="NOTETAKER_text" visible="true" AnchorPane.leftAnchor="30.0" BlendMode="OVERLAY" AnchorPane.topAnchor="20.0" text="#NoteTaker" ></Label>
 	
-	<Pane disable="true" layoutX="827.0" layoutY="150.0" AnchorPane.topAnchor="150" AnchorPane.rightAnchor="328" >
+	<Pane id="note_buttons" disable="true" layoutX="827.0" layoutY="150.0" AnchorPane.topAnchor="150" AnchorPane.rightAnchor="328" >
    <children>
 		<GridPane prefHeight="142.0" prefWidth="44.0" AnchorPane.rightAnchor="328.0" AnchorPane.topAnchor="150.0">
 			<columnConstraints>
