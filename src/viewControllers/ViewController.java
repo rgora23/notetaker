@@ -71,7 +71,5 @@ public abstract class ViewController implements Initializable {
 		return ((Text) getNodeById(id));
 	}
 
-	public Pane getPaneById(String id) {
-		return ((Pane) getNodeById(id));
-	}
+	
 }
