@@ -33,9 +33,6 @@ public class EventController extends ViewController {
 			getAnchorPaneById("dashboard").setDisable(false);
 			getButtonById("logout_button").setVisible(true);
 			getLabelById("NOTETAKER_text").setVisible(true);
-
-			getPaneById("dashboard_buttons").setDisable(false);
-
 			getPaneById("note_buttons").setDisable(false);
 			getLabelById("newaccount").setVisible(false);
 
@@ -57,6 +54,7 @@ public class EventController extends ViewController {
 		String[] errors = accountsController.register(username, password, confirmPassword);
 		if ( errors.length == 0 ) {
 			System.out.println("Account Created");
+			getAnchorPaneById("create_account_pane").setVisible(false); 
 		}
 		else {
 			for (String error : errors ) {
@@ -76,10 +74,8 @@ public class EventController extends ViewController {
 		  getLabelById("NOTETAKER_text").setVisible(false); 
 		  getAnchorPaneById("dashboard").setDisable(true);
 		  getButtonById("logout_button").setVisible(false);
-
-		  getPaneById("dashboard_buttons").setDisable(true);
-
 		  getPaneById("note_buttons").setDisable(true);
+		  getLabelById("newaccount").setVisible(true); 
 
 		  AccountsController.logout();
 		  
