@@ -10,8 +10,7 @@ public class NotesController extends Controller {
 
 	
 	public static String[] create(String title) {
-		String accountId = Session.getAccount().getID();
-		NoteCreationRequest request = new NoteCreationRequest(title, accountId);
+		NoteCreationRequest request = new NoteCreationRequest(title, Session.getAccount().getID());
 		Note.create(request);
 		
 		
