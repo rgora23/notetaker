@@ -3,11 +3,11 @@ package requestHelpers;
 public class NoteCreationRequest extends Request {
 
 	String title;
-	String account_id;
+	String accountId;
 	
-	public NoteCreationRequest(String title, String account_id) {
+	public NoteCreationRequest(String title, String accountId) {
 		this.title = title;
-		this.account_id = account_id;
+		this.accountId = accountId;
 	}
 
 	public String getTitle() {
@@ -20,12 +20,12 @@ public class NoteCreationRequest extends Request {
 	
 	public String getAccountId()
 	{
-		return account_id;
+		return accountId;
 	}
 	
 	public void setAccountId(String account_id)
 	{
-		this.account_id = account_id;
+		this.accountId = account_id;
 	}
 	
 	
