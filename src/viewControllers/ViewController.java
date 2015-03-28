@@ -15,6 +15,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import noteTaker.Session;
+import javafx.scene.layout.Pane;
 
 // This is the parent controller class that will be extended by all view controllers.
 // It holds common methods and variables that all controllers in this application
@@ -70,4 +71,5 @@ public abstract class ViewController implements Initializable {
 		return ((Text) getNodeById(id));
 	}
 
+	
 }

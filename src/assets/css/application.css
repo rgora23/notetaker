@@ -34,7 +34,7 @@
 }
 
 
-#new_account {
+#newaccount {
 	-fx-font-size: 12px;
     -fx-font-weight: bold;
     -fx-text-fill: #0283CF;
@@ -116,6 +116,13 @@
 	-fx-border-color: #888;
 	-fx-border-radius: 6px;	
 }
+
+#note_edit_pane {
+	-fx-background-color: #ADBEC2;
+	-fx-padding: 20px;
+	-fx-border-color: #888;
+	-fx-border-radius: 6px;  
+} 
 
 #create_note_form .label {
 	-fx-min-height: 50px;
