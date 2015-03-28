@@ -27,7 +27,7 @@
 						GridPane.halignment="CENTER" GridPane.rowIndex="0" />
 				<TextField id="note_title_input" onAction="#noteCreationAction" promptText="new title" text="Untitled" 
 							GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
-				<Button id="settings_save_button" layoutX="370.0" layoutY="360.0" mnemonicParsing="false" 
+				<Button id="note_create_button" layoutX="370.0" layoutY="360.0" mnemonicParsing="false" 
 						onMouseClicked="#noteCreationAction" prefHeight="26.0" prefWidth="60.0" text="SAVE" 
 						GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="2"/>
 			    <Button id="note_cancel_button" layoutX="370.0" layoutY="360.0" mnemonicParsing="false" 

@@ -14,12 +14,11 @@ import csv.CSVWriter;
 
 public class Account extends Model {
 
-	ArrayList<Note> myNotes;
-	String id;
-	String username;
-	String password;
-	static String tablePath = "database/accounts_table";
-	static String[] tableHeaders = {"id", "username", "salt", "hash"};
+	private String id;
+	private String username;
+	private String password;
+	private static String tablePath = "database/accounts_table";
+	private static String[] tableHeaders = {"id", "username", "salt", "hash"};
 
 	// This constructor is an example of an ORM.
 	// Every instance variable is mapped to a column in the table.
