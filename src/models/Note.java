@@ -23,7 +23,6 @@ public class Note {
 		noteTableWriter.write();
 	}
 	
-	
 	private static CSVWriter constructWriter() {
 		return Model.constructWriter(tablePath, tableHeaders);
 	}
