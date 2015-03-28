@@ -4,7 +4,10 @@ import java.io.IOException;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
+import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import noteTaker.Session;
 import controllers.AccountsController;
 import controllers.NotesController;
@@ -29,12 +32,15 @@ public class EventController extends ViewController {
 			System.out.println("Welcome " + Session.getAccount().getUsername() + "!");
 			
 			// Change GUI to show logged in user
-			getGridPaneById("login_pane_root").setVisible(false);
-			getAnchorPaneById("dashboard").setDisable(false);
 			getButtonById("logout_button").setVisible(true);
 			getLabelById("NOTETAKER_text").setVisible(true);
+			getAnchorPaneById("note_edit_pane").setVisible(true);
 			getPaneById("note_buttons").setVisible(true);
+			getAnchorPaneById("dashboard").setDisable(false);
+			
+			// Hide registration and login buttons
 			getLabelById("newaccount").setVisible(false);
+			getGridPaneById("login_pane_root").setVisible(false);
 
 		}
 		else {
@@ -66,17 +72,27 @@ public class EventController extends ViewController {
 	
 	@FXML protected void noteCreationAction(Event e) throws IOException {
 		String noteTitle = getTextFieldById("note_title_input").getText();
-		NotesController.create(noteTitle);
+		String[] errors = NotesController.create(noteTitle);
+		
+		if (errors.length == 0) {
+			System.out.println("Note successfully created!");
+		}
+		else {
+			System.out.println(errors[0]);
+		}
 	}
 	
 	@FXML protected void logoutButtonClicked(MouseEvent e) throws IOException {
-		  getGridPaneById("login_pane_root").setVisible(true);
 		  getLabelById("NOTETAKER_text").setVisible(false); 
-		  getAnchorPaneById("dashboard").setDisable(true);
 		  getButtonById("logout_button").setVisible(false);
 		  getPaneById("note_buttons").setVisible(false);
+		  getAnchorPaneById("note_edit_pane").setVisible(false);
+		  getAnchorPaneById("dashboard").setDisable(true);
+		  
+		  // Make login and registration buttons visible again
+		  getGridPaneById("login_pane_root").setVisible(true);
 		  getLabelById("newaccount").setVisible(true); 
-
+		  hideDashboardWindows();
 		  AccountsController.logout();
 		  
 	}
@@ -84,7 +100,10 @@ public class EventController extends ViewController {
    
 	
 	@FXML protected void createNoteButtonClicked(MouseEvent e) throws IOException {
-		getAnchorPaneById("create_note_pane").setVisible(true);
+		hideDashboardWindows();
+		AnchorPane noteForm = getAnchorPaneById("create_note_pane");
+		noteForm.toFront();
+		noteForm.setVisible(true);
 	}
 
 	@FXML protected void noteButtonClicked(MouseEvent e) throws IOException{
@@ -104,11 +123,18 @@ public class EventController extends ViewController {
 	}
 
 	@FXML protected void tagsButtonClicked(MouseEvent e) throws IOException {
-		getLabelById("noteTaker_text").setText("searchn' tags!");
+		hideDashboardWindows();
+		Label text = getLabelById("noteTaker_text"); 
+		text.setVisible(true);
+		text.toFront();
+		text.setText("searchn' tags!");
 	}
 
 	@FXML protected void settingsButtonClicked(MouseEvent e) throws IOException {
-		getNodeById("account_settings_pane").setVisible(true);
+		hideDashboardWindows();
+		Node settings = getNodeById("account_settings_pane");
+		settings.toFront();
+		settings.setVisible(true);
 	}
 
 	@FXML protected void createAccountClicked(MouseEvent e) throws IOException {
@@ -116,21 +142,25 @@ public class EventController extends ViewController {
 	}
 
 	@FXML protected void tryAccount(MouseEvent e) throws IOException {
-
+		// What does this method do?
 	}
 
 	@FXML protected void cancelAccountButtonClicked(MouseEvent e) throws IOException {
-		getAnchorPaneById("create_account_pane").setVisible(false);
-
+		hideDashboardWindows();
 	}
 
 	@FXML protected void saveSettingsButtonClicked(MouseEvent e) throws IOException {
-		getNodeById("account_settings_pane").setVisible(false);
+		hideDashboardWindows();
 	}
 
 	@FXML protected void noteCancelAction(MouseEvent e) throws IOException {
-		  getAnchorPaneById("create_note_pane").setVisible(false); 
-		  
+		hideDashboardWindows();
+	}
+	
+	private void hideDashboardWindows() {
+		getNodeById("account_settings_pane").setVisible(false);
+		getAnchorPaneById("create_note_pane").setVisible(false);
+		getLabelById("noteTaker_text").setVisible(false);
 	}
 	
 }

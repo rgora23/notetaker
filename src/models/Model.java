@@ -3,7 +3,7 @@ package models;
 import csv.CSVReader;
 import csv.CSVWriter;
 
-public class Model {
+public abstract class Model {
 	String dateCreated;
 	String dateModified;
 	

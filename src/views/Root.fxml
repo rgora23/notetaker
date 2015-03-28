@@ -27,7 +27,7 @@
 		<fx:include fx:id="embeddedNoteCreation" source="NoteCreation.fxml" />
 		<fx:include fx:id="embeddedNoteEdit" source="NoteEdit.fxml"/>
 		<Label id="newaccount" onMouseClicked="#createAccountClicked"
-			text="New Account" AnchorPane.rightAnchor="340.0" AnchorPane.topAnchor="28.0">
+			text="New Account" AnchorPane.rightAnchor="360.0" AnchorPane.topAnchor="28.0">
 			<cursor>
 				<Cursor fx:constant="HAND" />
 			</cursor>

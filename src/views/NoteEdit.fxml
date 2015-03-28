@@ -4,7 +4,7 @@
 
 <AnchorPane id="note_edit_pane" xmlns:fx="http://javafx.com/fxml/1"
 	fx:controller="viewControllers.EventController" prefHeight="150" prefWidth="500" AnchorPane.leftAnchor="10" 
-	AnchorPane.topAnchor="120" AnchorPane.bottomAnchor ="10" AnchorPane.rightAnchor="370" opacity="0.5" visible="true">
+	AnchorPane.topAnchor="120" AnchorPane.bottomAnchor ="10" AnchorPane.rightAnchor="370" opacity="0.5" visible="false">
 	
 	
 	
