@@ -56,7 +56,12 @@ public class Account extends Model {
 		return this.id;
 	}
 
-
+	/**
+	 * Find an account record in the accounts_table and return it's field values in an array
+	 * 
+	 * @param id	the id of the account in the accounts_table 	
+	 * @return		the field values of the account in an array 		
+	 */
 	public static Account getAccountById(String id) {
 		// Query the users table for the username with ID
 		CSVReader reader = constructReader();
@@ -64,6 +69,23 @@ public class Account extends Model {
 		return new Account(row);
 	}
 
+	/**
+	 * Authenticates a user trying to log in 
+	 * 
+	 * This method uses the data found in the LoginRequest object provided as a parameter to check if the 
+	 * user trying to login has credentials that match a record in the accounts_table. It does this by first 
+	 * checking to see if the username provided exists in the the user_name field of the users_table. If it 
+	 * does exist, it will return an array with accounts that have the provided username as a value in their 
+	 * user_name field. Since there can only be one account with that username, the array length should be one.
+	 * If the array length is zero, it means an account does not exist with the provided username.
+	 * The next step of authentication is to check to see if the provided password is correct. The method does
+	 * this by using the password provided in the LoginRequest object and the salt found in the retrieved 
+	 * table record and passing them in to a has function. If the result returned by the hash function matches
+	 * the value found in the hash field of the retrieved account record, the password found in the LoginRequest
+	 * object is valid and the user is authenticated.
+	 * 
+	 * @param request	LoginRequest object that provides the credentials of the user trying to log in
+	 */
 	public static void authenticate(LoginRequest request) {
 		// Try to find specified account
 		CSVReader reader = constructReader();
@@ -80,14 +102,31 @@ public class Account extends Model {
 			String recordHash = record.getValueAtField("hash");
 			String hashGenerated = PasswordSecurityFactory.getSHA1Hash(request.getPassword(), recordSalt);
 			boolean authenticated = hashGenerated.equals(recordHash);
-
+			
 			if (authenticated) request.setAccount(new Account(record));
 			request.setAuthenticated(authenticated);
 		}
 
 	}
-
-
+	
+	/**
+	 * Creates an account and adds a record to the accounts_table
+	 * 
+	 * This method handles registration in the NoteTaker application. The first step of registration is to determine
+	 * if all the necessary fields associated with registration have been filled. If any one of these fields is left
+	 * empty, an item is added to the getErrors array found in the passed RegistrationRequest object. The method also 
+	 * checks to see if the password and confirmation password are the same. If not, another item is added to the 
+	 * getErrors array. If the getErrors array has a length greater than zero, the registration process can not
+	 * proceed.
+	 * Once it is determined that the getErrors array has a length of zero, a salt is generated for the new account.
+	 * Once it is generated, the salt and the password provided by the RegistrationRequest object and passed in to a 
+	 * hash function and generate a hash value. After this is done, the username and password provided by the 
+	 * RegistrationRequest object and the generated salt and hash are added as a new record in the accounts table(the 
+	 * append method handles indexing automatically).
+	 * 
+	 * @param request	the RegistrationRequest object that provides the data for registration
+	 * @throws IOException
+	 */
 	public static void register(RegistrationRequest request) throws IOException {
 		CSVWriter accountTableWriter = constructWriter();
 
