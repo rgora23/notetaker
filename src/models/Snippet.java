@@ -10,7 +10,7 @@ public class Snippet {
 	ArrayList<Tag> tags;
 	String id;
 	static String tablePath = "database/snippets_table";
-	static String[] tableHeaders = {"name"};
+	static String[] tableHeaders = {"id", "name", "note_id", "content"};
 	
 	public Snippet() {
 		tags = new ArrayList<Tag>();

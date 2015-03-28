@@ -9,7 +9,7 @@ public class NoteCollection {
 	ArrayList<Note> notesCollection;
 	String id;
 	static String tablePath = "database/note_collections_table";
-	static String[] tableHeaders = {"name"};
+	static String[] tableHeaders = {"id", "name", "user_id"};
 	
 	public NoteCollection() {
 		
