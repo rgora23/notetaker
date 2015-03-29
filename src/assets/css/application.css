@@ -115,14 +115,20 @@
 	-fx-padding: 20px;
 	-fx-border-color: #888;
 	-fx-border-radius: 6px;	
-}
+} 
 
 #note_edit_pane {
-	-fx-background-color: #ADBEC2;
-	-fx-padding: 20px;
+	-fx-background-color: rgba(173,190,194, 0.5);
+	-fx-padding: 5px;
 	-fx-border-color: #888;
-	-fx-border-radius: 6px;  
-} 
+	-fx-border-radius: 6px;
+}
+
+#note_HTMLEditor {
+	-fx-background-color: #fff;
+	-fx-padding: 15px;
+	-fx-opacity: 0.8;
+}
 
 #create_note_form .label {
 	-fx-min-height: 50px;
@@ -133,7 +139,6 @@
 #settings_button, #tags_button, #createNote_button {
 	
 }
-
 
 
 

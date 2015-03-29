@@ -8,14 +8,16 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
+import javafx.scene.text.TextFlow;
+import javafx.scene.web.HTMLEditor;
 import noteTaker.Session;
-import javafx.scene.layout.Pane;
 
 // This is the parent controller class that will be extended by all view controllers.
 // It holds common methods and variables that all controllers in this application
@@ -69,6 +71,18 @@ public abstract class ViewController implements Initializable {
 
 	public Text getTextById(String id) {
 		return ((Text) getNodeById(id));
+	}
+	
+	public ListView<String> getListViewById(String id) {
+		return ((ListView<String>) getNodeById(id));
+	}
+	
+	public TextFlow getTextFlowById(String id) {
+		return ((TextFlow) getNodeById(id));
+	}
+	
+	public HTMLEditor getHTMLEditorById(String id) {
+		return ((HTMLEditor) getNodeById(id));
 	}
 
 	

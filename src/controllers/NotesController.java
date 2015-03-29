@@ -13,6 +13,7 @@ public class NotesController extends Controller {
 		NoteCreationRequest request = new NoteCreationRequest(title, Session.getAccount().getID());
 		Note.create(request);
 		String[] errors = ArrayListToStringArray(request.getErrors());
+		Session.getAccount().updateNotes();
 		return errors;
 	}
 	

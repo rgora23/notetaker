@@ -34,9 +34,9 @@
 		</Label>
 		<Button id="logout_button" onMouseClicked="#logoutButtonClicked" text="Log out" 
 			    AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="24" visible="false"> </Button>
-		<Label id="NOTETAKER_text" visible="true" AnchorPane.leftAnchor="30.0" BlendMode="OVERLAY" AnchorPane.topAnchor="20.0" text="#NoteTaker" ></Label>
+		<Label id="NOTETAKER_text" visible="true" AnchorPane.leftAnchor="30.0" BlendMode="OVERLAY" AnchorPane.topAnchor="0.0" text="#NoteTaker" ></Label>
 	
-	<Pane id="note_buttons" visible="false" layoutX="827.0" layoutY="150.0" AnchorPane.topAnchor="55" AnchorPane.rightAnchor="370" >
+	<Pane id="note_buttons" visible="false" layoutX="827.0" layoutY="100.0" AnchorPane.bottomAnchor="-15" AnchorPane.rightAnchor="192" >
    <children>
 		<GridPane prefHeight="142.0" prefWidth="44.0" AnchorPane.rightAnchor="328.0" AnchorPane.topAnchor="150.0" hgap="4">
 		<!--	<columnConstraints>

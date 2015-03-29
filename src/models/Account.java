@@ -19,6 +19,8 @@ public class Account extends Model {
 	private String password;
 	private static String tablePath = "database/accounts_table";
 	private static String[] tableHeaders = {"id", "username", "salt", "hash"};
+	
+	private ArrayList<Note> accountNotes;
 
 	// This constructor is an example of an ORM.
 	// Every instance variable is mapped to a column in the table.
@@ -45,14 +47,6 @@ public class Account extends Model {
 		record.setValueAtField(this.username, "username");
 		record.setValueAtField(this.password, "password");
 		writer.write();
-	}
-
-	public String getUsername() {
-		return this.username;
-	}
-
-	public String getID() {
-		return this.id;
 	}
 
 	/**
@@ -173,5 +167,23 @@ public class Account extends Model {
 	private static CSVReader constructReader() {
 		return Model.constructReader(tablePath, tableHeaders);
 	}
+	
+	public String getUsername() {
+		return this.username;
+	}
+
+	public String getID() {
+		return this.id;
+	}
+	
+	public ArrayList<Note> getNotes() {
+		return accountNotes;
+	}
+	
+	public void updateNotes() {
+		this.accountNotes = Note.getAccountNotes();
+	}
+
+	
 
 }

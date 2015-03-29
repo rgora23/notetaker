@@ -3,6 +3,7 @@ package controllers;
 import java.io.IOException;
 
 import models.Account;
+import models.Note;
 import noteTaker.ErrorMessages;
 import noteTaker.Session;
 import requestHelpers.LoginRequest;
@@ -35,6 +36,7 @@ public class AccountsController extends Controller {
 			Account.authenticate(loginRequest);
 			if (loginRequest.isAuthenticated()) {
 				Session.create(loginRequest.getAccount());
+				loginRequest.getAccount().updateNotes();
 				System.out.println("Successfully logged in.");
 			}
 			else {
