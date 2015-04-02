@@ -28,11 +28,11 @@ public class Session {
 	private static boolean sessionCreated = false;
 	private static Account account = null;
 	
+	
 	public static void create(Account account) {
 		Session.destroy();
 		Session.sessionCreated = true;
 		Session.account = account;
-		
 	}
 	
 	public static void destroy() {

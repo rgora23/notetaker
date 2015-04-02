@@ -42,7 +42,7 @@ public class Note {
 
 	}
 	
-	public ArrayList<Note> getAccountNotes() {
+	public static ArrayList<Note> getAccountNotes() {
 		ArrayList<Note> matchingNotes = new ArrayList<Note>();
 		
 		// If user is logged in to an account, get all matching notes
@@ -58,6 +58,17 @@ public class Note {
 		else System.out.println("Not logged in.");
 		return matchingNotes;
 	}
+	
+	public static Note getNoteByTitle(String title) {
+		CSVReader noteTableReader = constructReader();
+		CSVReader filteredReader = noteTableReader.where("title").isIgnoreCase(title);
+		
+		if ( !filteredReader.getTable().isEmpty() ) {
+			CSVRecord record = filteredReader.getTable().get(0);
+			return new Note(record);
+		}
+		else return null;
+	}
 
 
 	private static CSVWriter constructWriter() {
@@ -67,5 +78,31 @@ public class Note {
 	private static CSVReader constructReader() {
 		return Model.constructReader(tablePath, tableHeaders);
 	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public String getAccount_id() {
+		return account_id;
+	}
+
+	public void setAccount_id(String account_id) {
+		this.account_id = account_id;
+	}
+	
+	
 
 }
