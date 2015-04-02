@@ -62,17 +62,24 @@ public class EventController extends ViewController {
 
 
 	}
-
+			// check for verification of username and password 
 	@FXML protected void tryRegistration(Event e) throws IOException {
 		String username = getTextFieldById("new_username").getText();
 		String password = getPasswordFieldById("new_password").getText();
 		String confirmPassword = getPasswordFieldById("confirm_password").getText();
+<<<<<<< HEAD
 
+=======
+		
+		 	// change GUI for a logged-in user
+>>>>>>> matt
 		String[] errors = accountsController.register(username, password, confirmPassword);
 		if ( errors.length == 0 ) {
 			System.out.println("Account Created");
 			getAnchorPaneById("create_account_pane").setVisible(false); 
 		}
+		
+			// Show errors for incorrect user information 
 		else {
 			for (String error : errors ) {
 				System.out.println(error);
@@ -80,7 +87,12 @@ public class EventController extends ViewController {
 			}
 		}		
 	}
+<<<<<<< HEAD
 
+=======
+	
+		   // create a new note 
+>>>>>>> matt
 	@FXML protected void noteCreationAction(Event e) throws IOException {
 		String noteTitle = getTextFieldById("note_title_input").getText();
 		String[] errors = NotesController.create(noteTitle);
