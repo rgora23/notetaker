@@ -17,7 +17,7 @@
 <?import javafx.scene.text.TextFlow?>
 
 <AnchorPane xmlns:fx="http://javafx.com/fxml/1" id="dashboard"
-	disable="true"   prefWidth="200.0"
+	disable="true"   prefWidth="200.0" 
 	fx:controller="viewControllers.EventController"
 	 AnchorPane.leftAnchor="870.0"  AnchorPane.bottomAnchor="10.0"
 	AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="120.0">
