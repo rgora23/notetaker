@@ -67,12 +67,9 @@ public class EventController extends ViewController {
 		String username = getTextFieldById("new_username").getText();
 		String password = getPasswordFieldById("new_password").getText();
 		String confirmPassword = getPasswordFieldById("confirm_password").getText();
-<<<<<<< HEAD
 
-=======
-		
+
 		 	// change GUI for a logged-in user
->>>>>>> matt
 		String[] errors = accountsController.register(username, password, confirmPassword);
 		if ( errors.length == 0 ) {
 			System.out.println("Account Created");
@@ -87,12 +84,12 @@ public class EventController extends ViewController {
 			}
 		}		
 	}
-<<<<<<< HEAD
 
-=======
+
+
 	
 		   // create a new note 
->>>>>>> matt
+
 	@FXML protected void noteCreationAction(Event e) throws IOException {
 		String noteTitle = getTextFieldById("note_title_input").getText();
 		String[] errors = NotesController.create(noteTitle);
@@ -177,6 +174,7 @@ public class EventController extends ViewController {
 
 	@FXML protected void cancelAccountButtonClicked(MouseEvent e) throws IOException {
 		hideDashboardWindows();
+		getAnchorPaneById("create_account_pane").setVisible(false);
 	}
 
 	@FXML protected void saveSettingsButtonClicked(MouseEvent e) throws IOException {
@@ -232,7 +230,7 @@ public class EventController extends ViewController {
 		resultsList.setPrefWidth(330.0);
 		resultsList.setPrefHeight(456.0);
 		resultsList.setId("results_list");
-		AnchorPane.setTopAnchor(resultsList, 42.0);
+		AnchorPane.setTopAnchor(resultsList, 72.0);
 		AnchorPane.setRightAnchor(resultsList, 0.0);		
 	}
 	

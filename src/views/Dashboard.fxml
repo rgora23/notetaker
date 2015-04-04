@@ -58,13 +58,13 @@
 				</Button>
 			</children>
 		</GridPane>
-<<<<<<< HEAD
+
 		<ListView id="results_list" layoutX="74.0" layoutY="44.0" prefHeight="456.0"
-			prefWidth="330.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="42.0" />
-=======
+			prefWidth="330.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="72.0" />
+
 		<ListView layoutX="74.0" layoutY="44.0" 
 			prefWidth="330.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="72.0" prefHeight="456.0" />
->>>>>>> matt
+
 	</children>
 </AnchorPane>
 					
