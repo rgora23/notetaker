@@ -37,7 +37,7 @@ public class CSVRecordList {
 			}
 		}
 
-		ArrayList<CSVRecord> matchingRecords = new ArrayList<CSVRecord>();
+		ArrayList<CSVRecord> selectedRecords = new ArrayList<CSVRecord>();
 		CSVReader reader = new CSVReader(path);
 		reader.setHeaders(headers);
 		reader.parse();
@@ -46,11 +46,39 @@ public class CSVRecordList {
 		if (matchingIds.size() > 0) {			
 			for (CSVRecord record : reader.getTable()) {
 				int index = matchingIds.indexOf(record.getId());
-				if (index >= 0) matchingRecords.add(record);
+				if (index >= 0) selectedRecords.add(record);
 			}
 		}
 		// override the reader's table to only hold the matching records
-		reader.setTable(matchingRecords);
+		reader.setTable(selectedRecords);
+		return reader;
+	}
+	
+	public CSVReader isNot(String value, boolean ignoreCase) {
+		ArrayList<String> matchingIds = new ArrayList<String>();
+		for (int i = 0; i < valuesAtField.size(); i++) {
+			String id = ids.get(i);
+			if (ignoreCase) {
+				if (! valuesAtField.get(i).equalsIgnoreCase(value)) matchingIds.add(id);
+			}
+			else {
+				if (! valuesAtField.get(i).equals(value)) matchingIds.add(id);				
+			}
+		}
+		
+		ArrayList<CSVRecord> filteredRecords = new ArrayList<CSVRecord>();
+		CSVReader reader = new CSVReader(path);
+		reader.setHeaders(headers);
+		reader.parse();
+		
+		if (matchingIds.size() > 0) {			
+			for (CSVRecord record : reader.getTable()) {
+				int index = matchingIds.indexOf(record.getId());
+				if (index >= 0) filteredRecords.add(record);
+			}
+		}
+		// override the reader's table to only hold the filtered records
+		reader.setTable(filteredRecords);
 		return reader;
 	}
 	
@@ -61,5 +89,17 @@ public class CSVRecordList {
 	public CSVReader isIgnoreCase(String value) {
 		return is(value, true);
 	}
+	
+	public CSVReader isNot(String value) {
+		return isNot(value, false);
+	}
+	
+	public CSVReader isNotIgnoreCase(String value) {
+		return isNot(value, true);
+	}
 
 }
+
+
+
+

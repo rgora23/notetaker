@@ -32,58 +32,65 @@ public abstract class ViewController implements Initializable {
 		
 	}
 
+	protected Session getSession() {
+		return Session.getInstance();
+	}
 	
-	public Scene getScene() {
-		return Session.getStage().getScene();
+	protected Scene getScene() {
+		return getSession().getStage().getScene();
 	}
 
-	public Node getNodeById(String id) {
+	protected Node getNodeById(String id) {
 		return getScene().lookup("#" + id);
 	}
 
-	public Label getLabelById(String id) {
+	protected Label getLabelById(String id) {
 		return ((Label) getNodeById(id));
 	}
 
-	public TextField getTextFieldById(String id) {
+	protected TextField getTextFieldById(String id) {
 		return ((TextField) getNodeById(id));
 	}
 
-	public PasswordField getPasswordFieldById(String id) {
+	protected PasswordField getPasswordFieldById(String id) {
 		return ((PasswordField) getNodeById(id));
 	}
 
-	public Button getButtonById(String id) {
+	protected Button getButtonById(String id) {
 		return ((Button) getNodeById(id));
 	}
 
-	public GridPane getGridPaneById(String id) {
+	protected GridPane getGridPaneById(String id) {
 		return ((GridPane) getNodeById(id));
 	}
 
-	public AnchorPane getAnchorPaneById(String id) {
+	protected AnchorPane getAnchorPaneById(String id) {
 		return ((AnchorPane) getNodeById(id));
 	}
 	
-	public Pane getPaneById(String id) {
+	protected Pane getPaneById(String id) {
 		return ((Pane) getNodeById(id));
 	}
 
-	public Text getTextById(String id) {
+	protected Text getTextById(String id) {
 		return ((Text) getNodeById(id));
 	}
 	
-	public ListView<String> getListViewById(String id) {
+	protected ListView<String> getListViewById(String id) {
 		return ((ListView<String>) getNodeById(id));
 	}
 	
-	public TextFlow getTextFlowById(String id) {
+	protected TextFlow getTextFlowById(String id) {
 		return ((TextFlow) getNodeById(id));
 	}
 	
-	public HTMLEditor getHTMLEditorById(String id) {
+	protected HTMLEditor getHTMLEditorById(String id) {
 		return ((HTMLEditor) getNodeById(id));
 	}
 
 	
 }
+
+
+
+

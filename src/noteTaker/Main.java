@@ -24,7 +24,7 @@ public class Main extends Application {
 		
 		// Set the stage for the EventControllerParent so that
 		// all view controllers have access to the stage.
-		Session.setStage(primaryStage);
+		Session.getInstance().setStage(primaryStage);
 		
 		// Set the title of the window
 		primaryStage.setTitle("NoteTaker");
@@ -60,3 +60,7 @@ public class Main extends Application {
 	
 
 }
+
+
+
+
