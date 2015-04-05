@@ -1,5 +1,6 @@
 package viewControllers;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -12,13 +13,14 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.text.Text;
-import javafx.scene.text.TextFlow;
 import javafx.scene.web.HTMLEditor;
 import models.Note;
+import models.Snippet;
 import noteTaker.Session;
 import controllers.AccountsController;
 import controllers.NotesController;
+import controllers.SnippetsController;
+import exceptions.NoSessionNoteSetException;
 public class EventController extends ViewController {
 
 	AccountsController accountsController;
@@ -37,7 +39,7 @@ public class EventController extends ViewController {
 		String[] errors = AccountsController.login(username, password);
 		if (errors.length == 0) {
 			// Can reference account for info by referencing Session class.
-			System.out.println("Welcome " + Session.getAccount().getUsername() + "!");
+			System.out.println("Welcome " + getSession().getAccount().getUsername() + "!");
 
 			// Change GUI to show logged in user
 			getButtonById("logout_button").setVisible(true);
@@ -95,6 +97,7 @@ public class EventController extends ViewController {
 	}
 
 	@FXML protected void logoutButtonClicked(MouseEvent e) throws IOException {
+		
 		getLabelById("NOTETAKER_text").setVisible(false); 
 		getButtonById("logout_button").setVisible(false);
 		getPaneById("note_buttons").setVisible(false);
@@ -106,10 +109,10 @@ public class EventController extends ViewController {
 		getLabelById("newaccount").setVisible(true); 
 		hideDashboardWindows();
 		AccountsController.logout();
-		
+
 		// Remove all results from the results list
 		clearResultsList();
-		
+
 		// Resets the interface to original appearance
 		resetNoteInterface();
 
@@ -185,35 +188,35 @@ public class EventController extends ViewController {
 
 	private void populateNotesList() {
 		AnchorPane parent = getAnchorPaneById("dashboard");
-		
+
 		ListView<String> oldListView = getListViewById("results_list");
-		
+
 		if ( oldListView != null) parent.getChildren().remove(oldListView);
-		
+
 		ObservableList<String> noteTitles = FXCollections.observableArrayList();
-		
+
 		// Populate ObservableList object with the titles for the account's notes
-		for (Note note : Session.getAccount().getNotes()) {
+		for (Note note : getSession().getAccount().getNotes()) {
 			noteTitles.add(note.getTitle());
 		}
-		
+
 		final ListView<String> resultsList = new ListView<String>(noteTitles);
 		parent.getChildren().add(resultsList);
 		addStyleToResultsList(resultsList);
 		addClickListenersToResultsList(resultsList, noteTitles);
 	}
-	
+
 	private void clearResultsList() {
 		AnchorPane parent = getAnchorPaneById("dashboard");
 		ListView<String> oldListView = getListViewById("results_list");
 		if ( oldListView != null) parent.getChildren().remove(oldListView);
-		
+
 		ObservableList<String> emptyArrayList = FXCollections.observableArrayList();
 		ListView<String> resultsList = new ListView<String>(emptyArrayList);
 		parent.getChildren().add(resultsList);
 		addStyleToResultsList(resultsList);
 	}
-	
+
 	private void addStyleToResultsList(ListView<String> resultsList) {
 		resultsList.setLayoutX(74.0);
 		resultsList.setLayoutY(44.0);
@@ -221,68 +224,85 @@ public class EventController extends ViewController {
 		resultsList.setPrefHeight(456.0);
 		resultsList.setId("results_list");
 		AnchorPane.setTopAnchor(resultsList, 42.0);
-		AnchorPane.setRightAnchor(resultsList, 0.0);		
+		AnchorPane.setRightAnchor(resultsList, 0.0);
+		AnchorPane.setBottomAnchor(resultsList, 130.0);
 	}
-	
+
 	private void addClickListenersToResultsList(final ListView<String> resultsList, ObservableList<String> results) {
 		resultsList.setOnMouseClicked(new EventHandler<MouseEvent>() {
-	        @Override
-	        public void handle(MouseEvent event) {
-	        	String item = resultsList.getSelectionModel().getSelectedItem();
-	            Note clickedNote = Note.getNoteByTitle(item);
-	            initializeNoteInterface(clickedNote);
-	        }
-	    });
+			@Override
+			public void handle(MouseEvent event) {
+				String item = resultsList.getSelectionModel().getSelectedItem();
+				Note clickedNote = Note.getNoteByTitle(item);
+				Note currentNote = getSession().getCurrentNote(); 
+
+				// The clicked note is already open
+				if (currentNote == null || !currentNote.getId().equals(clickedNote.getId())) {
+					if (getSession().isEditingNote()) saveCurrentNote();
+					getSession().setCurrentNote(clickedNote);
+					initializeNoteInterface(clickedNote);					
+				}
+			}
+		});
 	}
-	
+
 	private void initializeNoteInterface(Note note) {
+		getSession().setEditingNote(true);
 		HTMLEditor parentHTMLEditor = getHTMLEditorById("note_HTMLEditor");
 		resetNoteInterface();
 		parentHTMLEditor.setDisable(false);
 		parentHTMLEditor.setOpacity(1);
 		populateNoteInterface(parentHTMLEditor);
 	}
-	
+
+	private void saveCurrentNote() {
+		if (getSession().getCurrentNote() != null) {
+			System.out.println("HELLO!");
+			HTMLEditor parentHTMLEditor = getHTMLEditorById("note_HTMLEditor");
+			String content = parentHTMLEditor.getHtmlText();
+			System.out.println(content);
+			SnippetsController.saveNote(getSession().getCurrentNote(), content);
+		}
+	}
+
 	private void resetNoteInterface() {
+		saveCurrentNote();
 		HTMLEditor parentHTMLEditor = getHTMLEditorById("note_HTMLEditor");
 		parentHTMLEditor.setHtmlText("");
 		parentHTMLEditor.setDisable(true);
 		parentHTMLEditor.setOpacity(0.8);
 	}
-	
+
 	private void populateNoteInterface(HTMLEditor parentHTMLEditor) {
-		
-		
-		
-		boolean snippetsPresent = false;
-		
-		
-		
-		if (snippetsPresent) {
-			
+		try {
+			if (getSession().getCurrentNote() != null) {
+
+				String totalContent = "";
+				int counter = 0;
+				ArrayList<Snippet> snippets = getSession().getCurrentNote().getSnippets();
+				for ( Snippet s : snippets ) {
+					counter++;
+					totalContent += s.getContent();
+					if (counter < snippets.size()) {
+						totalContent += SnippetsController.snippetSeparator;
+					}
+				}
+				parentHTMLEditor.setHtmlText(totalContent);
+
+			}
+			else {
+				throw new NoSessionNoteSetException("Trying to populate content, but no note has been set in the session.");
+			}
 		}
-		else {
-//			Text firstTextNode = new Text("Enter your text here motherfucker");
-//			parentHTMLEditor.getChildren().add(firstTextNode);
-			
+		catch( NoSessionNoteSetException e) {
+			e.printStackTrace();
 		}
-		
+
+
+
 	}
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

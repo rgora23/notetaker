@@ -5,16 +5,19 @@ import java.util.ArrayList;
 import noteTaker.ErrorMessages;
 import noteTaker.Session;
 import requestHelpers.NoteCreationRequest;
+import requestHelpers.SnippetsCreationRequest;
 import csv.CSVReader;
 import csv.CSVRecord;
 import csv.CSVWriter;
 
 
-public class Note {
+public class Note extends Model {
 
 	String title;
 	String id;
 	String account_id;
+	ArrayList<Snippet> snippets;
+	
 	static String tablePath = "database/notes_table";
 	static String[] tableHeaders = {"id", "title", "account_id"};
 
@@ -22,6 +25,7 @@ public class Note {
 		this.id = noteRecord.getId();
 		this.title = noteRecord.getValueAtField("title");
 		this.account_id = noteRecord.getValueAtField("account_id");
+		this.snippets = Snippet.getSnippetsByNoteId(id);
 	}
 
 	public static void create(NoteCreationRequest request) {
@@ -48,9 +52,9 @@ public class Note {
 		// If user is logged in to an account, get all matching notes
 		// and construct them using the ORM. Populate ArrayList of Note objects
 		// to return to controller.
-		if (Session.getAccount() != null) {
+		if (getSession().getAccount() != null) {
 			CSVReader noteTableReader = constructReader();
-			CSVReader accountNotes = noteTableReader.where("account_id").is(Session.getAccount().getID());
+			CSVReader accountNotes = noteTableReader.where("account_id").is(getSession().getAccount().getID());
 			for (CSVRecord record : accountNotes.getTable()) {
 				matchingNotes.add(new Note(record));
 			}
@@ -70,6 +74,11 @@ public class Note {
 		else return null;
 	}
 
+	public static Note getNoteById(String id) {
+		CSVReader noteTableReader = constructReader();
+		Note note = new Note(noteTableReader.getRecordById(id));
+		return note;
+	}
 
 	private static CSVWriter constructWriter() {
 		return Model.constructWriter(tablePath, tableHeaders);
@@ -102,7 +111,16 @@ public class Note {
 	public void setAccount_id(String account_id) {
 		this.account_id = account_id;
 	}
+
+	public ArrayList<Snippet> getSnippets() {
+		return snippets;
+	}
+	
 	
 	
 
 }
+
+
+
+

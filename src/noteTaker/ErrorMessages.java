@@ -15,3 +15,7 @@ public class ErrorMessages {
 	public static final String NOTE_TITLE_TAKEN = "You already have a note with this same title.";
 	
 }
+
+
+
+

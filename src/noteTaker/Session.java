@@ -2,18 +2,20 @@ package noteTaker;
 
 import javafx.stage.Stage;
 import models.Account;
+import models.Note;
 
 /*
- * The Session class serves to hold variables for both account sessions and application sessions.
+ * The Session class is a singleton class that serves to hold variables for 
+ * both account sessions and the application session.
  * 
  * Account session: 
- * It will contain static variables corresponding to the currently logged in account
+ * It will contain variables corresponding to the currently logged in account
  * and all dynamic content that follows from that.
  * 
  * Application session:
- * Application-wide variables that are set a runtime and used until the application is exited.
+ * Application-wide variables that are set at runtime and used until the application is exited.
  * This includes a Stage object created by the application start method that can be referenced
- * by all other classes. All application session variables can only be set once using static
+ * by all other classes. All application session variables can only be set once using
  * setter methods.
  * 
  */
@@ -21,44 +23,106 @@ import models.Account;
 
 public class Session {
 	
-	// Application session variables. These variables can only be set once.
-	private static Stage stage = null;
+	private static Session instance = null;
 	
-	// Account session variables
-	private static boolean sessionCreated = false;
-	private static Account account = null;
+	private Stage stage;
+	private boolean sessionCreated;
+	private Account account;
+	private boolean editingNote;
+	private Note currentNote;
 	
-	
-	public static void create(Account account) {
-		Session.destroy();
-		Session.sessionCreated = true;
-		Session.account = account;
+	private Session() {
+		// Application session variables. These variables can only be set once.
+		stage = null;
+		
+		// Account session variables
+		sessionCreated = false;
+		account = null;
+		editingNote = false;
+		currentNote = null;
 	}
 	
-	public static void destroy() {
-		Session.sessionCreated = false;
-		Session.account = null;
+	
+	public void create(Account account) {
+		this.destroy();
+		this.sessionCreated = true;
+		this.account = account;
 	}
 	
-	public static boolean isCreated() {
-		return Session.sessionCreated;
+	public void destroy() {
+		this.sessionCreated = false;
+		this.account = null;
+		this.currentNote = null;
+		this.editingNote = false;
 	}
 	
-	public static Stage getStage() {
-		return Session.stage;
+	public boolean isCreated() {
+		return this.sessionCreated;
 	}
 	
-	public static Account getAccount() {
-		return Session.account;
+	public Stage getStage() {
+		return this.stage;
+	}
+	
+	public Account getAccount() {
+		return this.account;
 	}
 	
 	// This method can only be called once. Once a non-null
 	// Stage object is passed in, further calls to setStage
 	// return false.
-	public static boolean setStage(Stage stage) {
-		boolean stageSet = Session.stage == null; 
-		if (stageSet) Session.stage = stage;
+	public boolean setStage(Stage stage) {
+		boolean stageSet = this.stage == null; 
+		if (stageSet) this.stage = stage;
 		return stageSet;
 	}
 	
+	public static Session getInstance() {
+		if (instance == null) {
+			instance = new Session();
+		}
+		return instance;
+	}
+
+
+	public boolean isSessionCreated() {
+		return sessionCreated;
+	}
+
+
+	public void setSessionCreated(boolean sessionCreated) {
+		this.sessionCreated = sessionCreated;
+	}
+
+
+	public boolean isEditingNote() {
+		return editingNote;
+	}
+
+
+	public void setEditingNote(boolean editingNote) {
+		this.editingNote = editingNote;
+	}
+
+
+	public Note getCurrentNote() {
+		return currentNote;
+	}
+
+
+	public void setCurrentNote(Note currentNote) {
+		this.currentNote = currentNote;
+	}
+
+
+	public void setAccount(Account account) {
+		this.account = account;
+	}
+	
+	
+	
 }
+
+
+
+

@@ -83,17 +83,26 @@ public class CSVWriter extends CSVReader {
 	 * @return The removed record or null if none is found.
 	 * @author Brian Maxwell
 	 */
-	public CSVRecord removeRecord(int id) {
-		String idString = id + "";
+	public CSVRecord removeRecord(String id) {
 		CSVRecord removedRecord = null;
 		for (CSVRecord record : table) {
-			if ( CSVHelper.checkEquality(idString, record.getId()) ) {
+			if ( CSVHelper.checkEquality(id, record.getId()) ) {
 				removedRecord = record;
 				table.remove(record);
+				
 				break;
 			}
 		}
 		return removedRecord;
+		
+	}
+	
+	public CSVRecord removeRecord(int id) {
+		return removeRecord(id + "");
+	}
+	
+	public CSVRecord removeRecord(CSVRecord r) {
+		return removeRecord(r.getId());
 	}
 
 	/**
@@ -111,3 +120,7 @@ public class CSVWriter extends CSVReader {
 	}
 
 }
+
+
+
+
