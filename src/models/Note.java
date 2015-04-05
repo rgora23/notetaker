@@ -20,7 +20,7 @@ public class Note extends Model {
 	ArrayList<Snippet> snippets;
 
 	static String tablePath = "database/notes_table";
-	static String[] tableHeaders = {"id", "title", "account_id","not_collection_id"};
+	static String[] tableHeaders = {"id", "title", "account_id","note_collection_id"};
 
 	public Note(CSVRecord noteRecord) {
 		this.id = noteRecord.getId();
@@ -39,7 +39,9 @@ public class Note extends Model {
 				.where("account_id").is(request.getAccountId())
 				.where("title").isIgnoreCase(request.getTitle());
 		if (notesWithSameTitle.getTable().isEmpty()) {
-			noteTableWriter.append(request.getTitle(), request.getAccountId());
+			// 0 means it does not belong to any collections
+			String noteCollectionId = "0";
+			noteTableWriter.append(request.getTitle(), request.getAccountId(), noteCollectionId);
 			noteTableWriter.write();
 		}
 		else {
