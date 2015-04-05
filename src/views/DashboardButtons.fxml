@@ -21,7 +21,7 @@
 	xmlns:fx="http://javafx.com/fxml/1" fx:controller="viewControllers.EventController">
 	<children>
 		<GridPane prefHeight="142.0" prefWidth="44.0"
-			AnchorPane.rightAnchor="328.0" AnchorPane.topAnchor="150.0">
+	<!--  AnchorPane.rightAnchor="328.0" AnchorPane.topAnchor="150.0">  -->
 			<columnConstraints>
 				<ColumnConstraints hgrow="SOMETIMES" minWidth="10.0"
 					prefWidth="100.0" />
