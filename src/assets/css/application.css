@@ -54,8 +54,8 @@
 }
 
 #settings_button {          
-    -fx-background-image: url("../images/NoteTakerButtons.jpg"); 
-    -fx-background-size:100% 100%;
+    -fx-background-image: url("../images/settings_button_2.jpg"); 
+    -fx-background-size:105% 105%;
     -fx-background-repeat: no-repeat;
     -fx-background-position:left;   
 }
@@ -66,8 +66,8 @@
 
 
 #tags_button  {          
-    -fx-background-image: url("../images/tagButton.jpg"); 
-    -fx-background-size:100% 100%;
+    -fx-background-image: url("../images/tagbutton2.jpg"); 
+    -fx-background-size:105% 105%;
     -fx-background-repeat: no-repeat;
     -fx-background-position:left;   
 }
@@ -77,8 +77,8 @@
 }
 
 #createNote_button {          
-    -fx-background-image: url("../images/newNoteButton.jpg"); 
-    -fx-background-size:100% 100%;
+    -fx-background-image: url("../images/new_note_button.jpg"); 
+    -fx-background-size:105% 105%;
     -fx-background-repeat: no-repeat;
     -fx-background-position:left;   
 } 

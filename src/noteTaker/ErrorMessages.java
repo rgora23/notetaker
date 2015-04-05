@@ -13,7 +13,7 @@ public class ErrorMessages {
 	public static final String REGISTRATION_PASSWORD_MISMATCH = "The passwords don't match.";
 	
 	public static final String NOTE_TITLE_TAKEN = "You already have a note with this same title.";
-	
+	public static final String NOTE_COLLECTION_TITLE_TAKEN = "You already have a collection with this same title.";
 }
 
 

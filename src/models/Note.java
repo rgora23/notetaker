@@ -16,15 +16,17 @@ public class Note extends Model {
 	String title;
 	String id;
 	String account_id;
+	String note_collection_id;
 	ArrayList<Snippet> snippets;
-	
+
 	static String tablePath = "database/notes_table";
-	static String[] tableHeaders = {"id", "title", "account_id"};
+	static String[] tableHeaders = {"id", "title", "account_id","not_collection_id"};
 
 	public Note(CSVRecord noteRecord) {
 		this.id = noteRecord.getId();
 		this.title = noteRecord.getValueAtField("title");
 		this.account_id = noteRecord.getValueAtField("account_id");
+		this.note_collection_id = noteRecord.getValueAtField(note_collection_id);
 		this.snippets = Snippet.getSnippetsByNoteId(id);
 	}
 
@@ -116,9 +118,14 @@ public class Note extends Model {
 		return snippets;
 	}
 	
-	
-	
+	public void setNoteCollection_id (String note_collection_id){
+		this.note_collection_id = note_collection_id; 
+	}
 
+	public String getNoteCollection_id() {
+		return note_collection_id; 
+	}
+	
 }
 
 

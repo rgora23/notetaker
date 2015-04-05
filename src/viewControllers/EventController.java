@@ -13,6 +13,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextFlow;
 import javafx.scene.web.HTMLEditor;
 import models.Note;
 import models.Snippet;
@@ -64,17 +66,21 @@ public class EventController extends ViewController {
 
 
 	}
-
+			// check for verification of username and password 
 	@FXML protected void tryRegistration(Event e) throws IOException {
 		String username = getTextFieldById("new_username").getText();
 		String password = getPasswordFieldById("new_password").getText();
 		String confirmPassword = getPasswordFieldById("confirm_password").getText();
 
+
+		 	// change GUI for a logged-in user
 		String[] errors = accountsController.register(username, password, confirmPassword);
 		if ( errors.length == 0 ) {
 			System.out.println("Account Created");
 			getAnchorPaneById("create_account_pane").setVisible(false); 
 		}
+		
+			// Show errors for incorrect user information 
 		else {
 			for (String error : errors ) {
 				System.out.println(error);
@@ -82,6 +88,11 @@ public class EventController extends ViewController {
 			}
 		}		
 	}
+
+
+
+	
+		   // create a new note 
 
 	@FXML protected void noteCreationAction(Event e) throws IOException {
 		String noteTitle = getTextFieldById("note_title_input").getText();
@@ -168,6 +179,7 @@ public class EventController extends ViewController {
 
 	@FXML protected void cancelAccountButtonClicked(MouseEvent e) throws IOException {
 		hideDashboardWindows();
+		getAnchorPaneById("create_account_pane").setVisible(false);
 	}
 
 	@FXML protected void saveSettingsButtonClicked(MouseEvent e) throws IOException {
@@ -221,7 +233,7 @@ public class EventController extends ViewController {
 		resultsList.setLayoutX(74.0);
 		resultsList.setLayoutY(44.0);
 		resultsList.setPrefWidth(330.0);
-		resultsList.setPrefHeight(456.0);
+		resultsList.setPrefHeight(545.0);
 		resultsList.setId("results_list");
 		AnchorPane.setTopAnchor(resultsList, 42.0);
 		AnchorPane.setRightAnchor(resultsList, 0.0);
@@ -303,6 +315,16 @@ public class EventController extends ViewController {
 	}
 
 }
+
+
+
+
+
+
+
+
+
+
 
 
 
