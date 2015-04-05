@@ -15,13 +15,15 @@ public class Note {
 	String title;
 	String id;
 	String account_id;
+	String note_collection_id;
 	static String tablePath = "database/notes_table";
-	static String[] tableHeaders = {"id", "title", "account_id"};
+	static String[] tableHeaders = {"id", "title", "account_id","not_collection_id"};
 
 	public Note(CSVRecord noteRecord) {
 		this.id = noteRecord.getId();
 		this.title = noteRecord.getValueAtField("title");
 		this.account_id = noteRecord.getValueAtField("account_id");
+		this.note_collection_id = noteRecord.getValueAtField(note_collection_id); 
 	}
 
 	public static void create(NoteCreationRequest request) {
@@ -103,6 +105,12 @@ public class Note {
 		this.account_id = account_id;
 	}
 	
-	
+	public void setNoteCollection_id (String note_collection_id){
+		this.note_collection_id = note_collection_id; 
+	}
 
+	public String getNoteCollection_id() {
+		return note_collection_id; 
+	}
+	
 }
