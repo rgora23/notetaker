@@ -124,7 +124,10 @@ public class EventController extends ViewController {
 
 	}
 
-
+	@FXML protected void confirmDeleteAccount(MouseEvent e) throws IOException{
+			
+		
+	}
 
 	@FXML protected void createNoteButtonClicked(MouseEvent e) throws IOException {
 		hideDashboardWindows();
