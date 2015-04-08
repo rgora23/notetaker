@@ -22,9 +22,12 @@
 	 AnchorPane.leftAnchor="870.0"  AnchorPane.bottomAnchor="10.0"
 	AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="120.0">
 	<children>
-	<TextField prefWidth="330.0" prefHeight="30.0" id="search_box" editable="true" promptText="search text" AnchorPane.topAnchor="0.0" AnchorPane.rightAnchor="0.0"/>
+
+
+	<TextField prefWidth="330.0" prefHeight="30.0" id="search_box" editable="true" promptText="search text" 
+				AnchorPane.topAnchor="0.0" AnchorPane.rightAnchor="0.0"/>
 		<GridPane layoutX="55.0" layoutY="14.0" prefHeight="54.0"
-			prefWidth="330.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="30.0">
+				prefWidth="330.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="30.0">
 			<columnConstraints>
 				<ColumnConstraints />
 				<ColumnConstraints />

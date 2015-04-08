@@ -6,6 +6,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
+import javafx.event.EventType;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
@@ -45,7 +46,8 @@ public class EventController extends ViewController {
 			getAnchorPaneById("note_edit_pane").setVisible(true);
 			getPaneById("note_buttons").setVisible(true);
 			getAnchorPaneById("dashboard").setDisable(false);
-
+			getButtonById("note_delete").setVisible(true);
+			getButtonById("collection_delete").setVisible(true);
 			// Hide registration and login buttons
 			getLabelById("newaccount").setVisible(false);
 			getGridPaneById("login_pane_root").setVisible(false);
@@ -109,7 +111,8 @@ public class EventController extends ViewController {
 		getPaneById("note_buttons").setVisible(false);
 		getAnchorPaneById("note_edit_pane").setVisible(false);
 		getAnchorPaneById("dashboard").setDisable(true);
-
+		getButtonById("note_delete").setVisible(false);
+		getButtonById("collection_delete").setVisible(false);
 		// Make login and registration buttons visible again
 		getGridPaneById("login_pane_root").setVisible(true);
 		getLabelById("newaccount").setVisible(true); 
@@ -125,8 +128,25 @@ public class EventController extends ViewController {
 	}
 
 	@FXML protected void confirmDeleteAccount(MouseEvent e) throws IOException{
-			
+			getTextById("confirm_delete_message").setVisible(true); 
+			getPasswordFieldById("confirm_delete_account_password").setVisible(true); 
 		
+	}
+	
+	@FXML protected void deleteNote(MouseEvent e) throws IOException{
+		
+	}
+	
+	@FXML protected void deleteCollection(MouseEvent e) throws IOException{
+		
+	}
+	
+	@FXML protected void deleteAccount(Event e) throws IOException {  
+		// code to delete account goes here
+		//  if password matches, remove and do:
+		    //Logout()
+		//else: 
+		getTextById("confirm_delete_message").setText("password does not match");
 	}
 
 	@FXML protected void createNoteButtonClicked(MouseEvent e) throws IOException {
@@ -231,7 +251,7 @@ public class EventController extends ViewController {
 		resultsList.setLayoutX(74.0);
 		resultsList.setLayoutY(44.0);
 		resultsList.setPrefWidth(330.0);
-		resultsList.setPrefHeight(545.0);
+		resultsList.setPrefHeight(500.0);
 		resultsList.setId("results_list");
 		AnchorPane.setTopAnchor(resultsList, 72.0);
 		AnchorPane.setRightAnchor(resultsList, 0.0);		
