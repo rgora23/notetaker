@@ -35,7 +35,7 @@ public class AccountsController extends Controller {
 		if (loginRequest.noErrors()) {
 			Account.authenticate(loginRequest);
 			if (loginRequest.isAuthenticated()) {
-				Session.create(loginRequest.getAccount());
+				getSession().create(loginRequest.getAccount());
 				loginRequest.getAccount().updateNotes();
 				System.out.println("Successfully logged in.");
 			}
@@ -51,9 +51,13 @@ public class AccountsController extends Controller {
 	}
 	
 	public static void logout() {
-		String username = Session.getAccount().getUsername();
-		Session.destroy();
+		String username = getSession().getAccount().getUsername();
+		getSession().destroy();
 		System.out.println("Logged out of " + username + "'s account.");
 	}
 
 }
+
+
+
+

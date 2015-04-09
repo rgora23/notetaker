@@ -62,11 +62,8 @@
 			</children>
 		</GridPane>
 
-		<ListView id="results_list" layoutX="74.0" layoutY="44.0" prefHeight="456.0"
-			prefWidth="330.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="72.0" />
-
-		<ListView layoutX="74.0" layoutY="44.0" 
-			prefWidth="330.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="72.0" prefHeight="456.0" />
+		<ListView id="results_list" layoutX="74.0" layoutY="44.0"
+			prefWidth="330.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="72.0" AnchorPane.bottomAnchor="0" />
 
 	</children>
 </AnchorPane>

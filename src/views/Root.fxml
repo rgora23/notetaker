@@ -19,13 +19,13 @@
 <AnchorPane id="root" xmlns:fx="http://javafx.com/fxml/1"
 	fx:controller="viewControllers.EventController">
 	<children>
- 		<fx:include fx:id="embeddedLoginPane" source="LoginPane.fxml" />
-		<fx:include fx:id="embeddedRegistrationPane" source="RegistrationPane.fxml" />
-	 	<fx:include fx:id="embeddedDashboard" source="Dashboard.fxml" />
-	    <!--  <fx:include fx:id="embeddedDashboardButton" source="DashboardButtons.fxml" />  -->  
-		<fx:include fx:id="embeddedAccountSettings" source="AccountSettings.fxml" />
-		<fx:include fx:id="embeddedNoteCreation" source="NoteCreation.fxml" />
-		<fx:include fx:id="embeddedNoteEdit" source="NoteEdit.fxml"/>
+ 		<fx:include fx:id="embeddedLoginPane" source="/views/LoginPane.fxml" />
+		<fx:include fx:id="embeddedRegistrationPane" source="/views/RegistrationPane.fxml" />
+	 	<fx:include fx:id="embeddedDashboard" source="/views/Dashboard.fxml" />
+	    <!--  <fx:include fx:id="embeddedDashboardButton" source="/views/DashboardButtons.fxml" />  -->  
+		<fx:include fx:id="embeddedAccountSettings" source="/views/AccountSettings.fxml" />
+		<fx:include fx:id="embeddedNoteCreation" source="/views/NoteCreation.fxml" />
+		<fx:include fx:id="embeddedNoteEdit" source="/views/NoteEdit.fxml"/>
 		<Label id="newaccount" onMouseClicked="#createAccountClicked"
 			text="New Account" AnchorPane.rightAnchor="360.0" AnchorPane.topAnchor="28.0">
 			<cursor>

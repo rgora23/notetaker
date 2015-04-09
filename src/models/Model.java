@@ -1,5 +1,6 @@
 package models;
 
+import noteTaker.Session;
 import csv.CSVReader;
 import csv.CSVWriter;
 
@@ -40,4 +41,12 @@ public abstract class Model {
 		writer.parse();
 		return writer;
 	}
+	
+	protected static Session getSession() {
+		return Session.getInstance();
+	}
 }
+
+
+
+
