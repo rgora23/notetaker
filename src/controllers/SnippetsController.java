@@ -26,6 +26,7 @@ public class SnippetsController extends Controller {
 		content = content.replaceAll("<p><br></p>", "");
 
 		if (content.length() > 0) {
+			System.out.println(content);
 
 			// This is the regex used to split the content into snippets
 			// When putting the snippets back together, must join them with the following string:
@@ -51,7 +52,7 @@ public class SnippetsController extends Controller {
 			Snippet.createSnippetsForNote(request);
 		}
 		else {
-			System.out.println("No content to write!");
+//			System.out.println("No content to write!");
 		}
 
 	}

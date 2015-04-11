@@ -25,7 +25,7 @@
 
 
 	<TextField prefWidth="330.0" prefHeight="30.0" id="search_box" editable="true" promptText="search text" 
-				AnchorPane.topAnchor="0.0" AnchorPane.rightAnchor="0.0"/>
+				AnchorPane.topAnchor="0.0" AnchorPane.rightAnchor="0.0" onKeyReleased="#searchTextChanged" />
 		<GridPane layoutX="55.0" layoutY="14.0" prefHeight="54.0"
 				prefWidth="330.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="30.0">
 			<columnConstraints>
@@ -38,12 +38,12 @@
 				<RowConstraints />
 			</rowConstraints>
 			<children>
-				<Button id="notes_button" mnemonicParsing="false"
-					onMouseClicked="#noteButtonClicked" prefHeight="26.0" prefWidth="229.0"
-					text="Notes" GridPane.columnIndex="0" GridPane.rowIndex="0" />
-				<Button id="title_button" mnemonicParsing="false"
+				<Button id="title_search_button" mnemonicParsing="false"
 					onMouseClicked="#titleButtonClicked" prefHeight="26.0" prefWidth="229.0"
-					text="Title" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+					text="Title" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+				<Button id="tags_search_button" mnemonicParsing="false"
+					onMouseClicked="#noteButtonClicked" prefHeight="26.0" prefWidth="229.0"
+					text="Tags" GridPane.columnIndex="1" GridPane.rowIndex="0" />
 				<Button id="modified_button"
 					onMouseClicked="#modifiedButtonClicked" prefHeight="15.0"
 					prefWidth="229.0" text="MODIFIED" GridPane.columnIndex="0"

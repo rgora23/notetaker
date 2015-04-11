@@ -38,8 +38,6 @@ public class Tag {
 		for (Tag t : snippet.getTags()) {
 			CSVReader tagTitleMatches = writer.where("title").isIgnoreCase(t.getTitle());
 			String tagId = tagTitleMatches.getTable().get(0).getId();
-			System.out.println("this tag id is " + tagId);
-			System.out.println("this snippet id is " + snippetId);
 			// add this snippet and tag relation in the tags_snippets_table
 			TaggedSnippet.write(snippetId, tagId);
 		}
