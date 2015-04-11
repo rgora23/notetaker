@@ -28,12 +28,11 @@
 		<Text id="login_fail_text" fill="A70000"
 			text="Sorry, this account did not match our records" visible="false"
 			GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="2" />
-		<TextField id="username_input"
-			editable="true" onAction="#tryLogin" promptText="User Name"
-			GridPane.columnIndex="0" GridPane.rowIndex="1" />
-		<PasswordField id="password_input"
-			editable="true" onAction="#tryLogin" promptText="Password"
-			GridPane.columnIndex="1" GridPane.rowIndex="1">
+		<TextField id="username_input" editable="true" onAction="#tryLogin"
+			promptText="User Name" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+		<PasswordField id="password_input" editable="true"
+			onAction="#tryLogin" promptText="Password" GridPane.columnIndex="1"
+			GridPane.rowIndex="1">
 		</PasswordField>
 
 	</children>
@@ -47,3 +46,7 @@
 		<RowConstraints />
 	</rowConstraints>
 </GridPane>
+
+
+
+

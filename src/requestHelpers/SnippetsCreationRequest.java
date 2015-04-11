@@ -6,11 +6,11 @@ import models.Note;
 import models.Snippet;
 
 public class SnippetsCreationRequest {
-	
+
 	private Note note;
 	private ArrayList<Snippet> snippets;
-	
-	public SnippetsCreationRequest(Note note, ArrayList<Snippet> snippets){
+
+	public SnippetsCreationRequest(Note note, ArrayList<Snippet> snippets) {
 		this.note = note;
 		this.snippets = snippets;
 	}
@@ -22,14 +22,5 @@ public class SnippetsCreationRequest {
 	public ArrayList<Snippet> getSnippets() {
 		return snippets;
 	}
-	
-	
 
-	
-	
-	
 }
-
-
-
-

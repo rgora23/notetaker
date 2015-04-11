@@ -21,7 +21,6 @@ import exceptions.InvalidSearchModeSetException;
  * 
  */
 
-
 public class Session {
 
 	private static Session instance = null;
@@ -47,7 +46,6 @@ public class Session {
 		currentNote = null;
 		searchMode = Session.TITLE_SEARCH_MODE;
 	}
-
 
 	public void create(Account account) {
 		this.destroy();
@@ -78,8 +76,9 @@ public class Session {
 	// Stage object is passed in, further calls to setStage
 	// return false.
 	public boolean setStage(Stage stage) {
-		boolean stageSet = this.stage == null; 
-		if (stageSet) this.stage = stage;
+		boolean stageSet = this.stage == null;
+		if (stageSet)
+			this.stage = stage;
 		return stageSet;
 	}
 
@@ -90,16 +89,13 @@ public class Session {
 		return instance;
 	}
 
-
 	public boolean isSessionCreated() {
 		return sessionCreated;
 	}
 
-
 	public void setSessionCreated(boolean sessionCreated) {
 		this.sessionCreated = sessionCreated;
 	}
-
 
 	public boolean isEditingNote() {
 		return editingNote;
@@ -109,13 +105,11 @@ public class Session {
 		return searchMode;
 	}
 
-
 	public void setSearchMode(int searchMode) {
 		try {
 			if (searchMode == Session.TAG_SEARCH_MODE || searchMode == Session.TITLE_SEARCH_MODE) {
-				this.searchMode = searchMode;			
-			}
-			else {
+				this.searchMode = searchMode;
+			} else {
 				throw new InvalidSearchModeSetException("invalid search mode set");
 			}
 		} catch (InvalidSearchModeSetException e) {
@@ -124,30 +118,20 @@ public class Session {
 
 	}
 
-
 	public void setEditingNote(boolean editingNote) {
 		this.editingNote = editingNote;
 	}
-
 
 	public Note getCurrentNote() {
 		return currentNote;
 	}
 
-
 	public void setCurrentNote(Note currentNote) {
 		this.currentNote = currentNote;
 	}
-
 
 	public void setAccount(Account account) {
 		this.account = account;
 	}
 
-
-
 }
-
-
-
-

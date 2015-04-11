@@ -23,19 +23,20 @@ import noteTaker.Session;
 // It holds common methods and variables that all controllers in this application
 // will need access to.
 public abstract class ViewController implements Initializable {
-	
+
 	public ViewController() {
-		
+
 	}
+
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		
+
 	}
 
 	protected Session getSession() {
 		return Session.getInstance();
 	}
-	
+
 	protected Scene getScene() {
 		return getSession().getStage().getScene();
 	}
@@ -67,7 +68,7 @@ public abstract class ViewController implements Initializable {
 	protected AnchorPane getAnchorPaneById(String id) {
 		return ((AnchorPane) getNodeById(id));
 	}
-	
+
 	protected Pane getPaneById(String id) {
 		return ((Pane) getNodeById(id));
 	}
@@ -75,22 +76,17 @@ public abstract class ViewController implements Initializable {
 	protected Text getTextById(String id) {
 		return ((Text) getNodeById(id));
 	}
-	
+
 	protected ListView<String> getListViewById(String id) {
 		return ((ListView<String>) getNodeById(id));
 	}
-	
+
 	protected TextFlow getTextFlowById(String id) {
 		return ((TextFlow) getNodeById(id));
 	}
-	
+
 	protected HTMLEditor getHTMLEditorById(String id) {
 		return ((HTMLEditor) getNodeById(id));
 	}
 
-	
 }
-
-
-
-

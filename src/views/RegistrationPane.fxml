@@ -22,7 +22,8 @@
 	visible="false" AnchorPane.rightAnchor="475.0" AnchorPane.topAnchor="150.0">
 	<children>
 		<GridPane id="new_account_window" layoutX="2.0" prefHeight="261.0"
-			prefWidth="244.0" AnchorPane.leftAnchor="1.0" AnchorPane.topAnchor="-1.0" gridLinesVisible="false">
+			prefWidth="244.0" AnchorPane.leftAnchor="1.0" AnchorPane.topAnchor="-1.0"
+			gridLinesVisible="false">
 			<columnConstraints>
 				<ColumnConstraints hgrow="SOMETIMES" minWidth="10.0"
 					prefWidth="5.0" />
@@ -85,8 +86,8 @@
 					text="Cancel" textAlignment="RIGHT" GridPane.halignment="LEFT"
 					GridPane.columnIndex="0" GridPane.rowIndex="5" />
 				<Button id="create_account_button" mnemonicParsing="false"
-					onMouseClicked="#tryRegistration" text="Create" GridPane.columnIndex="1"
-					GridPane.rowIndex="5" />
+					onMouseClicked="#tryRegistration" text="Create"
+					GridPane.columnIndex="1" GridPane.rowIndex="5" />
 
 				<Label id="create_account_error_text" text="" textFill="#d02424"
 					GridPane.columnSpan="2" GridPane.rowIndex="4" GridPane.columnIndex="0">
@@ -101,3 +102,7 @@
 		</GridPane>
 	</children>
 </AnchorPane>
+
+
+
+
