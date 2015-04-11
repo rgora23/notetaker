@@ -7,6 +7,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
+import javafx.event.EventType;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
@@ -15,6 +16,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextFlow;
 import javafx.scene.web.HTMLEditor;
 import models.Note;
 import models.Snippet;
@@ -52,6 +55,7 @@ public class EventController extends ViewController {
 			getAnchorPaneById("dashboard").setDisable(false);
 			getButtonById("note_delete").setVisible(true);
 			getButtonById("collection_delete").setVisible(true);
+			getButtonById("collection_create").setVisible(true);
 			// Hide registration and login buttons
 			getLabelById("newaccount").setVisible(false);
 			getGridPaneById("login_pane_root").setVisible(false);
@@ -121,7 +125,7 @@ public class EventController extends ViewController {
 		getAnchorPaneById("dashboard").setDisable(true);
 		getButtonById("note_delete").setVisible(false);
 		getButtonById("collection_delete").setVisible(false);
-		
+		getButtonById("collection_create").setVisible(false);
 		// Make login and registration buttons visible again
 		getGridPaneById("login_pane_root").setVisible(true);
 		getLabelById("newaccount").setVisible(true); 
@@ -129,15 +133,13 @@ public class EventController extends ViewController {
 		
 		// Remove all results from the results list
 		clearResultsList();
-		
+
 		// Resets the interface to original appearance
 		resetNoteInterface();
 		
 		
 		// log out through accounts controller
 		AccountsController.logout();
-
-		
 
 	}
 
@@ -178,6 +180,25 @@ public class EventController extends ViewController {
 		getTextById("confirm_delete_message").setText("password does not match");
 	}
 
+	@FXML protected void createCollection(MouseEvent e) throws IOException{
+		 //when the create collection button is clicked
+		hideDashboardWindows();
+		Node settings = getNodeById("create_collection_pane");
+		settings.toFront();
+		settings.setVisible(true);
+		
+		
+	}
+	
+	@FXML protected void collectionCreationAction(Event e) throws IOException {
+		//when the title is entered into the collection form and hit save
+		
+	}
+	
+	@FXML protected void collectionCancelAction(Event e) throws IOException {
+		 getAnchorPaneById("create_collection_pane").setVisible(false); 
+	}
+	
 	@FXML protected void createNoteButtonClicked(MouseEvent e) throws IOException {
 		hideDashboardWindows();
 		AnchorPane noteForm = getAnchorPaneById("create_note_pane");
@@ -260,6 +281,8 @@ public class EventController extends ViewController {
 		getNodeById("account_settings_pane").setVisible(false);
 		getAnchorPaneById("create_note_pane").setVisible(false);
 		getLabelById("noteTaker_text").setVisible(false);
+		getAnchorPaneById("create_collection_pane").setVisible(false); 
+		
 	}
 
 	// With no argument populate results with all notes on account
