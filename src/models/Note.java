@@ -1,11 +1,12 @@
 package models;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import noteTaker.ErrorMessages;
 import noteTaker.Session;
 import requestHelpers.NoteCreationRequest;
-import requestHelpers.SnippetsCreationRequest;
+import requestHelpers.NoteTitleSearchRequest;
 import csv.CSVReader;
 import csv.CSVRecord;
 import csv.CSVWriter;
@@ -82,6 +83,34 @@ public class Note extends Model {
 		CSVReader noteTableReader = constructReader();
 		Note note = new Note(noteTableReader.getRecordById(id));
 		return note;
+	}
+	
+	public static NoteTitleSearchRequest searchByTitle(NoteTitleSearchRequest request) {
+		ArrayList<Note> notes = getSession().getAccount().getNotes();
+		ArrayList<Note> matchingNotes = new ArrayList<Note>();
+		for ( Note note : notes ) {
+			String title = note.getTitle();
+			boolean queryMatches = title.toLowerCase().contains(request.getQuery().toLowerCase());
+			if ( queryMatches ) {
+				matchingNotes.add(note);
+			}
+		}
+		request.setResults(matchingNotes);
+		return request;
+	}
+	
+	public static void destroy(Note note) {
+		Snippet.destroySnippetsByNoteId(note.id);
+		CSVWriter writer = constructWriter();
+		CSVRecord record = writer.getRecordById(note.getId());
+		
+		// set the value in the table to null
+		int recordIndex = writer.getTable().indexOf(record);
+		writer.getTable().set(recordIndex, null);
+		
+		// Remove all null values from this table, effectively deleting the record
+		writer.getTable().removeAll(Collections.singleton(null));
+		writer.write();
 	}
 
 	private static CSVWriter constructWriter() {

@@ -15,8 +15,6 @@ public class TaggedSnippet extends Model {
 	public static void write(String snippet_id, String tag_id) {
 		CSVWriter writer = constructWriter();
 		writer.append(tag_id, snippet_id);
-		System.out.println(tag_id);
-		System.out.println(snippet_id);
 		writer.write();
 	}
 

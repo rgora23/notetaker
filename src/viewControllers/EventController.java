@@ -7,15 +7,14 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
-import javafx.event.EventType;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TextField;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.text.Text;
-import javafx.scene.text.TextFlow;
 import javafx.scene.web.HTMLEditor;
 import models.Note;
 import models.Snippet;
@@ -23,6 +22,7 @@ import noteTaker.Session;
 import controllers.AccountsController;
 import controllers.NotesController;
 import controllers.SnippetsController;
+import exceptions.DeleteNullNoteException;
 import exceptions.NoSessionNoteSetException;
 public class EventController extends ViewController {
 
@@ -68,21 +68,21 @@ public class EventController extends ViewController {
 
 
 	}
-			// check for verification of username and password 
+	// check for verification of username and password 
 	@FXML protected void tryRegistration(Event e) throws IOException {
 		String username = getTextFieldById("new_username").getText();
 		String password = getPasswordFieldById("new_password").getText();
 		String confirmPassword = getPasswordFieldById("confirm_password").getText();
 
 
-		 	// change GUI for a logged-in user
+		// change GUI for a logged-in user
 		String[] errors = accountsController.register(username, password, confirmPassword);
 		if ( errors.length == 0 ) {
 			System.out.println("Account Created");
 			getAnchorPaneById("create_account_pane").setVisible(false); 
 		}
-		
-			// Show errors for incorrect user information 
+
+		// Show errors for incorrect user information 
 		else {
 			for (String error : errors ) {
 				System.out.println(error);
@@ -93,8 +93,8 @@ public class EventController extends ViewController {
 
 
 
-	
-		   // create a new note 
+
+	// create a new note 
 
 	@FXML protected void noteCreationAction(Event e) throws IOException {
 		String noteTitle = getTextFieldById("note_title_input").getText();
@@ -110,6 +110,9 @@ public class EventController extends ViewController {
 	}
 
 	@FXML protected void logoutButtonClicked(MouseEvent e) throws IOException {
+
+		// save the currently selected note from the session in the database 
+		saveCurrentNote();
 		
 		getLabelById("NOTETAKER_text").setVisible(false); 
 		getButtonById("logout_button").setVisible(false);
@@ -118,38 +121,59 @@ public class EventController extends ViewController {
 		getAnchorPaneById("dashboard").setDisable(true);
 		getButtonById("note_delete").setVisible(false);
 		getButtonById("collection_delete").setVisible(false);
+		
 		// Make login and registration buttons visible again
 		getGridPaneById("login_pane_root").setVisible(true);
 		getLabelById("newaccount").setVisible(true); 
 		hideDashboardWindows();
-		AccountsController.logout();
-
+		
 		// Remove all results from the results list
 		clearResultsList();
-
+		
 		// Resets the interface to original appearance
 		resetNoteInterface();
+		
+		
+		// log out through accounts controller
+		AccountsController.logout();
+
+		
 
 	}
 
 	@FXML protected void confirmDeleteAccount(MouseEvent e) throws IOException{
-			getTextById("confirm_delete_message").setVisible(true); 
-			getPasswordFieldById("confirm_delete_account_password").setVisible(true); 
-		
+		getTextById("confirm_delete_message").setVisible(true); 
+		getPasswordFieldById("confirm_delete_account_password").setVisible(true); 
+
 	}
-	
+
 	@FXML protected void deleteNote(MouseEvent e) throws IOException{
-		
+		try {
+			Note currentNote = getSession().getCurrentNote();
+			if (currentNote != null) {
+				NotesController.delete(getSession().getCurrentNote());
+				resetNoteInterface();
+				
+				// Trigger the search on the input so that the results
+				// are updates.
+				searchTextChanged();
+			}
+			else {
+				throw new DeleteNullNoteException("Can't find the note to delete");
+			}
+		} catch (DeleteNullNoteException exception) {
+			exception.printStackTrace();
+		}
 	}
-	
+
 	@FXML protected void deleteCollection(MouseEvent e) throws IOException{
-		
+
 	}
-	
+
 	@FXML protected void deleteAccount(Event e) throws IOException {  
 		// code to delete account goes here
 		//  if password matches, remove and do:
-		    //Logout()
+		//Logout()
 		//else: 
 		getTextById("confirm_delete_message").setText("password does not match");
 	}
@@ -213,7 +237,24 @@ public class EventController extends ViewController {
 		hideDashboardWindows();
 	}
 
-	// Helper Methods
+	@FXML protected void searchTextChanged() {
+		TextField searchInput = getTextFieldById("search_box");
+		String query = searchInput.getText();
+
+		if ( getSession().getSearchMode() == Session.TITLE_SEARCH_MODE ) {
+			NotesController.search(query);
+			ArrayList<Note> notes = NotesController.search(query);
+			populateNotesList(notes);
+		}
+		else if ( getSession().getSearchMode() == Session.TAG_SEARCH_MODE ) {
+
+		}
+
+	}
+
+	////////////////////
+	// Helper Methods //
+	////////////////////
 
 	private void hideDashboardWindows() {
 		getNodeById("account_settings_pane").setVisible(false);
@@ -221,24 +262,29 @@ public class EventController extends ViewController {
 		getLabelById("noteTaker_text").setVisible(false);
 	}
 
+	// With no argument populate results with all notes on account
 	private void populateNotesList() {
+		ArrayList<Note> notes = getSession().getAccount().getNotes();
+		populateNotesList(notes);
+	}
+
+	private void populateNotesList(ArrayList<Note> notes) {
 		AnchorPane parent = getAnchorPaneById("dashboard");
 
 		ListView<String> oldListView = getListViewById("results_list");
 
 		if ( oldListView != null) parent.getChildren().remove(oldListView);
 
-		ObservableList<String> noteTitles = FXCollections.observableArrayList();
-
 		// Populate ObservableList object with the titles for the account's notes
-		for (Note note : getSession().getAccount().getNotes()) {
+		ObservableList<String> noteTitles = FXCollections.observableArrayList();
+		for (Note note : notes) {
 			noteTitles.add(note.getTitle());
 		}
 
 		final ListView<String> resultsList = new ListView<String>(noteTitles);
 		parent.getChildren().add(resultsList);
 		addStyleToResultsList(resultsList);
-		addClickListenersToResultsList(resultsList, noteTitles);
+		addEventListenersToResultsList(resultsList, noteTitles);
 	}
 
 	private void clearResultsList() {
@@ -263,49 +309,63 @@ public class EventController extends ViewController {
 		AnchorPane.setBottomAnchor(resultsList, 0.0);
 	}
 
-	private void addClickListenersToResultsList(final ListView<String> resultsList, ObservableList<String> results) {
+	private void addEventListenersToResultsList(final ListView<String> resultsList, ObservableList<String> results) {
 		resultsList.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent event) {
-				String item = resultsList.getSelectionModel().getSelectedItem();
-				Note clickedNote = Note.getNoteByTitle(item);
-				Note currentNote = getSession().getCurrentNote(); 
-
-				// The clicked note is already open
-				if (currentNote == null || !currentNote.getId().equals(clickedNote.getId())) {
-					if (getSession().isEditingNote()) saveCurrentNote();
-					getSession().setCurrentNote(clickedNote);
-					initializeNoteInterface(clickedNote);					
-				}
+				handleResultSelectionEvent(resultsList);
+			}
+		});
+		
+		resultsList.setOnKeyPressed(new EventHandler<KeyEvent>() {
+			@Override
+			public void handle(KeyEvent event) {
+				handleResultSelectionEvent(resultsList);
 			}
 		});
 	}
+	
+	private void handleResultSelectionEvent(ListView<String> resultsList) {
+		String item = resultsList.getSelectionModel().getSelectedItem();
+		Note selectedNote = Note.getNoteByTitle(item);
+		Note currentNote = getSession().getCurrentNote(); 
+
+		// Only run if the clicked note is not currently open
+		if (currentNote == null || !currentNote.getId().equals(selectedNote.getId())) {
+			if (getSession().isEditingNote()) saveCurrentNote();
+			getSession().setCurrentNote(selectedNote);
+			initializeNoteInterface(selectedNote);
+		}
+	}
 
 	private void initializeNoteInterface(Note note) {
-		getSession().setEditingNote(true);
-		HTMLEditor parentHTMLEditor = getHTMLEditorById("note_HTMLEditor");
 		resetNoteInterface();
+		getSession().setEditingNote(true);
+		
+		getButtonById("note_delete").setDisable(false);
+		HTMLEditor parentHTMLEditor = getHTMLEditorById("note_HTMLEditor");
 		parentHTMLEditor.setDisable(false);
 		parentHTMLEditor.setOpacity(1);
+		
 		populateNoteInterface(parentHTMLEditor);
 	}
 
 	private void saveCurrentNote() {
-		if (getSession().getCurrentNote() != null) {
-			System.out.println("HELLO!");
+		Note currentNote = getSession().getCurrentNote(); 
+		if (currentNote != null) {
 			HTMLEditor parentHTMLEditor = getHTMLEditorById("note_HTMLEditor");
 			String content = parentHTMLEditor.getHtmlText();
-			System.out.println(content);
-			SnippetsController.saveNote(getSession().getCurrentNote(), content);
+			SnippetsController.saveNote(currentNote, content);
 		}
 	}
 
 	private void resetNoteInterface() {
-		saveCurrentNote();
 		HTMLEditor parentHTMLEditor = getHTMLEditorById("note_HTMLEditor");
 		parentHTMLEditor.setHtmlText("");
 		parentHTMLEditor.setDisable(true);
 		parentHTMLEditor.setOpacity(0.8);
+		// disable the delete note button
+		getButtonById("note_delete").setDisable(true);
 	}
 
 	private void populateNoteInterface(HTMLEditor parentHTMLEditor) {
@@ -332,10 +392,9 @@ public class EventController extends ViewController {
 		catch( NoSessionNoteSetException e) {
 			e.printStackTrace();
 		}
-
-
-
 	}
+
+
 
 }
 

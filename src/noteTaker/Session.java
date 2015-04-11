@@ -3,6 +3,7 @@ package noteTaker;
 import javafx.stage.Stage;
 import models.Account;
 import models.Note;
+import exceptions.InvalidSearchModeSetException;
 
 /*
  * The Session class is a singleton class that serves to hold variables for 
@@ -22,52 +23,57 @@ import models.Note;
 
 
 public class Session {
-	
+
 	private static Session instance = null;
-	
+	public static final int TITLE_SEARCH_MODE = 0;
+	public static final int TAG_SEARCH_MODE = 1;
+
 	private Stage stage;
 	private boolean sessionCreated;
 	private Account account;
 	private boolean editingNote;
 	private Note currentNote;
-	
+	// Can be either "TITLE_SEARCH_MODE" or "TAG_SEARCH_MODE"
+	private int searchMode;
+
 	private Session() {
 		// Application session variables. These variables can only be set once.
 		stage = null;
-		
+
 		// Account session variables
 		sessionCreated = false;
 		account = null;
 		editingNote = false;
 		currentNote = null;
+		searchMode = Session.TITLE_SEARCH_MODE;
 	}
-	
-	
+
+
 	public void create(Account account) {
 		this.destroy();
 		this.sessionCreated = true;
 		this.account = account;
 	}
-	
+
 	public void destroy() {
 		this.sessionCreated = false;
 		this.account = null;
 		this.currentNote = null;
 		this.editingNote = false;
 	}
-	
+
 	public boolean isCreated() {
 		return this.sessionCreated;
 	}
-	
+
 	public Stage getStage() {
 		return this.stage;
 	}
-	
+
 	public Account getAccount() {
 		return this.account;
 	}
-	
+
 	// This method can only be called once. Once a non-null
 	// Stage object is passed in, further calls to setStage
 	// return false.
@@ -76,7 +82,7 @@ public class Session {
 		if (stageSet) this.stage = stage;
 		return stageSet;
 	}
-	
+
 	public static Session getInstance() {
 		if (instance == null) {
 			instance = new Session();
@@ -99,6 +105,25 @@ public class Session {
 		return editingNote;
 	}
 
+	public int getSearchMode() {
+		return searchMode;
+	}
+
+
+	public void setSearchMode(int searchMode) {
+		try {
+			if (searchMode == Session.TAG_SEARCH_MODE || searchMode == Session.TITLE_SEARCH_MODE) {
+				this.searchMode = searchMode;			
+			}
+			else {
+				throw new InvalidSearchModeSetException("invalid search mode set");
+			}
+		} catch (InvalidSearchModeSetException e) {
+			e.printStackTrace();
+		}
+
+	}
+
 
 	public void setEditingNote(boolean editingNote) {
 		this.editingNote = editingNote;
@@ -118,9 +143,9 @@ public class Session {
 	public void setAccount(Account account) {
 		this.account = account;
 	}
-	
-	
-	
+
+
+
 }
 
 
