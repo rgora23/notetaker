@@ -345,7 +345,7 @@ public class EventController extends ViewController {
 		resultsList.setPrefWidth(330.0);
 		resultsList.setPrefHeight(545.0);
 		resultsList.setId("results_list");
-		AnchorPane.setTopAnchor(resultsList, 72.0);
+		AnchorPane.setTopAnchor(resultsList, 84.0);
 		AnchorPane.setRightAnchor(resultsList, 0.0);
 		AnchorPane.setBottomAnchor(resultsList, 0.0);
 	}
