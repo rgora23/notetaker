@@ -21,20 +21,30 @@
 
 	<children>
 
-    <GridPane id="collection_form" gridLinesVisible="false" vgap="15" AnchorPane.topAnchor="0.0">
+		<GridPane id="collection_form" gridLinesVisible="false" vgap="15"
+			AnchorPane.topAnchor="0.0">
 			<children>
-				<Label id="collection_form_title" text="New collection" textAlignment="CENTER" GridPane.columnIndex="0" 
-						GridPane.halignment="CENTER" GridPane.rowIndex="0" />
-				<TextField id="collection_title_input" onAction="#collectionCreationAction" promptText="new title" text="Untitled" 
-							GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
-				<Button id="collection_create_button" layoutX="370.0" layoutY="360.0" mnemonicParsing="false" 
-						onMouseClicked="#collectionCreationAction" prefHeight="26.0" prefWidth="60.0" text="SAVE" 
-						GridPane.columnIndex="0" GridPane.halignment="RIGHT" GridPane.rowIndex="2"/>
-			    <Button id="collection_cancel_button" layoutX="370.0" layoutY="360.0" mnemonicParsing="false" 
-			    		onMouseClicked="#collectionCancelAction" prefHeight="26.0" prefWidth="70.0" text="CANCEL" 
-			    		GridPane.columnIndex="0" GridPane.halignment="LEFT" GridPane.rowIndex="2"/>
-			</children>       
+				<Label id="collection_form_title" text="New collection"
+					textAlignment="CENTER" GridPane.columnIndex="0"
+					GridPane.halignment="CENTER" GridPane.rowIndex="0" />
+				<TextField id="collection_title_input" onAction="#collectionCreationAction"
+					promptText="new title" text="Untitled" GridPane.columnIndex="0"
+					GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+				<Button id="collection_create_button" layoutX="370.0"
+					layoutY="360.0" mnemonicParsing="false" onMouseClicked="#collectionCreationAction"
+					prefHeight="26.0" prefWidth="60.0" text="SAVE"
+					GridPane.columnIndex="0" GridPane.halignment="RIGHT"
+					GridPane.rowIndex="2" />
+				<Button id="collection_cancel_button" layoutX="370.0"
+					layoutY="360.0" mnemonicParsing="false" onMouseClicked="#collectionCancelAction"
+					prefHeight="26.0" prefWidth="70.0" text="CANCEL"
+					GridPane.columnIndex="0" GridPane.halignment="LEFT"
+					GridPane.rowIndex="2" />
+			</children>
 		</GridPane>
 	</children>
-	</AnchorPane>
-	
+</AnchorPane>
+
+
+
+

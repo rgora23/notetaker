@@ -6,7 +6,6 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
-
 public class CSVReader extends CSVParser {
 
 	protected File file;
@@ -14,11 +13,14 @@ public class CSVReader extends CSVParser {
 	protected ArrayList<CSVRecord> table;
 
 	static String delimiter = ",,";
+
 	/**
-	 * Creates a new object that can read the entire database and retrieve values.
-	 * This is only suitable for small databases. Default headers are ["id"].
+	 * Creates a new object that can read the entire database and retrieve
+	 * values. This is only suitable for small databases. Default headers are
+	 * ["id"].
 	 * 
-	 * @param path   the path to the table
+	 * @param path
+	 *            the path to the table
 	 * @author Brian Maxwell
 	 */
 	public CSVReader(String path) {
@@ -27,11 +29,14 @@ public class CSVReader extends CSVParser {
 	}
 
 	/**
-	 * Creates a new object that can read the entire database and retrieve values.
-	 * This is only suitable for small databases. Provided headers override default headers.
+	 * Creates a new object that can read the entire database and retrieve
+	 * values. This is only suitable for small databases. Provided headers
+	 * override default headers.
 	 * 
-	 * @param path   the path to the table
-	 * @param headers   the
+	 * @param path
+	 *            the path to the table
+	 * @param headers
+	 *            the
 	 * @author Brian Maxwell
 	 */
 	public CSVReader(String path, String... headers) {
@@ -41,33 +46,38 @@ public class CSVReader extends CSVParser {
 
 	/**
 	 * Finds the next ID to use in order to append a record to the table.
+	 * 
 	 * @return String representation of the next ID to use in the table.
 	 */
 	public String getNextId() {
 		int lastId = -1;
 		try {
-			if (lastRecord() == null) lastId = 0;
-			else lastId = Integer.parseInt(lastRecord().getId());			
-		} catch (NumberFormatException e) { }
+			if (lastRecord() == null)
+				lastId = 0;
+			else
+				lastId = Integer.parseInt(lastRecord().getId());
+		} catch (NumberFormatException e) {
+		}
 		return (lastId + 1) + "";
 	}
 
 	/**
 	 * Gets the last record in the table
+	 * 
 	 * @return CsvRecord object of last record in the table.
 	 * @author Brian Maxwell
 	 */
 	public CSVRecord lastRecord() {
-		if ( table.size() == 0 ) {
+		if (table.size() == 0) {
 			return null;
-		}
-		else {
+		} else {
 			return table.get(table.size() - 1);
 		}
 	}
 
 	/**
 	 * Gets the first record in the table
+	 * 
 	 * @return CsvRecord object of first record in the table.
 	 * @author Brian Maxwell
 	 */
@@ -78,6 +88,7 @@ public class CSVReader extends CSVParser {
 	/**
 	 * Creates a CsvTable object from database table using the set delimiter.
 	 * The table can be retrieved using a getter on the CsvReader object.
+	 * 
 	 * @return The created CsvTable object
 	 * @author Brian Maxwell
 	 */
@@ -86,18 +97,20 @@ public class CSVReader extends CSVParser {
 	}
 
 	/**
-	 * Searches through the table and returns a new filtered table where all the values
-	 * of the supplied header hold the supplied value.
-	 * <br>
+	 * Searches through the table and returns a new filtered table where all the
+	 * values of the supplied header hold the supplied value. <br>
 	 * <div><strong>Example: </strong></div>
+	 * 
 	 * <pre>
 	 * CsvReader reader = new {@link #CsvReader}("inventory_table", "name", "price", "category");
 	 * reader.{@link #parse()};
 	 * CsvTable cleaningProducts =  reader.{@link #where}("category", "cleaning");
 	 * </pre>
 	 * 
-	 * @param header   The header of each record to compare the value to
-	 * @param value   The value to match against
+	 * @param header
+	 *            The header of each record to compare the value to
+	 * @param value
+	 *            The value to match against
 	 * @return A new CsvTable object holding matched records
 	 * @author Brian Maxwell
 	 */
@@ -105,7 +118,8 @@ public class CSVReader extends CSVParser {
 		ArrayList<CSVRecord> filteredTable = new ArrayList<CSVRecord>();
 		for (CSVRecord record : table) {
 			String headerValue = record.getValueAtField(header);
-			if ( CSVHelper.checkEquality(headerValue, value) ) filteredTable.add(record);
+			if (CSVHelper.checkEquality(headerValue, value))
+				filteredTable.add(record);
 		}
 		return filteredTable;
 	}
@@ -116,11 +130,13 @@ public class CSVReader extends CSVParser {
 	}
 
 	/**
-	 * Checks if the given value for a header has been taken for any
-	 * of the records in the table.
+	 * Checks if the given value for a header has been taken for any of the
+	 * records in the table.
 	 * 
-	 * @param header   The header of each record to compare the value to
-	 * @param value   The value to match against
+	 * @param header
+	 *            The header of each record to compare the value to
+	 * @param value
+	 *            The value to match against
 	 * @return returns if the value for the given header is unique.
 	 * @author Brian Maxwell
 	 */
@@ -130,7 +146,9 @@ public class CSVReader extends CSVParser {
 
 	/**
 	 * Search the table for the record with the matching id
-	 * @param id   the integer id of the record to retrieve
+	 * 
+	 * @param id
+	 *            the integer id of the record to retrieve
 	 * @return the matching record or null if nothing is found
 	 * @author Brian Maxwell
 	 */
@@ -140,7 +158,9 @@ public class CSVReader extends CSVParser {
 
 	/**
 	 * Search the table for the record with the matching id
-	 * @param id   the string id of the record to retrieve
+	 * 
+	 * @param id
+	 *            the string id of the record to retrieve
 	 * @return the matching record or null if nothing is found
 	 * @author Brian Maxwell
 	 */
@@ -174,9 +194,11 @@ public class CSVReader extends CSVParser {
 		for (CSVRecord record : table) {
 			ArrayList<String> row = record.getRow();
 			for (int i = 0; i < row.size(); i++) {
-				// remove all instances of delimiter in field before converting to string.
+				// remove all instances of delimiter in field before converting
+				// to string.
 				String d = CSVReader.delimiter;
-				// first letter of the delimiter. The field cannot begin or end with 
+				// first letter of the delimiter. The field cannot begin or end
+				// with
 				// a character that the delimiter begins with.
 				char fl = d.charAt(0);
 				String regex = "(" + d + ")|(" + fl + "+$)|(^" + fl + "+)";
@@ -188,13 +210,13 @@ public class CSVReader extends CSVParser {
 		return CSVHelper.join(rows, "\n");
 	}
 
-	///////////////////////////
-	//	Getters and Setters  //
-	///////////////////////////
-
+	// /////////////////////////
+	// Getters and Setters //
+	// /////////////////////////
 
 	/**
 	 * Get the corresponding CsvTable object mapping of this database table.
+	 * 
 	 * @return CsvTable object holding CsvRecords
 	 * @author Brian Maxwell
 	 */
@@ -202,10 +224,9 @@ public class CSVReader extends CSVParser {
 		return this.table;
 	}
 
-
-	/////////////////////////
-	//	Protected methods  //
-	/////////////////////////
+	// ///////////////////////
+	// Protected methods //
+	// ///////////////////////
 
 	protected void setTable(ArrayList<CSVRecord> table) {
 		this.table = table;
@@ -228,13 +249,9 @@ public class CSVReader extends CSVParser {
 				table.add(record);
 			}
 			reader.close();
-		} catch (IOException e) { }
+		} catch (IOException e) {
+		}
 		return table;
 	}
 
-
 }
-
-
-
-
