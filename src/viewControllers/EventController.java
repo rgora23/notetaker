@@ -133,29 +133,37 @@ public class EventController extends ViewController {
 		resetNoteInterface();
 
 	}
-
+	
 	@FXML protected void confirmDeleteAccount(MouseEvent e) throws IOException{
-			getTextById("confirm_delete_message").setVisible(true); 
+		// when "delete account" is clicked in settings window
+		 	getTextById("confirm_delete_message").setVisible(true); 
 			getPasswordFieldById("confirm_delete_account_password").setVisible(true); 
+			getTextById("change_password").setVisible(false); 
+			
 		
 	}
 	
 	@FXML protected void deleteNote(MouseEvent e) throws IOException{
-		
+		// when "delete note" icon is clicked on dashboard
 	}
 	
 	@FXML protected void deleteCollection(MouseEvent e) throws IOException{
-		
+		// when "delete collection" icon is clicked on dashboard
 	}
 	
 	@FXML protected void deleteAccount(Event e) throws IOException {  
 		// code to delete account goes here
-		//  if password matches, remove and do:
+		//  if password matches, remove account and do:
 		    //Logout()
 		//else: 
 		getTextById("confirm_delete_message").setText("password does not match");
 	}
 
+	@FXML protected void confirmChangePassword(MouseEvent e) throws IOException {
+		
+		
+	}
+	
 	@FXML protected void createCollection(MouseEvent e) throws IOException{
 		 //when the create collection button is clicked
 		hideDashboardWindows();
