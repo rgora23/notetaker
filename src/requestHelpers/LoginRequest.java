@@ -12,11 +12,11 @@ public class LoginRequest extends Request {
 	String userID;
 	Account account;
 	boolean authenticated;
-	
+
 	public LoginRequest(String username, String password) {
 		setUsername(username);
 		setPassword(password);
-		
+
 		// These variables must be validated against Account model
 		// through its controller
 		setAuthenticated(false);
@@ -47,11 +47,11 @@ public class LoginRequest extends Request {
 	public void setAuthenticated(boolean authenticated) {
 		this.authenticated = authenticated;
 	}
-	
+
 	public void setAccount(Account account) {
 		this.account = account;
 	}
-	
+
 	public Account getAccount() {
 		return this.account;
 	}
@@ -65,7 +65,3 @@ public class LoginRequest extends Request {
 	}
 
 }
-
-
-
-

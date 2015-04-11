@@ -7,13 +7,15 @@
 
 	fx:controller="viewControllers.EventController" prefHeight="150"
 	prefWidth="500" AnchorPane.leftAnchor="10" AnchorPane.topAnchor="120"
-	AnchorPane.bottomAnchor="10" AnchorPane.rightAnchor="330"
-	visible="false">
+	AnchorPane.bottomAnchor="10" AnchorPane.rightAnchor="330" visible="false">
 	<children>
-		<HTMLEditor id="note_HTMLEditor" prefHeight="150" prefWidth="500"
-			AnchorPane.leftAnchor="0" AnchorPane.topAnchor="0"
+		<HTMLEditor id="note_HTMLEditor" prefHeight="150"
+			prefWidth="500" AnchorPane.leftAnchor="0" AnchorPane.topAnchor="0"
 			AnchorPane.bottomAnchor="0" AnchorPane.rightAnchor="0" disable="true">
 		</HTMLEditor>
 	</children>
 </AnchorPane>
+
+
+
 

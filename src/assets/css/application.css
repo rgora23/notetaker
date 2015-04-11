@@ -1,5 +1,6 @@
 .root{
 	 -fx-background-image: url("../images/paperBackground.jpg");
+	 -fx-background-size: cover;
 }
 /*------------------------------>LABELS AND TEXT<---------------------------- */
 #username {
@@ -46,10 +47,12 @@
 /*---------------------> BUTTONS AND HOVERS <---------------------------- */
 
 #note_delete {          
-    -fx-background-image: url("../images/trashcan.jpg"); 
-    -fx-background-size:105% 105%;
+    /* -fx-background-image: url("../images/trashcan.jpg");  */
+    -fx-background-image: url("../images/icons/delete.png");
+    -fx-background-size: 85%;
+    -fx-background-color: transparent;
     -fx-background-repeat: no-repeat;
-    -fx-background-position:left;   
+    -fx-background-position:center;   
 }
 
 #collection_create {          
@@ -60,10 +63,11 @@
 }
 
 #collection_delete {          
-    -fx-background-image: url("../images/delete_collection.jpg"); 
-    -fx-background-size:105% 105%;
+    -fx-background-image: url("../images/delete_collection.jpg");
+    -fx-background-size: 95%;
+    -fx-background-color: transparent;
     -fx-background-repeat: no-repeat;
-    -fx-background-position:left;   
+    -fx-background-position:center;   
 }
 
 
@@ -76,10 +80,12 @@
 }
 
 #settings_button {          
-    -fx-background-image: url("../images/settings_button_2.jpg"); 
-    -fx-background-size:105% 105%;
+    /* -fx-background-image: url("../images/settings_button_2.jpg");-fx-alignment: */
+    -fx-background-image: url("../images/icons/settings.png"); 
+    -fx-background-size: 60% 85%;
+    -fx-background-color: transparent;
     -fx-background-repeat: no-repeat;
-    -fx-background-position:left;   
+    -fx-background-position: center;   
 }
 
 #settings_button:hover {
@@ -89,20 +95,23 @@
 
 #tags_button  {          
     -fx-background-image: url("../images/tagbutton2.jpg"); 
-    -fx-background-size:105% 105%;
+    -fx-background-size: 85%;
+    -fx-background-color: transparent;
     -fx-background-repeat: no-repeat;
-    -fx-background-position:left;   
+    -fx-background-position:center;
 }
 
 #tags_button:hover {
-	 -fx-effect:dropshadow( one-pass-box, rgba(255,255,255,0.5), 10,1,0,1);
+	 -fx-effect:dropshadow( one-pass-box, rgba(255,255,255,0.4), 4, 1, 0, 1);
 }
 
 #createNote_button {          
-    -fx-background-image: url("../images/new_note_button.jpg"); 
-    -fx-background-size:105% 105%;
+    /* -fx-background-image: url("../images/new_note_button.jpg");-fx-alignment: */ 
+    -fx-background-image: url("../images/icons/new_note.png");
+    -fx-background-size: 85%;
+    -fx-background-color: transparent;
     -fx-background-repeat: no-repeat;
-    -fx-background-position:left;   
+    -fx-background-position: 70% center;
 } 
 
 #createNote_button:hover {

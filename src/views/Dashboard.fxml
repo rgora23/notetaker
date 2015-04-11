@@ -17,17 +17,17 @@
 <?import javafx.scene.text.TextFlow?>
 
 <AnchorPane xmlns:fx="http://javafx.com/fxml/1" id="dashboard"
-	disable="true"   prefWidth="200.0" 
-	fx:controller="viewControllers.EventController"
-	 AnchorPane.leftAnchor="870.0"  AnchorPane.bottomAnchor="10.0"
+	disable="true" prefWidth="200.0" fx:controller="viewControllers.EventController"
+	AnchorPane.leftAnchor="870.0" AnchorPane.bottomAnchor="10.0"
 	AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="120.0">
 	<children>
 
 
-	<TextField prefWidth="330.0" prefHeight="30.0" id="search_box" editable="true" promptText="search text" 
-				AnchorPane.topAnchor="0.0" AnchorPane.rightAnchor="0.0"/>
+		<TextField prefWidth="330.0" prefHeight="30.0" id="search_box"
+			editable="true" promptText="search text" AnchorPane.topAnchor="0.0"
+			AnchorPane.rightAnchor="0.0" onKeyReleased="#searchTextChanged" />
 		<GridPane layoutX="55.0" layoutY="14.0" prefHeight="54.0"
-				prefWidth="330.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="30.0">
+			prefWidth="330.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="30.0">
 			<columnConstraints>
 				<ColumnConstraints />
 				<ColumnConstraints />
@@ -38,16 +38,15 @@
 				<RowConstraints />
 			</rowConstraints>
 			<children>
-				<Button id="notes_button" mnemonicParsing="false"
-					onMouseClicked="#noteButtonClicked" prefHeight="26.0" prefWidth="229.0"
-					text="Notes" GridPane.columnIndex="0" GridPane.rowIndex="0" />
-				<Button id="title_button" mnemonicParsing="false"
+				<Button id="title_search_button" mnemonicParsing="false"
 					onMouseClicked="#titleButtonClicked" prefHeight="26.0" prefWidth="229.0"
-					text="Title" GridPane.columnIndex="1" GridPane.rowIndex="0" />
-				<Button id="modified_button"
-					onMouseClicked="#modifiedButtonClicked" prefHeight="15.0"
-					prefWidth="229.0" text="MODIFIED" GridPane.columnIndex="0"
-					GridPane.rowIndex="1">
+					text="Title" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+				<Button id="tags_search_button" mnemonicParsing="false"
+					onMouseClicked="#noteButtonClicked" prefHeight="26.0" prefWidth="229.0"
+					text="Tags" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+				<Button id="modified_button" onMouseClicked="#modifiedButtonClicked"
+					prefHeight="15.0" prefWidth="229.0" text="MODIFIED"
+					GridPane.columnIndex="0" GridPane.rowIndex="1">
 					<font>
 						<Font size="9.0" />
 					</font>
@@ -63,8 +62,12 @@
 		</GridPane>
 
 		<ListView id="results_list" layoutX="74.0" layoutY="44.0"
-			prefWidth="330.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="72.0" AnchorPane.bottomAnchor="0" />
+			prefWidth="330.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="72.0"
+			AnchorPane.bottomAnchor="0" />
 
 	</children>
 </AnchorPane>
-					
+
+
+
+

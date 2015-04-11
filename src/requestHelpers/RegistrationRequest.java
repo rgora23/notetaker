@@ -1,12 +1,11 @@
 package requestHelpers;
 
-
 public class RegistrationRequest extends Request {
 
 	String username;
 	String password;
 	String confirmPassword;
-	
+
 	public RegistrationRequest(String username, String password, String confirm_password) {
 		this.username = username;
 		this.password = password;
@@ -36,10 +35,5 @@ public class RegistrationRequest extends Request {
 	public void setConfirmPassword(String confirmPassword) {
 		this.confirmPassword = confirmPassword;
 	}
-	
-	
+
 }
-
-
-
-
