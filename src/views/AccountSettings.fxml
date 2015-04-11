@@ -15,6 +15,8 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.text.TextFlow?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Text?>
 
 
 <Pane id="account_settings_pane" layoutX="325.0" layoutY="271.0" xmlns:fx="http://javafx.com/fxml/1"
@@ -24,9 +26,9 @@
 	fx:controller="viewControllers.EventController" visible="false">
 	<children>
 		<Label id="noteTaker_text" alignment="BOTTOM_CENTER"
-			blendMode="OVERLAY" contentDisplay="CENTER" textAlignment="CENTER" />
+			blendMode="OVERLAY" contentDisplay="CENTER" textAlignment="CENTER"/>
 		<GridPane alignment="TOP_CENTER" layoutX="30.0" layoutY="20.0"
-			prefHeight="363.0" prefWidth="292.0" vgap="15.0">
+			prefHeight="363.0" prefWidth="292.0" vgap="15.0" GridLinesVisible="true">
 			<columnConstraints>
 				<ColumnConstraints hgrow="SOMETIMES" minWidth="10.0"
 					prefWidth="100.0" />
@@ -57,15 +59,23 @@
 					GridPane.rowIndex="2" />
 				<RadioButton mnemonicParsing="false" text="setting"
 					GridPane.columnIndex="0" GridPane.rowIndex="3" />
-				<RadioButton mnemonicParsing="false" text="setting"
-					GridPane.columnIndex="0" GridPane.rowIndex="9" />
-				<RadioButton mnemonicParsing="false" text="setting"
-					GridPane.columnIndex="0" GridPane.rowIndex="10" />
-				<RadioButton mnemonicParsing="false" text="setting"
-					GridPane.columnIndex="0" GridPane.rowIndex="11" />
+				
+				<Text id="delete_account" GridPane.columnIndex="0" GridPane.rowIndex="10" 
+						 onMouseClicked="#confirmDeleteAccount" text="Delete Accounts" fill="A70000">
+						<cursor>
+						<Cursor fx:constant="HAND" />
+						</cursor>
+				</Text>
+			 
+				<PasswordField id="confirm_delete_account_password" editable="true" Visible="false" 
+							onAction="#deleteAccount" promptText="Enter Password" GridPane.columnIndex="0" 
+							GridPane.rowIndex="11" prefWidth="50" />
+				<Text id="confirm_delete_message" GridPane.columnIndex="0" GridPane.rowIndex="12" fill="A70000" 
+					  text="enter password to delete" Visible="false"></Text>
+				
 				<Label id="settings_text" Text="Set Awesomeness"
 					GridPane.columnIndex="0" GridPane.rowIndex="0" />
-				<Label id="settings_text" Text="Sort Style"
+				<Label id="settings_text" Text="Account Settings"
 					GridPane.columnIndex="0" GridPane.rowIndex="8" />
 			</children>
 		</GridPane>

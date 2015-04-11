@@ -45,6 +45,21 @@
 
 /*---------------------> BUTTONS AND HOVERS <---------------------------- */
 
+#note_delete {          
+    -fx-background-image: url("../images/trashcan.jpg"); 
+    -fx-background-size:105% 105%;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position:left;   
+}
+
+#collection_delete {          
+    -fx-background-image: url("../images/delete_collection.jpg"); 
+    -fx-background-size:105% 105%;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position:left;   
+}
+
+
 #modifiedbutton{
 	-fx-font-size: 12px;
     -fx-font-weight: bold;
