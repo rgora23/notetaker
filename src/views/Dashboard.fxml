@@ -15,6 +15,19 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.text.TextFlow?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.collections.FXCollections ?>
+<?import javafx.scene.control.RadioButton?>
+
+
+<?import java.util.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+
+
+
 
 <AnchorPane xmlns:fx="http://javafx.com/fxml/1" id="dashboard"
 	disable="true" prefWidth="200.0" fx:controller="viewControllers.EventController"
@@ -38,31 +51,42 @@
 				<RowConstraints />
 			</rowConstraints>
 			<children>
-				<Button id="title_search_button" mnemonicParsing="false"
-					onMouseClicked="#titleButtonClicked" prefHeight="26.0" prefWidth="229.0"
-					text="Title" GridPane.columnIndex="0" GridPane.rowIndex="0" />
-				<Button id="tags_search_button" mnemonicParsing="false"
-					onMouseClicked="#noteButtonClicked" prefHeight="26.0" prefWidth="229.0"
-					text="Tags" GridPane.columnIndex="1" GridPane.rowIndex="0" />
-				<Button id="modified_button" onMouseClicked="#modifiedButtonClicked"
-					prefHeight="15.0" prefWidth="229.0" text="MODIFIED"
-					GridPane.columnIndex="0" GridPane.rowIndex="1">
-					<font>
-						<Font size="9.0" />
-					</font>
-				</Button>
-				<Button id="date_button" onMouseClicked="#dateButtonClicked"
-					prefHeight="0.0" prefWidth="165.0" text="DATE"
-					GridPane.columnIndex="1" GridPane.rowIndex="1">
-					<font>
-						<Font size="9.0" />
-					</font>
-				</Button>
+				<fx:define>
+					<ToggleGroup fx:id="$searchType" />
+				</fx:define>
+
+
+				<fx:define>
+					<ToggleGroup fx:id="searchType" />
+				</fx:define>
+
+				<RadioButton mnemonicParsing="false" text="Title"
+					selected="true" toggleGroup="$searchType" prefHeight="30.0"
+					prefWidth="165" GridPane.rowIndex="0" GridPane.columnIndex="0"
+					GridPane.columnSpan="1" />
+				<RadioButton mnemonicParsing="false" text="Tags"
+					toggleGroup="$searchType" prefHeight="30.0" prefWidth="165"
+					GridPane.rowIndex="0" GridPane.columnIndex="1" GridPane.columnSpan="1" />
+
+
+
+				<ComboBox fx:id="note_collections" layoutX="0" layoutY="0"
+					GridPane.rowIndex="1" prefWidth="330" minWidth="330" prefHeight="40.0"
+					GridPane.columnSpan="2" promptText="Choose a note collection">
+					<items>
+						<FXCollections fx:factory="observableArrayList">
+							<String fx:value="All Collections" />
+						</FXCollections>
+					</items>
+					<value>
+						<String fx:value="All Collections" />
+					</value>
+				</ComboBox>
 			</children>
 		</GridPane>
 
 		<ListView id="results_list" layoutX="74.0" layoutY="44.0"
-			prefWidth="330.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="72.0"
+			prefWidth="330.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="84.0"
 			AnchorPane.bottomAnchor="0" />
 
 	</children>

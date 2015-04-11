@@ -41,10 +41,10 @@
 			BlendMode="OVERLAY" AnchorPane.topAnchor="0.0" text="#NoteTaker"></Label>
 
 		<Pane id="note_buttons" visible="false" layoutX="827.0" layoutY="100.0"
-			AnchorPane.topAnchor="52" AnchorPane.rightAnchor="370">
+			AnchorPane.topAnchor="60" AnchorPane.rightAnchor="30">
 			<children>
 				<GridPane prefHeight="142.0" prefWidth="44.0"
-					AnchorPane.rightAnchor="328.0" AnchorPane.topAnchor="150.0" hgap="4">
+					AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="150.0" hgap="4">
 					<!-- <columnConstraints> <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" 
 						prefWidth="159.0" /> </columnConstraints> -->
 					<rowConstraints>
