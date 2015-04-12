@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 import noteTaker.ErrorMessages;
 import noteTaker.PasswordSecurityFactory;
+import requestHelpers.ChangePasswordRequest;
 import requestHelpers.LoginRequest;
 import requestHelpers.RegistrationRequest;
 import csv.CSVReader;
@@ -180,6 +181,52 @@ public class Account extends Model {
 			}
 		}
 
+	}
+	
+	/**
+	 * The method that handles changing a password
+	 * 
+	 * This method is called when the user wishes to change his/her password. It handles errors created by the 
+	 * user when they enter incorrect information in to the password change form. It checks to see that all 
+	 * necessary fields in the password change form are filled, the new password and confirm new password are 
+	 * the same, and that the new password is not the old password. If any of these violations are detected, the 
+	 * array inside the request object is populated. If the errors array is empty, the method continues by
+	 * retrieving the user's current salt and uses that salt and the new password to create a new hash. It then
+	 * updates the user's hash field with the newly generated hash.
+	 * 
+	 * @param request The ChangePasswordRequest object that provides the information needed to change a password
+	 * 
+	 */
+	public static void changePassword(ChangePasswordRequest request){
+		CSVWriter accountTableWriter = constructWriter();
+		CSVReader accountTableReader = constructReader();
+
+		if (!request.getNewPassword().equals(request.getConfirmNewPassword())) {
+			request.getErrors().add(ErrorMessages.CHANGE_PASSWORD_MISMATCH);
+		}
+
+		if (request.getNewPassword().isEmpty()) {
+			request.getErrors().add(ErrorMessages.NEW_PASSWORD_FIELD_EMPTY);
+		}
+
+		if (request.getConfirmNewPassword().isEmpty()) {
+			request.getErrors().add(ErrorMessages.CONFIRM_NEW_PASSWORD_FIELD_EMPTY);
+		}
+
+		if (request.getOldPassword().equals(request.getNewPassword())) {
+			request.getErrors().add(ErrorMessages.PASSWORD_IN_USE);
+		}
+
+		if (request.getErrors().isEmpty()) {
+			CSVReader filteredReader = accountTableReader.where("id").is(request.getAccountId());
+			ArrayList<CSVRecord> matchingRecords = filteredReader.getTable();
+			CSVRecord userRecord = matchingRecords.get(0);
+			String recordSalt = userRecord.getValueAtField("salt");
+			
+			String newHash = PasswordSecurityFactory.getSHA1Hash(request.getNewPassword(), recordSalt);
+			accountTableWriter.append(request.getUsername(), newSalt, newHash);
+			accountTableWriter.write();
+		}
 	}
 
 	private static CSVWriter constructWriter() {
