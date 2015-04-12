@@ -46,6 +46,22 @@
 
 /*---------------------> BUTTONS AND HOVERS <---------------------------- */
 
+#note_create_button {
+-fx-background-radius: 10px;
+}
+
+#settings_save_button {
+-fx-background-radius: 10px;
+}
+
+#note_cancel_button {
+-fx-background-radius: 10px;
+}
+
+#logout_button {
+-fx-background-radius: 10px;
+}
+
 #note_delete {          
     /* -fx-background-image: url("../images/trashcan.jpg");  */
     -fx-background-image: url("../images/icons/delete.png");
@@ -135,6 +151,17 @@
 
 
 /* ---------------------->For all labels used to title forms<------------------------ */
+#account_settings_pane {
+	/*-fx-background-color: #6DAFFF; */
+	-fx-padding: 20px;
+	-fx-border-color: #888;
+	-fx-opacity: 0.9;
+	-fx-padding:10;
+	-fx-background-color: linear-gradient(to bottom right, #BCD8FD, #1880FC)
+} 
+
+
+
 #form_title {
 	-fx-font-size: 18px;
 	-fx-effect:dropshadow( gaussian, rgba(255,255,255,0.5), 0,0,0,1);
@@ -147,10 +174,11 @@
 }
 
 #create_note_form {
-	-fx-background-color: #ADBEC2;
+	-fx-background-color: #6DAFFF;
 	-fx-padding: 20px;
 	-fx-border-color: #888;
-	-fx-border-radius: 6px;	
+
+	-fx-padding:10;
 } 
 
 

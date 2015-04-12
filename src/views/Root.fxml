@@ -19,7 +19,7 @@
 <AnchorPane id="root" xmlns:fx="http://javafx.com/fxml/1"
 	fx:controller="viewControllers.EventController">
 	<children>
-		<fx:include fx:id="embeddedLoginPane" source="/views/LoginPane.fxml" />
+	    <fx:include fx:id="embeddedLoginPane" source="/views/LoginPane.fxml" />
 		<fx:include fx:id="embeddedRegistrationPane" source="/views/RegistrationPane.fxml" />
 		<fx:include fx:id="embeddedDashboard" source="/views/Dashboard.fxml" />
 		<fx:include fx:id="embeddedNoteCollectionForm" source="/views/NoteCollectionForm.fxml" />
@@ -43,10 +43,8 @@
 		<Pane id="note_buttons" visible="false" layoutX="827.0" layoutY="100.0"
 			AnchorPane.topAnchor="60" AnchorPane.rightAnchor="30">
 			<children>
-				<GridPane prefHeight="142.0" prefWidth="44.0"
+				<GridPane prefHeight="142.0" prefWidth="44.0" 
 					AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="150.0" hgap="4">
-					<!-- <columnConstraints> <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" 
-						prefWidth="159.0" /> </columnConstraints> -->
 					<rowConstraints>
 						<RowConstraints minHeight="10.0" prefHeight="30.0"
 							vgrow="SOMETIMES" />
