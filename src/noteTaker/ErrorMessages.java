@@ -7,6 +7,8 @@ package noteTaker;
  * in the requestHelpers package.
  * 
  * @author Brian Maxwell
+ * @author Tony Benny
+ * @author Matt Yeager
  * 
  */
 public class ErrorMessages {
@@ -26,6 +28,13 @@ public class ErrorMessages {
 	// Note creation error messages
 	public static final String NOTE_TITLE_TAKEN = "You already have a note with this same title.";
 	public static final String NOTE_COLLECTION_TITLE_TAKEN = "You already have a collection with this same title.";
+	
+	// Password change error messages
+	public static final String CHANGE_PASSWORD_MISMATCH = "The new password doesn't match the confirmation password";
+	public static final String PASSWORD_IN_USE = "The new password can't be the same as the old password";
+	public static final String OLD_PASSWORD_FIELD_EMPTY = "Old password field is empty";
+	public static final String NEW_PASSWORD_FIELD_EMPTY = "New password field is empty";
+	public static final String CONFIRM_NEW_PASSWORD_FIELD_EMPTY = "Confirm new password field is empty";
 }
 
 
