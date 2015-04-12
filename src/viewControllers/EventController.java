@@ -140,16 +140,26 @@ public class EventController extends ViewController {
 		AccountsController.logout();
 
 	}
-	
-	@FXML protected void confirmDeleteAccount(MouseEvent e) throws IOException{
+
+	@FXML
+	protected void confirmDeleteAccount(MouseEvent e) throws IOException {
 		// when "delete account" is clicked in settings window
-		 	getTextById("confirm_delete_message").setVisible(true); 
-			getPasswordFieldById("confirm_delete_account_password").setVisible(true); 
-			getTextById("change_password").setVisible(false); 
-			
-		
+		getTextById("confirm_delete_message").setVisible(true);
+		getPasswordFieldById("confirm_delete_account_password").setVisible(true);
+		getTextById("change_password").setVisible(false);
+
 	}
 
+	/**
+	 * The controller method that handles deleting notes
+	 * 
+	 * This method handles note deletion by
+	 * 
+	 * @param e
+	 *            The mouse event that is created when the delete note button is
+	 *            clicked
+	 * @throws IOException
+	 */
 	@FXML
 	protected void deleteNote(MouseEvent e) throws IOException {
 		try {
@@ -168,27 +178,29 @@ public class EventController extends ViewController {
 			exception.printStackTrace();
 		}
 	}
-	
-	@FXML protected void deleteCollection(MouseEvent e) throws IOException{
+
+	@FXML
+	protected void deleteCollection(MouseEvent e) throws IOException {
 		// when "delete collection" icon is clicked on dashboard
 	}
 
 	@FXML
 	protected void deleteAccount(Event e) throws IOException {
 		// code to delete account goes here
-		//  if password matches, remove account and do:
-		    //Logout()
-		//else: 
+		// if password matches, remove account and do:
+		// Logout()
+		// else:
 		getTextById("confirm_delete_message").setText("password does not match");
 	}
 
-	@FXML protected void confirmChangePassword(MouseEvent e) throws IOException {
-		
-		
+	@FXML
+	protected void confirmChangePassword(MouseEvent e) throws IOException {
+
 	}
-	
-	@FXML protected void createCollection(MouseEvent e) throws IOException{
-		 //when the create collection button is clicked
+
+	@FXML
+	protected void createCollection(MouseEvent e) throws IOException {
+		// when the create collection button is clicked
 		hideDashboardWindows();
 		Node settings = getNodeById("create_collection_pane");
 		settings.toFront();
@@ -196,12 +208,29 @@ public class EventController extends ViewController {
 
 	}
 
+	/**
+	 * This method handles the events that occur after the note collection
+	 * creation button is clicked.
+	 * 
+	 * @param e
+	 * @throws IOException
+	 */
 	@FXML
 	protected void collectionCreationAction(Event e) throws IOException {
 		// when the title is entered into the collection form and hit save
 
 	}
 
+	/**
+	 * This method handles the events that occur when a user is viewing the note
+	 * collection creation form and hits the cancel button. It hides the note
+	 * collection creation form.
+	 * 
+	 * @param e
+	 *            The mouse event that is created after the cancel button is
+	 *            clicked
+	 * @throws IOException
+	 */
 	@FXML
 	protected void collectionCancelAction(Event e) throws IOException {
 		getAnchorPaneById("create_collection_pane").setVisible(false);
@@ -244,6 +273,16 @@ public class EventController extends ViewController {
 		text.setText("searchn' tags!");
 	}
 
+	/**
+	 * This method handles the event that occurs after the settings button is
+	 * clicked. When the settings button is clicked, it hides the dashboard
+	 * windows and displays the form for changing settings
+	 * 
+	 * @param e
+	 *            The mouse event that is created when the settings button is
+	 *            clicked
+	 * @throws IOException
+	 */
 	@FXML
 	protected void settingsButtonClicked(MouseEvent e) throws IOException {
 		hideDashboardWindows();
@@ -252,6 +291,15 @@ public class EventController extends ViewController {
 		settings.setVisible(true);
 	}
 
+	/**
+	 * This method handles the event that occurs after the create account button
+	 * is clicked. It pulls up the account creation form.
+	 * 
+	 * @param e
+	 *            The mouse event that is created when the create account button
+	 *            is clicked
+	 * @throws IOException
+	 */
 	@FXML
 	protected void createAccountClicked(MouseEvent e) throws IOException {
 		getAnchorPaneById("create_account_pane").setVisible(true);
@@ -259,9 +307,19 @@ public class EventController extends ViewController {
 
 	@FXML
 	protected void tryAccount(MouseEvent e) throws IOException {
-		// What does this method do?
+
 	}
 
+	/**
+	 * This method handles the event that occurs after the cancel button is
+	 * clicked when the user is trying to create a new account. It hides the
+	 * dashboard windows and hides the account creation form.
+	 * 
+	 * @param e
+	 *            The mouse event that is created after the cancel button is
+	 *            clicked
+	 * @throws IOException
+	 */
 	@FXML
 	protected void cancelAccountButtonClicked(MouseEvent e) throws IOException {
 		hideDashboardWindows();
@@ -297,6 +355,11 @@ public class EventController extends ViewController {
 	// Helper Methods //
 	// //////////////////
 
+	/**
+	 * This method hides all panes associated with the dashboard. This includes
+	 * the account settings pane, note creation pane, text body, and collection
+	 * creation pane
+	 */
 	private void hideDashboardWindows() {
 		getNodeById("account_settings_pane").setVisible(false);
 		getAnchorPaneById("create_note_pane").setVisible(false);
@@ -305,12 +368,30 @@ public class EventController extends ViewController {
 
 	}
 
+	/**
+	 * View controller method that displays notes
+	 * 
+	 * This view controller takes no argument and by default displays all notes
+	 * belonging to an account on the side pane
+	 */
 	// With no argument populate results with all notes on account
 	private void populateNotesList() {
 		ArrayList<Note> notes = getSession().getAccount().getNotes();
 		populateNotesList(notes);
 	}
 
+	/**
+	 * View controller that displays selected notes
+	 * 
+	 * This view controller method allows an array list populated with notes to
+	 * be passed and displays those notes on the side panel. It checks to see if
+	 * the current list view is null or not. If the current list view is null,
+	 * it populates it with the notes provided in the passed parameter array
+	 * list. If the current list view is not null and contains notes, it deletes
+	 * the current list view and populates the list view with the new notes.
+	 * 
+	 * @param notes
+	 */
 	private void populateNotesList(ArrayList<Note> notes) {
 		AnchorPane parent = getAnchorPaneById("dashboard");
 
@@ -332,6 +413,9 @@ public class EventController extends ViewController {
 		addEventListenersToResultsList(resultsList, noteTitles);
 	}
 
+	/**
+	 * This method clears the search list view
+	 */
 	private void clearResultsList() {
 		AnchorPane parent = getAnchorPaneById("dashboard");
 		ListView<String> oldListView = getListViewById("results_list");
@@ -344,6 +428,12 @@ public class EventController extends ViewController {
 		addStyleToResultsList(resultsList);
 	}
 
+	/**
+	 * This method styles new ListView objects in the scene that get created
+	 * when the user performs a search and when the scene is initially loaded
+	 * 
+	 * @param resultsList
+	 */
 	private void addStyleToResultsList(ListView<String> resultsList) {
 		resultsList.setLayoutX(74.0);
 		resultsList.setLayoutY(44.0);
@@ -355,6 +445,13 @@ public class EventController extends ViewController {
 		AnchorPane.setBottomAnchor(resultsList, 0.0);
 	}
 
+	/**
+	 * This method handles the selection method when clicking in the results
+	 * list
+	 * 
+	 * @param resultsList
+	 * @param results
+	 */
 	private void addEventListenersToResultsList(final ListView<String> resultsList, ObservableList<String> results) {
 		resultsList.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			@Override
@@ -371,6 +468,17 @@ public class EventController extends ViewController {
 		});
 	}
 
+	/**
+	 * This method handles selecting an item after searching for it in the
+	 * results list
+	 * 
+	 * This method displays a note if it is not currently open and being edited.
+	 * It saves the note that is currently open and initializes a new note
+	 * interface with content from the newly selected note.
+	 * 
+	 * @param resultsList
+	 *            the ListView object the user has selected from
+	 */
 	private void handleResultSelectionEvent(ListView<String> resultsList) {
 		String item = resultsList.getSelectionModel().getSelectedItem();
 		Note selectedNote = Note.getNoteByTitle(item);
@@ -385,6 +493,15 @@ public class EventController extends ViewController {
 		}
 	}
 
+	/**
+	 * This method starts the interface for users of the program to type notes
+	 * 
+	 * When this method is called, any note interfaces opened before are reset
+	 * and all text on screen is deleted. The delete button for a note is also
+	 * disabled and a new HTMLEditor object is created.
+	 * 
+	 * @param note
+	 */
 	private void initializeNoteInterface(Note note) {
 		resetNoteInterface();
 		getSession().setEditingNote(true);
@@ -397,6 +514,10 @@ public class EventController extends ViewController {
 		populateNoteInterface(parentHTMLEditor);
 	}
 
+	/**
+	 * This controller method saves the current note being edited if it contains
+	 * content
+	 */
 	private void saveCurrentNote() {
 		Note currentNote = getSession().getCurrentNote();
 		if (currentNote != null) {
@@ -406,6 +527,10 @@ public class EventController extends ViewController {
 		}
 	}
 
+	/**
+	 * This method resets a note interface and deletes all text currently on
+	 * screen. It also disables the note deletion button.
+	 */
 	private void resetNoteInterface() {
 		HTMLEditor parentHTMLEditor = getHTMLEditorById("note_HTMLEditor");
 		parentHTMLEditor.setHtmlText("");
@@ -415,6 +540,21 @@ public class EventController extends ViewController {
 		getButtonById("note_delete").setDisable(true);
 	}
 
+	/**
+	 * This method populates a note editing interface with a note
+	 * 
+	 * This method populates a note interface by using the snippets found in a
+	 * note. It first intitializes an empty String variable. Then, it creates an
+	 * array list that holds all of the snippets associated with a notes. Once
+	 * this is done, it iterates through each snippet found in the array list
+	 * and adds the content of each snippet to the empty string that was
+	 * initialized earlier on in the method. Once the method is done iterating
+	 * through all the snippets, and HTMLEditor object method is used to
+	 * populate the interface with the snippet content.
+	 * 
+	 * @param parentHTMLEditor
+	 *            the HTMLEditor object that is used to edit text in the note
+	 */
 	private void populateNoteInterface(HTMLEditor parentHTMLEditor) {
 		try {
 			if (getSession().getCurrentNote() != null) {
