@@ -90,7 +90,7 @@
 					GridPane.halignment="CENTER" GridPane.rowIndex="6" /> 
 				
 			 <Button id="settings_save_button" layoutX="170.0" layoutY="260.0"
-					mnemonicParsing="false" onMouseClicked="#CancelSettingsButtonClicked"
+					mnemonicParsing="false" onMouseClicked="#cancelSettingsButtonClicked"
 					prefHeight="26.0" prefWidth="105.0" text="Cancel" GridPane.rowIndex="11" GridPane.columnIndex="0"/>
 			</children>
 		</GridPane>

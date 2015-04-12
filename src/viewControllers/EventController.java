@@ -8,24 +8,22 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
-import javafx.event.EventType;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.text.Text;
-import javafx.scene.text.TextFlow;
 import javafx.scene.web.HTMLEditor;
 import models.Note;
 import models.Snippet;
-import noteTaker.Session;
 import controllers.AccountsController;
 import controllers.NotesController;
 import controllers.SnippetsController;
+import controllers.TagsController;
 import exceptions.DeleteNullNoteException;
 import exceptions.NoSessionNoteSetException;
 
@@ -37,6 +35,22 @@ public class EventController extends ViewController {
 		accountsController = new AccountsController();
 	}
 
+	/**
+	 * Event controller method for when the user is trying to log in
+	 * 
+	 * This event controller is called when the user tries to log in. It pulls
+	 * the text entered by the user in the username text box and password text
+	 * box and passes it in to the login method provided by the
+	 * AccountsController class. The login method returns a string array that
+	 * contains any errors that occured while processing the users credentials.
+	 * If the array is empty, the program logs the user in and greets the user
+	 * with a greeting and makes hidden elements of the UI visible. If the array
+	 * is not empty, login failure text is set to visible and displays the error
+	 * created by the user.
+	 * 
+	 * @param e
+	 * @throws IOException
+	 */
 	@FXML
 	protected void tryLogin(ActionEvent e) throws IOException {
 		// Get username and password input values to give to controller
@@ -56,6 +70,7 @@ public class EventController extends ViewController {
 			getPaneById("note_buttons").setVisible(true);
 			getAnchorPaneById("dashboard").setDisable(false);
 			getButtonById("note_delete").setVisible(true);
+			getButtonById("save_note_button").setVisible(true);
 			getButtonById("collection_delete").setVisible(true);
 			getButtonById("collection_create").setVisible(true);
 			// Hide registration and login buttons
@@ -73,7 +88,23 @@ public class EventController extends ViewController {
 
 	}
 
-	// check for verification of username and password
+	/**
+	 * Event controller method for when the user is trying to register
+	 * 
+	 * This event controller is called when the user is trying to create an
+	 * account with noteTaker. It first checks if whether or not the user has
+	 * properly inputted information in the correct format on the registration
+	 * form. It does this by using the register method found in the
+	 * accountsController class. If the user leaves the user name, password, or
+	 * confirm password field empty, the register method will return a String
+	 * array containing the error that occured. If this array is empty, a
+	 * message stating account creation was successful is displayed and the
+	 * create_account_pane becomes invisible. If the array is not empty, the
+	 * method iterates through the array and displays each error.
+	 * 
+	 * @param e
+	 * @throws IOException
+	 */
 	@FXML
 	protected void tryRegistration(Event e) throws IOException {
 		String username = getTextFieldById("new_username").getText();
@@ -96,21 +127,52 @@ public class EventController extends ViewController {
 		}
 	}
 
-	// create a new note
-
+	/**
+	 * Event controller for note creation
+	 * 
+	 * This method is called when the user wishes to create a note. It grabs the
+	 * String inputted by the user in the note title box and passes it as a
+	 * parameter in to the create method provided by the NotesController class.
+	 * The create method returns an array containing any errors that are
+	 * produced by the title String provided by the user and the returned array
+	 * is stored in a local variable. The error that is most likely to occur is
+	 * if the user entered a title that matches a note already belonging to the
+	 * user. If the errors array is empty, it is assumed the title String is
+	 * unique and valid as a note name. If this is true the user note list is
+	 * populated with the new note and the dashboard windows are hidden. If this
+	 * is not true, an error message is displayed.
+	 * 
+	 * @param e
+	 * @throws IOException
+	 */
 	@FXML
 	protected void noteCreationAction(Event e) throws IOException {
-		String noteTitle = getTextFieldById("note_title_input").getText();
+		TextField noteTitleInput = getTextFieldById("note_title_input");
+		String noteTitle = noteTitleInput.getText();
 		String[] errors = NotesController.create(noteTitle);
 
 		if (errors.length == 0) {
 			hideDashboardWindows();
+			noteTitleInput.setText("");
 			populateNotesList();
 		} else {
 			System.out.println(errors[0]);
 		}
 	}
 
+	/**
+	 * Event controller for logging out
+	 * 
+	 * This method is called when the user clicks the log out button. It ensures
+	 * the various panes and buttons that are only viewable by a logged in user
+	 * become invisible and that the results list and note interface are
+	 * cleared/reset. It does this throgh the use of helper methods. It also
+	 * ensures the user is logged out by using the logout method found in the
+	 * AccountsController class.
+	 * 
+	 * @param e
+	 * @throws IOException
+	 */
 	@FXML
 	protected void logoutButtonClicked(MouseEvent e) throws IOException {
 
@@ -123,6 +185,7 @@ public class EventController extends ViewController {
 		getAnchorPaneById("note_edit_pane").setVisible(false);
 		getAnchorPaneById("dashboard").setDisable(true);
 		getButtonById("note_delete").setVisible(false);
+		getButtonById("save_note_button").setVisible(false);
 		getButtonById("collection_delete").setVisible(false);
 		getButtonById("collection_create").setVisible(false);
 		// Make login and registration buttons visible again
@@ -141,6 +204,18 @@ public class EventController extends ViewController {
 
 	}
 
+	/**
+	 * Event controller method for confirming account deletion
+	 * 
+	 * This method is called after the user has clicked the delete account
+	 * button from the account settings page. It asks the user if he/she is okay
+	 * with proceeding with account deletion and makes the change password
+	 * button text invisible as well. This method is called after the
+	 * deleteAccount event controller method is called
+	 * 
+	 * @param e
+	 * @throws IOException
+	 */
 	@FXML
 	protected void confirmDeleteAccount(MouseEvent e) throws IOException {
 		// when "delete account" is clicked in settings window
@@ -151,13 +226,14 @@ public class EventController extends ViewController {
 	}
 
 	/**
-	 * The controller method that handles deleting notes
+	 * Event controller for note deletion
 	 * 
-	 * This method handles note deletion by
+	 * This method is called when the user wishes to delete a note. It checks to
+	 * make sure that a note is currently selected and calls the delete static
+	 * method found in the NotesController class. If a note is not selected, a
+	 * DeleteNullNoteException is raised and an error message is displayed
 	 * 
 	 * @param e
-	 *            The mouse event that is created when the delete note button is
-	 *            clicked
 	 * @throws IOException
 	 */
 	@FXML
@@ -165,11 +241,11 @@ public class EventController extends ViewController {
 		try {
 			Note currentNote = getSession().getCurrentNote();
 			if (currentNote != null) {
-				NotesController.delete(getSession().getCurrentNote());
+				NotesController.delete(currentNote);
 				resetNoteInterface();
 
 				// Trigger the search on the input so that the results
-				// are updates.
+				// are updated.
 				searchTextChanged();
 			} else {
 				throw new DeleteNullNoteException("Can't find the note to delete");
@@ -263,6 +339,11 @@ public class EventController extends ViewController {
 	protected void dateButtonClicked(MouseEvent e) throws IOException {
 		getLabelById("noteTaker_text").setText("..YES");
 	}
+	
+	@FXML
+	protected void saveNoteButtonClicked(MouseEvent e) throws IOException {
+		saveCurrentNote();
+	}
 
 	@FXML
 	protected void tagsButtonClicked(MouseEvent e) throws IOException {
@@ -327,7 +408,7 @@ public class EventController extends ViewController {
 	}
 
 	@FXML
-	protected void CancelSettingsButtonClicked(MouseEvent e) throws IOException {
+	protected void cancelSettingsButtonClicked(MouseEvent e) throws IOException {
 		hideDashboardWindows();
 	}
 
@@ -336,35 +417,40 @@ public class EventController extends ViewController {
 		hideDashboardWindows();
 	}
 
-	@FXML protected void changePassword(Event e) throws IOException{
-	    hideDashboardWindows();	
+	@FXML
+	protected void changePassword(Event e) throws IOException {
+		hideDashboardWindows();
 	}
-	
-	@FXML protected void ChangePasswordClicked(MouseEvent e) throws IOException {
-		  getTextFieldById("current_password").setVisible(true);
-		  getTextFieldById("new_password_settings").setVisible(true); 
-		  getTextFieldById("confirm_new_password").setVisible(true); 
+
+	@FXML
+	protected void ChangePasswordClicked(MouseEvent e) throws IOException {
+		getTextFieldById("current_password").setVisible(true);
+		getTextFieldById("new_password_settings").setVisible(true);
+		getTextFieldById("confirm_new_password").setVisible(true);
 	}
-	
-	
+
 	@FXML
 	protected void searchTextChanged() {
 		TextField searchInput = getTextFieldById("search_box");
 		String query = searchInput.getText();
 
-		if (getSession().getSearchMode() == Session.TITLE_SEARCH_MODE) {
+		RadioButton titleSearchButton = getRadioButtonById("title_search_button");
+		RadioButton tagSearchButton = getRadioButtonById("tag_search_button");
+
+		if ( query.isEmpty() || titleSearchButton.isSelected() ) {
 			NotesController.search(query);
 			ArrayList<Note> notes = NotesController.search(query);
 			populateNotesList(notes);
-		} else if (getSession().getSearchMode() == Session.TAG_SEARCH_MODE) {
-
+		} 
+		else if ( tagSearchButton.isSelected() ) {
+			TagsController.search(query);
 		}
 
 	}
 
-	// //////////////////
+	////////////////////
 	// Helper Methods //
-	// //////////////////
+	////////////////////
 
 	/**
 	 * This method hides all panes associated with the dashboard. This includes
@@ -471,7 +557,7 @@ public class EventController extends ViewController {
 			}
 		});
 
-		resultsList.setOnKeyPressed(new EventHandler<KeyEvent>() {
+		resultsList.setOnKeyReleased(new EventHandler<KeyEvent>() {
 			@Override
 			public void handle(KeyEvent event) {
 				handleResultSelectionEvent(resultsList);
@@ -518,9 +604,11 @@ public class EventController extends ViewController {
 		getSession().setEditingNote(true);
 
 		getButtonById("note_delete").setDisable(false);
+		getButtonById("save_note_button").setDisable(false);
 		HTMLEditor parentHTMLEditor = getHTMLEditorById("note_HTMLEditor");
 		parentHTMLEditor.setDisable(false);
 		parentHTMLEditor.setOpacity(1);
+		
 
 		populateNoteInterface(parentHTMLEditor);
 	}
@@ -549,6 +637,7 @@ public class EventController extends ViewController {
 		parentHTMLEditor.setOpacity(0.8);
 		// disable the delete note button
 		getButtonById("note_delete").setDisable(true);
+		getButtonById("save_note_button").setDisable(true);
 	}
 
 	/**
@@ -592,3 +681,7 @@ public class EventController extends ViewController {
 	}
 
 }
+
+
+
+

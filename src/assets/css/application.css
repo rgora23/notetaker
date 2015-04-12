@@ -134,6 +134,18 @@
 	 -fx-effect:dropshadow( one-pass-box, rgba(255,255,255,0.5), 10,1,0,1);
 }
 
+#save_note_button {
+	-fx-background-image: url("../images/icons/save.png");
+    -fx-background-size: 85%;
+    -fx-background-color: transparent;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: 70% center;
+}
+
+#save_note_button:hover {
+	-fx-effect:dropshadow( one-pass-box, rgba(255,255,255,0.5), 10,1,0,1);
+}
+
 
 #datebutton{
 	-fx-font-size: 9px;
@@ -214,6 +226,8 @@
 	
 }
 
-
+.radio_button {
+	-fx-padding: 0px 10px;
+}
 
 

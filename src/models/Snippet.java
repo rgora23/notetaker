@@ -13,6 +13,7 @@ public class Snippet {
 	ArrayList<Tag> tags;
 	String id;
 	String content;
+	String note_id;
 	int order;
 
 	static String tablePath = "database/snippets_table";
@@ -46,8 +47,9 @@ public class Snippet {
 	 *            the CSVRecord object to be used as a construction parameter
 	 */
 	public Snippet(CSVRecord record) {
-		tags = new ArrayList<Tag>();
+		this.tags = new ArrayList<Tag>();
 		this.id = record.getId();
+		this.note_id = record.getValueAtField("note_id");
 		this.content = record.getValueAtField("content");
 		String orderString = record.getValueAtField("order");
 		int orderInt = 0;
@@ -67,15 +69,16 @@ public class Snippet {
 	 * object holds the id of the note the snippets belong to, the content of
 	 * the snippets, and the order of the snippets. The order of the snippets
 	 * provides the structure of the body of the note object and ensures the
-	 * information in the note is presented in a chronological order. The method
-	 * also creates a CSVWriter object and makes use of the getNextId method
-	 * found in the CSVWriter class to determine the ids of all the snippets.
-	 * The final step of the snippet creation process is to account for the tags
-	 * associated with the snippets. The method relies on help from methods
-	 * found in the Tag class to accomplish this task. the createTagsForSnippet
-	 * method parses through the content body of the snippet and searches for
-	 * strings that are prefixed with a hash(this is the syntax of a snippet).
-	 * If tags are found, the tags_table is populated with the found snippets.
+	 * information in the note is presented in the same order that it wsa input.
+	 * The method also creates a CSVWriter object and makes use of the getNextId
+	 * method found in the CSVWriter class to determine the ids of all the
+	 * snippets. The final step of the snippet creation process is to account
+	 * for the tags associated with the snippets. The method relies on help from
+	 * methods found in the Tag class to accomplish this task. the
+	 * createTagsForSnippet method parses through the content body of the
+	 * snippet and searches for strings that are prefixed with a hash(this is
+	 * the syntax of a snippet). If tags are found, the tags_table is populated
+	 * with the found snippets.
 	 * 
 	 * @param request
 	 *            the SnippetsCreationRequest object that holds all the data
@@ -154,6 +157,13 @@ public class Snippet {
 
 		// Remove all associated records in the tags_snippets_table
 		TaggedSnippet.destroyBySnippetIds(snippetIds);
+	}
+
+	public static Snippet getSnippetById(String snippetId) {
+		CSVReader reader = constructReader();
+		CSVRecord snippetRecord = reader.getRecordById(snippetId);
+		Snippet snippet = new Snippet(snippetRecord);
+		return snippet;
 	}
 
 	private static CSVWriter constructWriter() {
