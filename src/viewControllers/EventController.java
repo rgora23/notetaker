@@ -182,11 +182,6 @@ public class EventController extends ViewController {
 		getTextById("confirm_delete_message").setText("password does not match");
 	}
 
-	@FXML protected void confirmChangePassword(MouseEvent e) throws IOException {
-		
-		
-	}
-	
 	@FXML protected void createCollection(MouseEvent e) throws IOException{
 		 //when the create collection button is clicked
 		hideDashboardWindows();
@@ -269,7 +264,7 @@ public class EventController extends ViewController {
 	}
 
 	@FXML
-	protected void saveSettingsButtonClicked(MouseEvent e) throws IOException {
+	protected void CancelSettingsButtonClicked(MouseEvent e) throws IOException {
 		hideDashboardWindows();
 	}
 
@@ -278,6 +273,17 @@ public class EventController extends ViewController {
 		hideDashboardWindows();
 	}
 
+	@FXML protected void changePassword(Event e) throws IOException{
+	    hideDashboardWindows();	
+	}
+	
+	@FXML protected void ChangePasswordClicked(MouseEvent e) throws IOException {
+		  getTextFieldById("current_password").setVisible(true);
+		  getTextFieldById("new_password_settings").setVisible(true); 
+		  getTextFieldById("confirm_new_password").setVisible(true); 
+	}
+	
+	
 	@FXML
 	protected void searchTextChanged() {
 		TextField searchInput = getTextFieldById("search_box");

@@ -20,15 +20,15 @@
 
 
 <Pane id="account_settings_pane" layoutX="325.0" layoutY="271.0"
-	xmlns:fx="http://javafx.com/fxml/1" style="-fx-background-color: #ADBEC2 ; -fx-border-color: grey;"
-	AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="200.0"
-	AnchorPane.rightAnchor="500.0" AnchorPane.topAnchor="150.0"
-	fx:controller="viewControllers.EventController" visible="false">
+	xmlns:fx="http://javafx.com/fxml/1" 
+	AnchorPane.bottomAnchor="200.0" AnchorPane.leftAnchor="300.0"
+	AnchorPane.rightAnchor="600.0" AnchorPane.topAnchor="250.0"
+	fx:controller="viewControllers.EventController" visible="false" >
 	<children>
 		<Label id="noteTaker_text" alignment="BOTTOM_CENTER" blendMode="OVERLAY"
 			contentDisplay="CENTER" textAlignment="CENTER" />
 		<GridPane alignment="TOP_CENTER" layoutX="30.0" layoutY="20.0"
-			prefHeight="363.0" prefWidth="292.0" vgap="8.0" GridLinesVisible="true">
+			prefHeight="363.0" prefWidth="292.0" vgap="8.0" GridLinesVisible="false">
 			<columnConstraints>
 				<ColumnConstraints hgrow="SOMETIMES" minWidth="10.0"
 					prefWidth="100.0" />
@@ -38,7 +38,7 @@
 				<RowConstraints />
 				<RowConstraints />
 				<RowConstraints />
-				<RowConstraints maxHeight="18.0" minHeight="0.0"
+		<!--		<RowConstraints maxHeight="18.0" minHeight="0.0"
 					prefHeight="0.0" />
 				<RowConstraints maxHeight="18.0" minHeight="0.0"
 					prefHeight="18.0" />
@@ -49,7 +49,7 @@
 					prefHeight="0.0" />
 				<RowConstraints />
 				<RowConstraints />
-				<RowConstraints />
+				<RowConstraints /> -->
 			</rowConstraints>
 			<children>
 			
@@ -68,20 +68,33 @@
 							GridPane.rowIndex="2" prefWidth="50" />
 							
 				<Text id="confirm_delete_message" GridPane.columnIndex="0" GridPane.rowIndex="3" 
-					  text="enter password to delete" Visible="false"></Text>
+					  text=":enter password to delete" Visible="false"></Text>
 					  
 			 <Text id="change_password" text="Change Password" visible="true" fill="A70000"
-					GridPane.columnIndex="0" GridPane.rowIndex="2" onMouseClicked="#confirmChangePassword">
-					<cursor>
+					GridPane.columnIndex="0" GridPane.rowIndex="2" onMouseClicked="#ChangePasswordClicked">
+						<cursor>
 						<Cursor fx:constant="HAND" />
 						</cursor>
-				</Text> 
+			</Text> 
+						
+			<TextField id="current_password" visible="false"
+				    GridPane.columnIndex="0" promptText="password"
+					GridPane.halignment="CENTER" GridPane.rowIndex="4" /> 
+								
+			<TextField id="new_password_settings" visible="false"
+					GridPane.columnIndex="0" promptText="New password"
+					GridPane.halignment="CENTER" GridPane.rowIndex="5" /> 
+			
+			<TextField id="confirm_new_password" onAction="#changePassword" visible="false"
+					GridPane.columnIndex="0" promptText="Confirm new Password"
+					GridPane.halignment="CENTER" GridPane.rowIndex="6" /> 
 				
+			 <Button id="settings_save_button" layoutX="170.0" layoutY="260.0"
+					mnemonicParsing="false" onMouseClicked="#CancelSettingsButtonClicked"
+					prefHeight="26.0" prefWidth="105.0" text="Cancel" GridPane.rowIndex="11" GridPane.columnIndex="0"/>
 			</children>
 		</GridPane>
-		<Button id="settings_save_button" layoutX="370.0" layoutY="360.0"
-			mnemonicParsing="false" onMouseClicked="#saveSettingsButtonClicked"
-			prefHeight="26.0" prefWidth="105.0" text="SAVE" />
+		
 	</children>
 </Pane>
 
