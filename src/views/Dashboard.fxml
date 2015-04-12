@@ -39,10 +39,10 @@
 		<TextField prefWidth="330.0" prefHeight="30.0" id="search_box"
 			editable="true" promptText="search text" AnchorPane.topAnchor="0.0"
 			AnchorPane.rightAnchor="0.0" onKeyReleased="#searchTextChanged" />
-		<GridPane layoutX="55.0" layoutY="14.0" prefHeight="54.0"
-			prefWidth="330.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="30.0">
+		<GridPane layoutX="55.0" layoutY="14.0" prefHeight="54.0" 
+			prefWidth="330.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="40.0">
 			<columnConstraints>
-				<ColumnConstraints />
+				<ColumnConstraints prefWidth="100"/>
 				<ColumnConstraints />
 			</columnConstraints>
 			<rowConstraints>
@@ -59,18 +59,19 @@
 				<fx:define>
 					<ToggleGroup fx:id="searchType" />
 				</fx:define>
+				<RadioButton mnemonicParsing="false" text="Tags"
+					toggleGroup="$searchType" prefHeight="30.0" prefWidth="165"
+					GridPane.rowIndex="0" GridPane.columnIndex="1" />
 
 				<RadioButton mnemonicParsing="false" text="Title"
 					selected="true" toggleGroup="$searchType" prefHeight="30.0"
 					prefWidth="165" GridPane.rowIndex="0" GridPane.columnIndex="0"
 					GridPane.columnSpan="1" />
-				<RadioButton mnemonicParsing="false" text="Tags"
-					toggleGroup="$searchType" prefHeight="30.0" prefWidth="165"
-					GridPane.rowIndex="0" GridPane.columnIndex="1" GridPane.columnSpan="1" />
+				
 
 
 
-				<ComboBox fx:id="note_collections" layoutX="0" layoutY="0"
+	<!--  			<ComboBox fx:id="note_collections" layoutX="0" layoutY="0"
 					GridPane.rowIndex="1" prefWidth="330" minWidth="330" prefHeight="40.0"
 					GridPane.columnSpan="2" promptText="Choose a note collection">
 					<items>
@@ -81,7 +82,7 @@
 					<value>
 						<String fx:value="All Collections" />
 					</value>
-				</ComboBox>
+				</ComboBox>  -->
 			</children>
 		</GridPane>
 
