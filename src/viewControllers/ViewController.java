@@ -10,6 +10,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.PasswordField;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
@@ -80,6 +81,10 @@ public abstract class ViewController implements Initializable {
 	protected ListView<String> getListViewById(String id) {
 		return ((ListView<String>) getNodeById(id));
 	}
+	
+	protected RadioButton getRadioButtonById(String id) {
+		return ((RadioButton) getNodeById(id));
+	}
 
 	protected TextFlow getTextFlowById(String id) {
 		return ((TextFlow) getNodeById(id));
@@ -90,3 +95,7 @@ public abstract class ViewController implements Initializable {
 	}
 
 }
+
+
+
+

@@ -26,38 +26,61 @@ public class SnippetsController extends Controller {
 		content = content.replaceAll("<p><br></p>", "");
 
 		if (content.length() > 0) {
-			System.out.println(content);
-
-			// This is the regex used to split the content into snippets
-			// When putting the snippets back together, must join them with the
-			// following string:
-			// "<p><font><br></font></p>" which will put a break between them in
-			// the HTML editor.
-			String regex = "<p><font( face=\"[a-zA-Z ]*\")?><br></font></p>";
-			String snippetContents[] = content.split(regex);
-
 			ArrayList<Snippet> snippets = new ArrayList<Snippet>();
-
-			for (int i = 0; i < snippetContents.length; i++) {
-				String c = snippetContents[i];
-				if (c.equals(""))
-					continue;
-
-				Snippet thisSnippet = new Snippet(c, i);
-				for (String tag : getTagsFromContent(c)) {
-					thisSnippet.addTag(tag);
+			
+			// Use <br> tags as the delimiter for the snippets
+			String[] snippetTexts = content.split("<br>");
+			
+			for (int i = 0; i < snippetTexts.length; i++) {
+				String c = snippetTexts[i];
+				if ( c.length() > 0 ) {
+					
+					// remove trailing closed HTML tags
+					while (c.matches("^</.+?>.*")) {
+						c = c.replaceAll("^</.+?>", "");						
+					}
+					
+					// remove trailing open HTML tags
+					while (c.matches(".*<[^/><]+>$")) {
+						c = c.replaceAll("<[^/><]+>$", "");
+					}
+					Snippet thisSnippet = new Snippet(c, i);
+					
+					ArrayList<String> tagTexts = getTagsFromContent(c);
+					
+					for (String tag : tagTexts) {
+						thisSnippet.addTag(tag);
+						System.out.println(tag);
+					}
+					
+					snippets.add(thisSnippet);
 				}
-
-				snippets.add(thisSnippet);
 			}
+			
 
-			SnippetsCreationRequest request =
-					new SnippetsCreationRequest(Session.getInstance().getCurrentNote(), snippets);
+			
+			Note currentNote = getSession().getCurrentNote();
+			SnippetsCreationRequest request = new SnippetsCreationRequest(currentNote, snippets);
 			Snippet.createSnippetsForNote(request);
-		} else {
+		} 
+		else {
 			// System.out.println("No content to write!");
 		}
 
+		
+	}
+
+	private static ArrayList<String> getPTagsFromContent(String content) {
+		String regex = "<p>(.*?)<\\/p>";
+		Pattern snippetPattern = Pattern.compile(regex);
+		Matcher patternMatcher = snippetPattern.matcher(content);
+		ArrayList<String> matches = new ArrayList<String>();
+		while (patternMatcher.find()) {
+			String match = patternMatcher.group();
+			match = match.replaceAll("#", "");
+			matches.add(match);
+		}
+		return matches;
 	}
 
 	private static ArrayList<String> getTagsFromContent(String content) {
@@ -74,3 +97,7 @@ public class SnippetsController extends Controller {
 	}
 
 }
+
+
+
+

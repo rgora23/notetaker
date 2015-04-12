@@ -10,3 +10,7 @@ public class InvalidSearchModeSetException extends Exception {
 	}
 
 }
+
+
+
+

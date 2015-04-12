@@ -8,3 +8,7 @@ public class DeleteNullNoteException extends Exception {
 		super(message);
 	}
 }
+
+
+
+
