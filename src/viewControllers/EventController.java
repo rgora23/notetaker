@@ -459,9 +459,9 @@ public class EventController extends ViewController {
 
 	@FXML
 	protected void ChangePasswordClicked(MouseEvent e) throws IOException {
-		getTextFieldById("current_password").setVisible(true);
-		getTextFieldById("new_password_settings").setVisible(true);
-		getTextFieldById("confirm_new_password").setVisible(true);
+		getPasswordFieldById("current_password").setVisible(true);
+		getPasswordFieldById("new_password_settings").setVisible(true);
+		getPasswordFieldById("confirm_new_password").setVisible(true);
 	}
 
 	@FXML
@@ -691,7 +691,8 @@ public class EventController extends ViewController {
 	private void initializeNoteInterface(Note note) {
 		resetNoteInterface();
 		getSession().setEditingNote(true);
-
+		String title = getSession().getCurrentNote().getTitle();
+		getLabelById("NOTETAKER_text").setText(title);
 		getButtonById("note_delete").setDisable(false);
 		getButtonById("save_note_button").setDisable(false);
 		HTMLEditor parentHTMLEditor = getHTMLEditorById("note_HTMLEditor");
@@ -713,6 +714,8 @@ public class EventController extends ViewController {
 			String content = parentHTMLEditor.getHtmlText();
 			SnippetsController.saveNote(currentNote, content);
 		}
+		// Update the results list by triggering the searchTextChange event
+		searchTextChanged();
 	}
 
 	/**
@@ -724,6 +727,8 @@ public class EventController extends ViewController {
 		parentHTMLEditor.setHtmlText("");
 		parentHTMLEditor.setDisable(true);
 		parentHTMLEditor.setOpacity(0.8);
+		
+		getLabelById("NOTETAKER_text").setText("#NoteTaker");
 		// disable the delete note button
 		getButtonById("note_delete").setDisable(true);
 		getButtonById("save_note_button").setDisable(true);

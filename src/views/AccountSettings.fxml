@@ -77,15 +77,15 @@
 						</cursor>
 			</Text> 
 						
-			<TextField id="current_password" visible="false"
+			<PasswordField id="current_password" visible="false"
 				    GridPane.columnIndex="0" promptText="password"
 					GridPane.halignment="CENTER" GridPane.rowIndex="4" /> 
 								
-			<TextField id="new_password_settings" visible="false"
+			<PasswordField id="new_password_settings" visible="false"
 					GridPane.columnIndex="0" promptText="New password"
 					GridPane.halignment="CENTER" GridPane.rowIndex="5" /> 
 			
-			<TextField id="confirm_new_password" onAction="#changePassword" visible="false"
+			<PasswordField id="confirm_new_password" onAction="#changePassword" visible="false"
 					GridPane.columnIndex="0" promptText="Confirm new Password"
 					GridPane.halignment="CENTER" GridPane.rowIndex="6" /> 
 				
