@@ -2,6 +2,8 @@ package models;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import requestHelpers.SnippetsCreationRequest;
 import csv.CSVReader;
@@ -13,10 +15,11 @@ public class Snippet {
 	ArrayList<Tag> tags;
 	String id;
 	String content;
-	String note_id;
+	String noteId;
+	Note note;
 	int order;
 
-	static String tablePath = "database/snippets_table";
+	static String tableName = "snippets_table";
 	static String[] tableHeaders = { "id", "note_id", "content", "order" };
 
 	/**
@@ -49,7 +52,8 @@ public class Snippet {
 	public Snippet(CSVRecord record) {
 		this.tags = new ArrayList<Tag>();
 		this.id = record.getId();
-		this.note_id = record.getValueAtField("note_id");
+		this.noteId = record.getValueAtField("note_id");
+//		this.note = Note.getNoteById(noteId);
 		this.content = record.getValueAtField("content");
 		String orderString = record.getValueAtField("order");
 		int orderInt = 0;
@@ -59,6 +63,25 @@ public class Snippet {
 			e.printStackTrace();
 		}
 		this.order = orderInt;
+	}
+	
+	public String getPlainText() {
+		String regex = "(?<=>)[^<]+";
+		Pattern pattern = Pattern.compile(regex);
+		Matcher matcher = pattern.matcher(this.content); 
+    	matcher.find();
+    	String match = matcher.group();
+    	Note associatedNote = getAssociatedNote();
+    	String noteTitle = associatedNote.getTitle().toUpperCase();
+    	if (match.length() > 22) match = match.substring(0, 19) + "...";
+    	if (noteTitle.length() > 22) noteTitle = noteTitle.substring(0, 19) + "...";
+    	match = match + " - (" + noteTitle + ")";
+		return match;
+	}
+	
+	public Note getAssociatedNote() {
+		Note associatedNote = Note.getNoteById(this.noteId);
+		return associatedNote;
 	}
 
 	/**
@@ -158,7 +181,7 @@ public class Snippet {
 		// Remove all associated records in the tags_snippets_table
 		TaggedSnippet.destroyBySnippetIds(snippetIds);
 	}
-
+	
 	public static Snippet getSnippetById(String snippetId) {
 		CSVReader reader = constructReader();
 		CSVRecord snippetRecord = reader.getRecordById(snippetId);
@@ -167,11 +190,11 @@ public class Snippet {
 	}
 
 	private static CSVWriter constructWriter() {
-		return Model.constructWriter(tablePath, tableHeaders);
+		return Model.constructWriter(tableName, tableHeaders);
 	}
 
 	private static CSVReader constructReader() {
-		return Model.constructReader(tablePath, tableHeaders);
+		return Model.constructReader(tableName, tableHeaders);
 	}
 
 	public String getContent() {
@@ -194,5 +217,11 @@ public class Snippet {
 	public ArrayList<Tag> getTags() {
 		return tags;
 	}
+
+	public Note getNote() {
+		return note;
+	}
+	
+	
 
 }

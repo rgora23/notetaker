@@ -9,7 +9,7 @@ import csv.CSVWriter;
 
 public class TaggedSnippet extends Model {
 
-	static String tablePath = "database/tags_snippets_table";
+	static String tableName = "tags_snippets_table";
 	static String[] tableHeaders = { "id", "snippet_id", "tag_id" };
 
 	public static void write(String snippet_id, String tag_id) {
@@ -71,11 +71,11 @@ public class TaggedSnippet extends Model {
 	}
 
 	private static CSVWriter constructWriter() {
-		return Model.constructWriter(tablePath, tableHeaders);
+		return Model.constructWriter(tableName, tableHeaders);
 	}
 
 	private static CSVReader constructReader() {
-		return Model.constructReader(tablePath, tableHeaders);
+		return Model.constructReader(tableName, tableHeaders);
 	}
 }
 

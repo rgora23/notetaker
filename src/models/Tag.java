@@ -11,7 +11,7 @@ public class Tag {
 	private String title;
 	private String id;
 
-	static String tablePath = "database/tags_table";
+	static String tableName = "tags_table";
 	static String[] tableHeaders = { "id", "title" };
 
 	public Tag(String title) {
@@ -81,11 +81,11 @@ public class Tag {
 	}
 
 	private static CSVWriter constructWriter() {
-		return Model.constructWriter(tablePath, tableHeaders);
+		return Model.constructWriter(tableName, tableHeaders);
 	}
 
 	private static CSVReader constructReader() {
-		return Model.constructReader(tablePath, tableHeaders);
+		return Model.constructReader(tableName, tableHeaders);
 	}
 
 	public String getTitle() {
