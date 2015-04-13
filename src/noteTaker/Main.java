@@ -4,6 +4,7 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.io.IOException;
 
+import controllers.TagsController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -42,6 +43,7 @@ public class Main extends Application {
 		primaryStage.setMinWidth(800.0);
 		primaryStage.setMinHeight(500.0);
 		primaryStage.show();
+		
 	}
 
 	public Parent getRootFromFile(String pathToFile) {
@@ -58,3 +60,7 @@ public class Main extends Application {
 	}
 
 }
+
+
+
+

@@ -5,6 +5,12 @@ import java.util.ArrayList;
 import models.Note;
 import models.Snippet;
 
+/**
+ * This class provides objects that facilitate the creation of Snippets. It is
+ * used by the Snippet class to add a record to the snippts_table and provides
+ * the note the snippet is being created for as well as the content of the
+ * snippets.
+ */
 public class SnippetsCreationRequest {
 
 	private Note note;
@@ -24,3 +30,7 @@ public class SnippetsCreationRequest {
 	}
 
 }
+
+
+
+

@@ -14,7 +14,7 @@ public class TaggedSnippet extends Model {
 
 	public static void write(String snippet_id, String tag_id) {
 		CSVWriter writer = constructWriter();
-		writer.append(tag_id, snippet_id);
+		writer.append(snippet_id, tag_id);
 		writer.write();
 	}
 
@@ -51,6 +51,24 @@ public class TaggedSnippet extends Model {
 		writer.getTable().removeAll(Collections.singleton(null));
 		writer.write();
 	}
+	
+	public static ArrayList<Snippet> getSnippetsByTagId(String tagId) {
+		ArrayList<Snippet> snippets = new ArrayList<Snippet>();
+		CSVReader reader = constructReader();
+		
+		for ( CSVRecord record : reader.getTable() ) {
+
+			String recordTagId = record.getValueAtField("tag_id");
+			if ( tagId.equals(recordTagId) ) {
+				String snippetId = record.getValueAtField("snippet_id");
+				Snippet snippet = Snippet.getSnippetById(snippetId);
+				snippets.add(snippet);
+			}
+			
+		}
+		
+		return snippets;
+	}
 
 	private static CSVWriter constructWriter() {
 		return Model.constructWriter(tablePath, tableHeaders);
@@ -60,3 +78,7 @@ public class TaggedSnippet extends Model {
 		return Model.constructReader(tablePath, tableHeaders);
 	}
 }
+
+
+
+

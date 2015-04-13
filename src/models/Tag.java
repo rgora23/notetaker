@@ -1,7 +1,10 @@
 package models;
 
-import requestHelpers.TagCreationRequest;
+import java.util.ArrayList;
+
+import requestHelpers.TagTitleSearchRequest;
 import csv.CSVReader;
+import csv.CSVRecord;
 import csv.CSVWriter;
 
 public class Tag {
@@ -13,6 +16,11 @@ public class Tag {
 
 	public Tag(String title) {
 		this.title = title;
+	}
+	
+	public Tag(CSVRecord r) {
+		this.id = r.getId();
+		this.title = r.getValueAtField("title");
 	}
 
 	public static void create(Tag t) {
@@ -56,6 +64,21 @@ public class Tag {
 			TaggedSnippet.write(snippetId, tagId);
 		}
 	}
+	
+	public static TagTitleSearchRequest searchTagsByTitle(TagTitleSearchRequest request) {
+		ArrayList<Tag> matchingTags = new ArrayList<Tag>();
+		CSVReader reader = constructReader();
+		for ( CSVRecord record : reader.getTable() ) {
+			String recordTitle = record.getValueAtField("title");
+			boolean queryMatches = recordTitle.toLowerCase().contains(request.getQuery().toLowerCase());
+			if (queryMatches) {
+				Tag thisTag = new Tag(record);
+				request.addMatch(thisTag);
+				matchingTags.add(thisTag);
+			}
+		}
+		return request;
+	}
 
 	private static CSVWriter constructWriter() {
 		return Model.constructWriter(tablePath, tableHeaders);
@@ -74,3 +97,7 @@ public class Tag {
 	}
 
 }
+
+
+
+

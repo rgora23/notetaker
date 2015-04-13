@@ -20,13 +20,6 @@
 <?import javafx.scene.control.RadioButton?>
 
 
-<?import java.util.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.paint.*?>
-<?import javafx.scene.text.*?>
-
-
 
 
 <AnchorPane xmlns:fx="http://javafx.com/fxml/1" id="dashboard"
@@ -39,11 +32,12 @@
 		<TextField prefWidth="330.0" prefHeight="30.0" id="search_box"
 			editable="true" promptText="search text" AnchorPane.topAnchor="0.0"
 			AnchorPane.rightAnchor="0.0" onKeyReleased="#searchTextChanged" />
-		<GridPane layoutX="55.0" layoutY="14.0" prefHeight="54.0" 
-			prefWidth="330.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="40.0">
+		<GridPane layoutX="55.0" layoutY="14.0" prefHeight="54.0"
+			minWidth="330" prefWidth="330.0" AnchorPane.rightAnchor="0.0"
+			AnchorPane.topAnchor="40.0">
 			<columnConstraints>
-				<ColumnConstraints prefWidth="100"/>
-				<ColumnConstraints />
+				<ColumnConstraints prefWidth="165" />
+				<ColumnConstraints prefWidth="165" />
 			</columnConstraints>
 			<rowConstraints>
 				<RowConstraints />
@@ -51,38 +45,27 @@
 				<RowConstraints />
 			</rowConstraints>
 			<children>
-				<fx:define>
-					<ToggleGroup fx:id="$searchType" />
-				</fx:define>
-
 
 				<fx:define>
 					<ToggleGroup fx:id="searchType" />
 				</fx:define>
-				<RadioButton mnemonicParsing="false" text="Tags"
-					toggleGroup="$searchType" prefHeight="30.0" prefWidth="165"
-					GridPane.rowIndex="0" GridPane.columnIndex="1" />
 
-				<RadioButton mnemonicParsing="false" text="Title"
-					selected="true" toggleGroup="$searchType" prefHeight="30.0"
-					prefWidth="165" GridPane.rowIndex="0" GridPane.columnIndex="0"
-					GridPane.columnSpan="1" />
-				
+				<RadioButton id="title_search_button" styleClass="radio_button" mnemonicParsing="false"
+					text="Search by Title" selected="false" toggleGroup="$searchType"
+					prefHeight="30.0" prefWidth="165" GridPane.rowIndex="0"
+					GridPane.columnIndex="0" />
+
+				<RadioButton id="tag_search_button" styleClass="radio_button" mnemonicParsing="false"
+					text="Search by Tags" toggleGroup="$searchType" prefHeight="30.0"
+					prefWidth="165" selected="true" GridPane.columnIndex="1" />
 
 
 
-	<!--  			<ComboBox fx:id="note_collections" layoutX="0" layoutY="0"
-					GridPane.rowIndex="1" prefWidth="330" minWidth="330" prefHeight="40.0"
-					GridPane.columnSpan="2" promptText="Choose a note collection">
-					<items>
-						<FXCollections fx:factory="observableArrayList">
-							<String fx:value="All Collections" />
-						</FXCollections>
-					</items>
-					<value>
-						<String fx:value="All Collections" />
-					</value>
-				</ComboBox>  -->
+				<!-- <ComboBox fx:id="note_collections" layoutX="0" layoutY="0" GridPane.rowIndex="1" 
+					prefWidth="330" minWidth="330" prefHeight="40.0" GridPane.columnSpan="2" 
+					promptText="Choose a note collection"> <items> <FXCollections fx:factory="observableArrayList"> 
+					<String fx:value="All Collections" /> </FXCollections> </items> <value> <String 
+					fx:value="All Collections" /> </value> </ComboBox> -->
 			</children>
 		</GridPane>
 

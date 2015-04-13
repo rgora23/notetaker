@@ -2,9 +2,14 @@ package requestHelpers;
 
 import models.Account;
 
-// This is an object that holds the values of a login request. 
-// It can be referenced to get authentication status and possible error messages.
-
+/**
+ * This class inherits directly from the Request class. When a user attempts to
+ * login, an object of this class is created and the data found in the object is
+ * used by the Account model class for authentication. This method can be used
+ * to get the users authentication status(using the boolean instance variable
+ * authenticated) and also display possible error messages through usage of the 
+ * errors Array List it inherits from the Request class.
+ */
 public class LoginRequest extends Request {
 
 	String username;
@@ -65,3 +70,7 @@ public class LoginRequest extends Request {
 	}
 
 }
+
+
+
+

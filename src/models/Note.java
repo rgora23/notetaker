@@ -10,7 +10,22 @@ import requestHelpers.NoteTitleSearchRequest;
 import csv.CSVReader;
 import csv.CSVRecord;
 import csv.CSVWriter;
-
+/**
+ * This class inherits directly from the Model class and is the model for notes.
+ * It includes methods for creating note records, deleting note records, and
+ * retrieving note records. It relies heavily on classes from the CSV package
+ * such as CSVRecord, CSVWriter, and CSVReader. These classes help with
+ * functions such as indexing and retrieving notes.This class also relies on the
+ * NoteCreationRequest and NoteTitleSearch class from the requestHelpers
+ * package. The classes from the requestHelpers package provide data for the
+ * note creation and title search functions.
+ * 
+ * 
+ * @author Brian Maxwell
+ * @author Tony Benny
+ * @author Matt Yeager
+ * 
+ */
 public class Note extends Model {
 
 	String title;
@@ -141,6 +156,21 @@ public class Note extends Model {
 		return note;
 	}
 
+	/**
+	 * The method that allows for searching by a note's title
+	 * 
+	 * This method searches for notes by comparing a string that holds the note
+	 * title of interest with all of the notes belonging to a user. Two array
+	 * lists are initialized, one that holds all of the notes belonging to the
+	 * user and another that will hold the note that matches the string. The
+	 * string that holds the title of the note of interest is compared with each
+	 * element of the array list that holds the users notes and every match is
+	 * then added to the matching matching notes array list.
+	 * 
+	 * @param request
+	 *            The NoteTitleSearchRequest object that holds the title
+	 * @return
+	 */
 	public static NoteTitleSearchRequest searchByTitle(NoteTitleSearchRequest request) {
 		ArrayList<Note> notes = getSession().getAccount().getNotes();
 		ArrayList<Note> matchingNotes = new ArrayList<Note>();
@@ -155,6 +185,19 @@ public class Note extends Model {
 		return request;
 	}
 
+	/**
+	 * Method that handles deleting a note
+	 * 
+	 * This method handles the deletion of notes from the notes table. It first
+	 * destroys all snippets associated with the note by using the
+	 * destroySnippetsByNoteId static method provided by the Snippets class.
+	 * Next, it parses through the notes table using the record id which is
+	 * provided by a CSVRecord object. Finally, using a CSVWriter object the
+	 * record is actually deleted.
+	 * 
+	 * @param note
+	 *            The Note object that is going to be deleted
+	 */
 	public static void destroy(Note note) {
 		Snippet.destroySnippetsByNoteId(note.id);
 		CSVWriter writer = constructWriter();
@@ -215,3 +258,7 @@ public class Note extends Model {
 	}
 
 }
+
+
+
+

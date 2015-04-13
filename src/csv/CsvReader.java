@@ -6,6 +6,17 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * This class inherits directly from the CSVParser class. It grants the program
+ * the ability to read CSV files and obtain different forms of data. The CSV
+ * files used in the program are delimited by double commas. It retrieves CSV
+ * Records from the various tables in the database using methods that take
+ * various types of input. It also has the ability to check the uniqueness of a
+ * value of data inside a record.
+ * 
+ * @author Brian Maxwell
+ * 
+ */
 public class CSVReader extends CSVParser {
 
 	protected File file;
@@ -243,7 +254,8 @@ public class CSVReader extends CSVParser {
 			reader = new BufferedReader(new FileReader(file));
 			String line;
 			while ((line = reader.readLine()) != null) {
-				ArrayList<String> row = CSVHelper.StringArrayToArrayList(line.split(delimiter));
+				ArrayList<String> row = CSVHelper.StringArrayToArrayList(line
+						.split(delimiter));
 				CSVRecord record = new CSVRecord(row);
 				record.setHeaders(this.headers);
 				table.add(record);

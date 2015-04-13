@@ -4,6 +4,17 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 
+/**
+ * This class inherits directly from the CSVReader class and is a grand child of
+ * the CSVParser class. NoteTaker uses CSV files to store data and this class is
+ * used to write data on to those files. It has the ability to remove records
+ * from the database as well as write records to the database. During the
+ * writing process, if a record id is not supplied, it will intelligently add
+ * one for you. When writing CSV files, fields are separated by double commas.
+ * 
+ * @author Brian Maxwell
+ * 
+ */
 public class CSVWriter extends CSVReader {
 
 	/**
@@ -87,7 +98,8 @@ public class CSVWriter extends CSVReader {
 		if (validateUniqueness("id", newRecord.getId()))
 			table.add(new CSVRecord(row));
 		else
-			System.out.println("The id " + row.get(0) + " has already been allocated.");
+			System.out.println("The id " + row.get(0)
+					+ " has already been allocated.");
 		return uniqueId;
 	}
 
