@@ -18,7 +18,7 @@ public class Account extends Model {
 	private String id;
 	private String username;
 	private String password;
-	private static String tablePath = "database/accounts_table";
+	private static String tableName = "accounts_table";
 	private static String[] tableHeaders = { "id", "username", "salt", "hash" };
 
 	private ArrayList<Note> accountNotes;
@@ -236,11 +236,11 @@ public class Account extends Model {
 	}
 
 	private static CSVWriter constructWriter() {
-		return Model.constructWriter(tablePath, tableHeaders);
+		return Model.constructWriter(tableName, tableHeaders);
 	}
 
 	private static CSVReader constructReader() {
-		return Model.constructReader(tablePath, tableHeaders);
+		return Model.constructReader(tableName, tableHeaders);
 	}
 
 	public String getUsername() {

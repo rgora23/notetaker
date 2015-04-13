@@ -51,13 +51,13 @@
 				</fx:define>
 
 				<RadioButton id="title_search_button" styleClass="radio_button" mnemonicParsing="false"
-					text="Search by Title" selected="false" toggleGroup="$searchType"
+					text="Search by Title" selected="true" toggleGroup="$searchType"
 					prefHeight="30.0" prefWidth="165" GridPane.rowIndex="0"
 					GridPane.columnIndex="0" />
 
 				<RadioButton id="tag_search_button" styleClass="radio_button" mnemonicParsing="false"
 					text="Search by Tags" toggleGroup="$searchType" prefHeight="30.0"
-					prefWidth="165" selected="true" GridPane.columnIndex="1" />
+					prefWidth="165" selected="false" GridPane.columnIndex="1" />
 
 
 
