@@ -17,7 +17,7 @@
 <?import javafx.scene.text.TextFlow?>
 
 <AnchorPane id="create_account_pane" prefHeight="200.0"
-	prefWidth="290.0" style="-fx-background-color: #ADBEC2 ; -fx-border-color: grey;"
+	prefWidth="290.0" 
 	xmlns:fx="http://javafx.com/fxml/1" fx:controller="viewControllers.EventController"
 	visible="false" AnchorPane.rightAnchor="475.0" AnchorPane.topAnchor="150.0">
 	<children>
@@ -58,39 +58,42 @@
 					</padding>
 				</Label>
 
-				<Label text="user name" GridPane.columnIndex="0"
-					GridPane.rowIndex="1" />
-				<Label text="password" GridPane.columnIndex="0"
-					GridPane.rowIndex="2" />
-				<Label text="confirm" GridPane.columnIndex="0"
-					GridPane.rowIndex="3" />
+				<Label text="USERNAME" GridPane.columnIndex="0"
+					GridPane.rowIndex="1" visible="false" />
+				<Label text="PASSWORD" GridPane.columnIndex="0"
+					GridPane.rowIndex="2" visible="false"/>
+				<Label text="CONFIRM" GridPane.columnIndex="0"
+					GridPane.rowIndex="3" visible="false"/>
 
 				<TextField id="new_username" maxHeight="-Infinity"
 					maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
 					onAction="#tryRegistration" prefHeight="26.0" prefWidth="145.0"
-					promptText="User Name" GridPane.rowIndex="1" GridPane.columnIndex="1"
-					GridPane.columnSpan="2" />
+					promptText="User Name" GridPane.rowIndex="1" GridPane.columnIndex="0"
+					GridPane.columnSpan="2" GridPane.halignment="CENTER"/>
+				
 				<PasswordField id="new_password" maxHeight="-Infinity"
 					maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
 					onAction="#tryRegistration" prefHeight="26.0" prefWidth="145.0"
-					promptText="password" GridPane.rowIndex="2" GridPane.columnIndex="1"
-					GridPane.columnSpan="2" />
+					promptText="password" GridPane.rowIndex="2" GridPane.columnIndex="0"
+					GridPane.columnSpan="2" GridPane.halignment="CENTER"/>
+					
 				<PasswordField id="confirm_password" maxHeight="-Infinity"
 					maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
 					onAction="#tryRegistration" prefHeight="26.0" prefWidth="145.0"
 					promptText="confirm password" GridPane.rowIndex="3"
-					GridPane.columnIndex="1" GridPane.columnSpan="2" />
+					GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.halignment="CENTER" />
 
 				<Button id="cancel_create_account_button" contentDisplay="RIGHT"
 					mnemonicParsing="false" onMouseClicked="#cancelAccountButtonClicked"
-					text="Cancel" textAlignment="RIGHT" GridPane.halignment="LEFT"
-					GridPane.columnIndex="0" GridPane.rowIndex="5" />
+					text="Cancel" textAlignment="RIGHT" GridPane.halignment="CENTER"
+					GridPane.columnIndex="0" GridPane.rowIndex="5" prefWidth="75"/>
+				
 				<Button id="create_account_button" mnemonicParsing="false"
 					onMouseClicked="#tryRegistration" text="Create"
-					GridPane.columnIndex="1" GridPane.rowIndex="5" />
+					GridPane.columnIndex="1" GridPane.rowIndex="5" GridPane.halignment="CENTER" prefWidth="75"/>
 
 				<Label id="create_account_error_text" text="" textFill="#d02424"
-					GridPane.columnSpan="2" GridPane.rowIndex="4" GridPane.columnIndex="0">
+					GridPane.columnSpan="2" GridPane.rowIndex="4" GridPane.columnIndex="0" GridPane.halignment="CENTER">
 					<font>
 						<Font size="10.0" />
 					</font>
