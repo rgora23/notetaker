@@ -223,8 +223,14 @@ public class Account extends Model {
 			CSVRecord userRecord = matchingRecords.get(0);
 			String recordSalt = userRecord.getValueAtField("salt");
 			
+			//Generating new hash and adding to table
 			String newHash = PasswordSecurityFactory.getSHA1Hash(request.getNewPassword(), recordSalt);
-			accountTableWriter.append(request.getUsername(), newSalt, newHash);
+			for(CSVRecord r : accountTableWriter.getTable()) {
+				if(r.getId().equals(request.getAccountId())) {
+					r.setValueAtField(newHash, "hash");
+					break;
+				}
+			}
 			accountTableWriter.write();
 		}
 	}
