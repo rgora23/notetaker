@@ -3,6 +3,7 @@ package viewControllers;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import noteTaker.Session;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -458,9 +459,9 @@ public class EventController extends ViewController {
 
 	@FXML
 	protected void ChangePasswordClicked(MouseEvent e) throws IOException {
-		getTextFieldById("current_password").setVisible(true);
-		getTextFieldById("new_password_settings").setVisible(true);
-		getTextFieldById("confirm_new_password").setVisible(true);
+		getPasswordFieldById("current_password").setVisible(true);
+		getPasswordFieldById("new_password_settings").setVisible(true);
+		getPasswordFieldById("confirm_new_password").setVisible(true);
 	}
 
 	@FXML
@@ -478,6 +479,8 @@ public class EventController extends ViewController {
 		} 
 		else if ( tagSearchButton.isSelected() ) {
 			TagsController.search(query);
+			ArrayList<Snippet> snippets = getSession().getMatchingSnippets();
+			populateSnippetsList(snippets);
 		}
 
 	}
@@ -541,7 +544,27 @@ public class EventController extends ViewController {
 		final ListView<String> resultsList = new ListView<String>(noteTitles);
 		parent.getChildren().add(resultsList);
 		addStyleToResultsList(resultsList);
-		addEventListenersToResultsList(resultsList, noteTitles);
+		addEventListenersToTitlesList(resultsList, noteTitles);
+	}
+	
+	private void populateSnippetsList(ArrayList<Snippet> snippets) {
+		AnchorPane parent = getAnchorPaneById("dashboard");
+
+		ListView<String> oldListView = getListViewById("results_list");
+		if (oldListView != null)
+			parent.getChildren().remove(oldListView);
+		
+		// Populate ObservableList object with the contents of the snippets
+		ObservableList<String> snippetContents = FXCollections.observableArrayList();
+		for (Snippet snippet : snippets) {
+			String content = snippet.getPlainText();
+			snippetContents.add(content);
+		}
+
+		final ListView<String> resultsList = new ListView<String>(snippetContents);
+		parent.getChildren().add(resultsList);
+		addStyleToResultsList(resultsList);
+		addEventListenersToSnippetsList(resultsList, snippetContents);
 	}
 
 	/**
@@ -583,18 +606,34 @@ public class EventController extends ViewController {
 	 * @param resultsList
 	 * @param results
 	 */
-	private void addEventListenersToResultsList(final ListView<String> resultsList, ObservableList<String> results) {
+	private void addEventListenersToTitlesList(final ListView<String> resultsList, ObservableList<String> results) {
 		resultsList.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent event) {
-				handleResultSelectionEvent(resultsList);
+				handleTitleSelectionEvent(resultsList);
 			}
 		});
 
 		resultsList.setOnKeyReleased(new EventHandler<KeyEvent>() {
 			@Override
 			public void handle(KeyEvent event) {
-				handleResultSelectionEvent(resultsList);
+				handleTitleSelectionEvent(resultsList);
+			}
+		});
+	}
+	
+	private void addEventListenersToSnippetsList(final ListView<String> resultsList, ObservableList<String> results) {
+		resultsList.setOnMouseClicked(new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent event) {
+				handleSnippetSelectionEvent(resultsList);
+			}
+		});
+
+		resultsList.setOnKeyReleased(new EventHandler<KeyEvent>() {
+			@Override
+			public void handle(KeyEvent event) {
+				handleSnippetSelectionEvent(resultsList);
 			}
 		});
 	}
@@ -610,15 +649,31 @@ public class EventController extends ViewController {
 	 * @param resultsList
 	 *            the ListView object the user has selected from
 	 */
-	private void handleResultSelectionEvent(ListView<String> resultsList) {
+	private void handleTitleSelectionEvent(ListView<String> resultsList) {
 		String item = resultsList.getSelectionModel().getSelectedItem();
 		Note selectedNote = Note.getNoteByTitle(item);
 		Note currentNote = getSession().getCurrentNote();
 
 		// Only run if the clicked note is not currently open
 		if (currentNote == null || !currentNote.getId().equals(selectedNote.getId())) {
-			if (getSession().isEditingNote())
-				saveCurrentNote();
+			if (getSession().isEditingNote()) {
+				saveCurrentNote();				
+			}
+			getSession().setCurrentNote(selectedNote);
+			initializeNoteInterface(selectedNote);
+		}
+	}
+	
+	private void handleSnippetSelectionEvent(ListView<String> resultsList) {
+		int index = resultsList.getSelectionModel().getSelectedIndex();
+		Snippet selectedSnippet = getSession().getMatchingSnippets().get(index);
+		Note selectedNote = selectedSnippet.getAssociatedNote();
+		Note currentNote = getSession().getCurrentNote();
+		// Only run if the clicked note is not currently open
+		if (currentNote == null || !currentNote.getId().equals(selectedNote.getId())) {
+			if (getSession().isEditingNote()){
+				saveCurrentNote();				
+			}
 			getSession().setCurrentNote(selectedNote);
 			initializeNoteInterface(selectedNote);
 		}
@@ -636,7 +691,8 @@ public class EventController extends ViewController {
 	private void initializeNoteInterface(Note note) {
 		resetNoteInterface();
 		getSession().setEditingNote(true);
-
+		String title = getSession().getCurrentNote().getTitle();
+		getLabelById("NOTETAKER_text").setText(title);
 		getButtonById("note_delete").setDisable(false);
 		getButtonById("save_note_button").setDisable(false);
 		HTMLEditor parentHTMLEditor = getHTMLEditorById("note_HTMLEditor");
@@ -658,6 +714,8 @@ public class EventController extends ViewController {
 			String content = parentHTMLEditor.getHtmlText();
 			SnippetsController.saveNote(currentNote, content);
 		}
+		// Update the results list by triggering the searchTextChange event
+		searchTextChanged();
 	}
 
 	/**
@@ -669,6 +727,8 @@ public class EventController extends ViewController {
 		parentHTMLEditor.setHtmlText("");
 		parentHTMLEditor.setDisable(true);
 		parentHTMLEditor.setOpacity(0.8);
+		
+		getLabelById("NOTETAKER_text").setText("#NoteTaker");
 		// disable the delete note button
 		getButtonById("note_delete").setDisable(true);
 		getButtonById("save_note_button").setDisable(true);

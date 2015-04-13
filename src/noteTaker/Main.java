@@ -4,7 +4,6 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.io.IOException;
 
-import controllers.TagsController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -35,7 +34,7 @@ public class Main extends Application {
 		scene = new Scene(root, screenSize.width, screenSize.height);
 
 		// Apply style to scene
-		String cssUrl = this.getClass().getResource("/assets/css/application.css").toExternalForm();
+		String cssUrl = this.getClass().getResource("/application.css").toExternalForm();
 		scene.getStylesheets().add(cssUrl);
 
 		// Set the newly created and styled scene to primaryStage and show it.

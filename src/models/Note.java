@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 import noteTaker.ErrorMessages;
-import noteTaker.Session;
 import requestHelpers.NoteCreationRequest;
 import requestHelpers.NoteTitleSearchRequest;
 import csv.CSVReader;
@@ -34,7 +33,7 @@ public class Note extends Model {
 	String note_collection_id;
 	ArrayList<Snippet> snippets;
 
-	static String tablePath = "database/notes_table";
+	static String tableName = "notes_table";
 	static String[] tableHeaders = { "id", "title", "account_id", "note_collection_id" };
 
 	public Note(CSVRecord noteRecord) {
@@ -214,11 +213,11 @@ public class Note extends Model {
 	}
 
 	private static CSVWriter constructWriter() {
-		return Model.constructWriter(tablePath, tableHeaders);
+		return Model.constructWriter(tableName, tableHeaders);
 	}
 
 	private static CSVReader constructReader() {
-		return Model.constructReader(tablePath, tableHeaders);
+		return Model.constructReader(tableName, tableHeaders);
 	}
 
 	public String getTitle() {
