@@ -260,6 +260,11 @@ public class EventController extends ViewController {
 		// when "delete collection" icon is clicked on dashboard
 	}
 
+	/**
+	 * This method handles account deletion
+	 * @param e
+	 * @throws IOException
+	 */
 	@FXML
 	protected void deleteAccount(Event e) throws IOException {
 		// code to delete account goes here
@@ -312,6 +317,12 @@ public class EventController extends ViewController {
 		getAnchorPaneById("create_collection_pane").setVisible(false);
 	}
 
+	/**
+	 * Event controller that is called when the user clicks on the new note button.
+	 * This method makes the note form visible and brings it to the front of the GUI.
+	 * @param e
+	 * @throws IOException
+	 */
 	@FXML
 	protected void createNoteButtonClicked(MouseEvent e) throws IOException {
 		hideDashboardWindows();
@@ -319,12 +330,22 @@ public class EventController extends ViewController {
 		noteForm.toFront();
 		noteForm.setVisible(true);
 	}
-
+	
+	/** 
+	 * Event controller that is called when the note button is clicked
+	 * @param e
+	 * @throws IOException
+	 */
 	@FXML
 	protected void noteButtonClicked(MouseEvent e) throws IOException {
 		getLabelById("noteTaker_text").setText("YES");
 	}
 
+	/**
+	 * Event controller that is called when the user clicks on the title button
+	 * @param e
+	 * @throws IOException
+	 */
 	@FXML
 	protected void titleButtonClicked(MouseEvent e) throws IOException {
 		getLabelById("noteTaker_text").setText("NO");
@@ -335,16 +356,29 @@ public class EventController extends ViewController {
 		getLabelById("noteTaker_text").setText("MAYBE");
 	}
 
+	/**
+	 * Event controller that is called when a user clicks on the date button
+	 * @param e
+	 * @throws IOException
+	 */
 	@FXML
 	protected void dateButtonClicked(MouseEvent e) throws IOException {
 		getLabelById("noteTaker_text").setText("..YES");
 	}
 	
+	/**
+	 * Event controller that is called when a user clicks on the save note button.
+	 */
 	@FXML
 	protected void saveNoteButtonClicked(MouseEvent e) throws IOException {
 		saveCurrentNote();
 	}
-
+	
+	/**
+	 * Event controller called when the user clicks on the tags button
+	 * @param e
+	 * @throws IOException
+	 */
 	@FXML
 	protected void tagsButtonClicked(MouseEvent e) throws IOException {
 		hideDashboardWindows();
