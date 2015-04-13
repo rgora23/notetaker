@@ -9,7 +9,8 @@ import java.util.ArrayList;
 public class CSVReader extends CSVParser {
 
 	protected File file;
-	private String path;
+	private String fileName;
+	private String directoryPath;
 	protected ArrayList<CSVRecord> table;
 
 	static String delimiter = ",,";
@@ -25,7 +26,8 @@ public class CSVReader extends CSVParser {
 	 */
 	public CSVReader(String path) {
 		super();
-		this.path = path;
+		this.fileName = path;
+		this.directoryPath = "database";
 	}
 
 	/**
@@ -41,7 +43,8 @@ public class CSVReader extends CSVParser {
 	 */
 	public CSVReader(String path, String... headers) {
 		super(headers);
-		this.path = path;
+		this.fileName = path;
+		this.directoryPath = "database";
 	}
 
 	/**
@@ -125,7 +128,7 @@ public class CSVReader extends CSVParser {
 	}
 
 	public CSVRecordList where(String field) {
-		CSVRecordList fields = new CSVRecordList(headers, table, field, path);
+		CSVRecordList fields = new CSVRecordList(headers, table, field, fileName);
 		return fields;
 	}
 
@@ -235,9 +238,17 @@ public class CSVReader extends CSVParser {
 	protected ArrayList<CSVRecord> createTableFromFile() {
 		table = null;
 		BufferedReader reader = null;
-		file = new File(path);
+		
+		
 		try {
+			
+			// Make directory if it doesn't exist
+			File directory = new File(directoryPath);
+			directory.mkdirs();
+			
 			// Create file if it doesn't exist
+			String path = directoryPath + "/" + fileName;
+			file = new File(path);
 			file.createNewFile();
 			table = new ArrayList<CSVRecord>();
 			reader = new BufferedReader(new FileReader(file));

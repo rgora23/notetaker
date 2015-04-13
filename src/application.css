@@ -1,5 +1,5 @@
 .root{
-	 -fx-background-image: url("../images/paperBackground.jpg");
+	 -fx-background-image: url("assets/images/paper_background.jpg");
 	 -fx-background-size: cover;
 }
 /*------------------------------>LABELS AND TEXT<---------------------------- */
@@ -63,8 +63,8 @@
 }
 
 #note_delete {          
-    /* -fx-background-image: url("../images/trashcan.jpg");  */
-    -fx-background-image: url("../images/icons/delete.png");
+    /* -fx-background-image: url("assets/images/trashcan.jpg");  */
+    -fx-background-image: url("assets/images/icons/delete.png");
     -fx-background-size: 85%;
     -fx-background-color: transparent;
     -fx-background-repeat: no-repeat;
@@ -72,14 +72,14 @@
 }
 
 #collection_create {          
-    -fx-background-image: url("../images/create_collection.jpg"); 
+    -fx-background-image: url("assets/images/create_collection.jpg"); 
     -fx-background-size:105% 105%;
     -fx-background-repeat: no-repeat;
     -fx-background-position:left;   
 }
 
 #collection_delete {          
-    -fx-background-image: url("../images/delete_collection.jpg");
+    -fx-background-image: url("assets/images/delete_collection.jpg");
     -fx-background-size: 95%;
     -fx-background-color: transparent;
     -fx-background-repeat: no-repeat;
@@ -96,8 +96,8 @@
 }
 
 #settings_button {          
-    /* -fx-background-image: url("../images/settings_button_2.jpg");-fx-alignment: */
-    -fx-background-image: url("../images/icons/settings.png"); 
+    /* -fx-background-image: url("assets/images/settings_button_2.jpg");-fx-alignment: */
+    -fx-background-image: url("assets/images/icons/settings.png"); 
     -fx-background-size: 60% 85%;
     -fx-background-color: transparent;
     -fx-background-repeat: no-repeat;
@@ -110,7 +110,7 @@
 
 
 #tags_button  {          
-    -fx-background-image: url("../images/tagbutton2.jpg"); 
+    -fx-background-image: url("assets/images/tagbutton2.jpg"); 
     -fx-background-size: 85%;
     -fx-background-color: transparent;
     -fx-background-repeat: no-repeat;
@@ -122,8 +122,8 @@
 }
 
 #createNote_button {          
-    /* -fx-background-image: url("../images/new_note_button.jpg");-fx-alignment: */ 
-    -fx-background-image: url("../images/icons/new_note.png");
+    /* -fx-background-image: url("assets/images/new_note_button.jpg");-fx-alignment: */ 
+    -fx-background-image: url("assets/images/icons/new_note.png");
     -fx-background-size: 85%;
     -fx-background-color: transparent;
     -fx-background-repeat: no-repeat;
@@ -135,7 +135,7 @@
 }
 
 #save_note_button {
-	-fx-background-image: url("../images/icons/save.png");
+	-fx-background-image: url("assets/images/icons/save.png");
     -fx-background-size: 85%;
     -fx-background-color: transparent;
     -fx-background-repeat: no-repeat;

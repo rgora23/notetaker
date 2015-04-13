@@ -1,3 +1,4 @@
+
 package controllers;
 
 import java.util.ArrayList;
@@ -50,7 +51,6 @@ public class SnippetsController extends Controller {
 					
 					for (String tag : tagTexts) {
 						thisSnippet.addTag(tag);
-						System.out.println(tag);
 					}
 					
 					snippets.add(thisSnippet);

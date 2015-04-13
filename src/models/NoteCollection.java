@@ -13,7 +13,7 @@ public class NoteCollection {
 	String id;
 	String title;
 	String account_id;
-	static String tablePath = "database/note_collections_table";
+	static String tableName = "note_collections_table";
 	static String[] tableHeaders = { "id", "title", "account_id" };
 
 	public NoteCollection() {
@@ -60,11 +60,11 @@ public class NoteCollection {
 	}
 
 	private static CSVWriter constructWriter() {
-		return Model.constructWriter(tablePath, tableHeaders);
+		return Model.constructWriter(tableName, tableHeaders);
 	}
 
 	private static CSVReader constructReader() {
-		return Model.constructReader(tablePath, tableHeaders);
+		return Model.constructReader(tableName, tableHeaders);
 	}
 }
 
