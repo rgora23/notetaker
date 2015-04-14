@@ -50,6 +50,10 @@
 -fx-background-radius: 10px;
 }
 
+#settings_cancel_button {
+-fx-background-radius: 10px;
+}
+
 #settings_save_button {
 -fx-background-radius: 10px;
 }

@@ -618,6 +618,7 @@ public class EventController extends ViewController {
 		getPasswordFieldById("password_input").clear();
 		getPasswordFieldById("new_password").clear();
 		getPasswordFieldById("confirm_password").clear();
+		getLabelById("create_account_error_text").setText("");
 	}
 	
 	
