@@ -21,7 +21,7 @@
 
 <AnchorPane id="account_settings_pane" layoutX="325.0" layoutY="271.0"
 	xmlns:fx="http://javafx.com/fxml/1" 
-	AnchorPane.rightAnchor="600.0" AnchorPane.bottomAnchor="150.0"
+	AnchorPane.rightAnchor="400.0" AnchorPane.bottomAnchor="100.0"
 	fx:controller="viewControllers.EventController" visible="false" prefHeight="400">
 	<children>
 		<Label id="noteTaker_text" alignment="BOTTOM_CENTER" blendMode="OVERLAY"
