@@ -50,6 +50,10 @@
 -fx-background-radius: 10px;
 }
 
+#settings_cancel_button {
+-fx-background-radius: 10px;
+}
+
 #settings_save_button {
 -fx-background-radius: 10px;
 }
@@ -59,6 +63,14 @@
 }
 
 #logout_button {
+-fx-background-radius: 10px;
+}
+
+#cancel_create_account_button {
+-fx-background-radius: 10px;
+}
+
+#create_account_button {
 -fx-background-radius: 10px;
 }
 
@@ -163,16 +175,31 @@
 
 
 /* ---------------------->For all labels used to title forms<------------------------ */
+
 #account_settings_pane {
 	/*-fx-background-color: #6DAFFF; */
 	-fx-padding: 20px;
 	-fx-border-color: #888;
 	-fx-opacity: 0.9;
+	-fx-padding:0;
+	-fx-background-color: linear-gradient(to bottom right, #BCD8FD, #1880FC)
+	
+	}
+/* #account_settings_grid {
+	-fx-padding: 20px;
+	-fx-border-color: #888;
+	-fx-opacity: 0.9;
 	-fx-padding:10;
 	-fx-background-color: linear-gradient(to bottom right, #BCD8FD, #1880FC)
-} 
+}*/
 
-
+#new_account_window {
+	-fx-padding: 20px;
+	-fx-border-color: #888;
+	-fx-opacity: 0.9;
+	-fx-padding:10;
+	-fx-background-color: linear-gradient(to bottom right, #BCD8FD, #1880FC)	
+}
 
 #form_title {
 	-fx-font-size: 18px;

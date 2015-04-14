@@ -77,7 +77,8 @@ public class EventController extends ViewController {
 			// Hide registration and login buttons
 			getLabelById("newaccount").setVisible(false);
 			getGridPaneById("login_pane_root").setVisible(false);
-
+			getTextById("login_fail_text").setVisible(false);
+			clearValues();
 			// Show all the user's notes in the side panel
 			populateNotesList();
 
@@ -85,6 +86,7 @@ public class EventController extends ViewController {
 			// Present errors to user
 			getTextById("login_fail_text").setText(errors[0]);
 			getTextById("login_fail_text").setVisible(true);
+			
 		}
 
 	}
@@ -117,6 +119,7 @@ public class EventController extends ViewController {
 		if (errors.length == 0) {
 			System.out.println("Account Created");
 			getAnchorPaneById("create_account_pane").setVisible(false);
+			clearValues();
 		}
 
 		// Show errors for incorrect user information
@@ -156,6 +159,7 @@ public class EventController extends ViewController {
 			hideDashboardWindows();
 			noteTitleInput.setText("");
 			populateNotesList();
+			clearValues();
 		} else {
 			System.out.println(errors[0]);
 		}
@@ -223,7 +227,7 @@ public class EventController extends ViewController {
 		getTextById("confirm_delete_message").setVisible(true);
 		getPasswordFieldById("confirm_delete_account_password").setVisible(true);
 		getTextById("change_password").setVisible(false);
-
+		
 	}
 
 	/**
@@ -273,6 +277,8 @@ public class EventController extends ViewController {
 		// Logout()
 		// else:
 		getTextById("confirm_delete_message").setText("password does not match");
+		clearValues();
+
 	}
 
 	@FXML
@@ -440,21 +446,34 @@ public class EventController extends ViewController {
 	protected void cancelAccountButtonClicked(MouseEvent e) throws IOException {
 		hideDashboardWindows();
 		getAnchorPaneById("create_account_pane").setVisible(false);
+		clearValues();
 	}
 
 	@FXML
 	protected void cancelSettingsButtonClicked(MouseEvent e) throws IOException {
 		hideDashboardWindows();
+		clearValues();
+		getPasswordFieldById("current_password").setVisible(false);
+		getPasswordFieldById("new_password_settings").setVisible(false);
+		getPasswordFieldById("confirm_new_password").setVisible(false);
+		getTextFieldById("confirm_delete_account_password").setVisible(false);
+		getTextById("confirm_delete_message").setText("");
+		getTextById("change_password").setVisible(true);
 	}
 
 	@FXML
 	protected void noteCancelAction(MouseEvent e) throws IOException {
 		hideDashboardWindows();
+		clearValues();
 	}
 
 	@FXML
 	protected void changePassword(Event e) throws IOException {
 		hideDashboardWindows();
+		clearValues();
+		getPasswordFieldById("current_password").setVisible(false);
+		getPasswordFieldById("new_password_settings").setVisible(false);
+		getPasswordFieldById("confirm_new_password").setVisible(false);
 	}
 
 	@FXML
@@ -582,6 +601,28 @@ public class EventController extends ViewController {
 		addStyleToResultsList(resultsList);
 	}
 
+	
+	/**
+	 * Clear values is used to clear text fields and password fields
+	 * after the data entered has been used and is discarded. 
+	 */
+	protected void clearValues() {
+		getTextFieldById("search_box").clear();
+		getTextFieldById("username_input").clear();
+		getTextFieldById("note_title_input").clear();
+		getTextFieldById("new_username").clear();
+		getPasswordFieldById("current_password").clear();
+		getPasswordFieldById("new_password_settings").clear();
+		getPasswordFieldById("confirm_new_password").clear();
+		getPasswordFieldById("confirm_delete_account_password").clear();
+		getPasswordFieldById("password_input").clear();
+		getPasswordFieldById("new_password").clear();
+		getPasswordFieldById("confirm_password").clear();
+		getLabelById("create_account_error_text").setText("");
+	}
+	
+	
+	
 	/**
 	 * This method styles new ListView objects in the scene that get created
 	 * when the user performs a search and when the scene is initially loaded
