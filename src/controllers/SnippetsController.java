@@ -1,4 +1,3 @@
-
 package controllers;
 
 import java.util.ArrayList;
@@ -9,6 +8,7 @@ import models.Note;
 import models.Snippet;
 import noteTaker.Session;
 import requestHelpers.SnippetsCreationRequest;
+
 
 public class SnippetsController extends Controller {
 
@@ -22,52 +22,52 @@ public class SnippetsController extends Controller {
 		Snippet.destroySnippetsByNoteId(note.getId());
 
 		// Remove html, head, and body tags from content
-		content = content.replaceAll("<html dir=\"ltr\"><head></head><body contenteditable=\"true\">", "");
+		content = content
+				.replaceAll(
+						"<html dir=\"ltr\"><head></head><body contenteditable=\"true\">",
+						"");
 		content = content.replaceAll("</body></html>", "");
 		content = content.replaceAll("<p><br></p>", "");
 
 		if (content.length() > 0) {
 			ArrayList<Snippet> snippets = new ArrayList<Snippet>();
-			
+
 			// Use <br> tags as the delimiter for the snippets
 			String[] snippetTexts = content.split("<br>");
-			
+
 			for (int i = 0; i < snippetTexts.length; i++) {
 				String c = snippetTexts[i];
-				if ( c.length() > 0 ) {
-					
+				if (c.length() > 0) {
+
 					// remove trailing closed HTML tags
 					while (c.matches("^</.+?>.*")) {
-						c = c.replaceAll("^</.+?>", "");						
+						c = c.replaceAll("^</.+?>", "");
 					}
-					
+
 					// remove trailing open HTML tags
 					while (c.matches(".*<[^/><]+>$")) {
 						c = c.replaceAll("<[^/><]+>$", "");
 					}
 					Snippet thisSnippet = new Snippet(c, i);
-					
+
 					ArrayList<String> tagTexts = getTagsFromContent(c);
-					
+
 					for (String tag : tagTexts) {
 						thisSnippet.addTag(tag);
 					}
-					
+
 					snippets.add(thisSnippet);
 				}
 			}
-			
 
-			
 			Note currentNote = getSession().getCurrentNote();
-			SnippetsCreationRequest request = new SnippetsCreationRequest(currentNote, snippets);
+			SnippetsCreationRequest request = new SnippetsCreationRequest(
+					currentNote, snippets);
 			Snippet.createSnippetsForNote(request);
-		} 
-		else {
+		} else {
 			// System.out.println("No content to write!");
 		}
 
-		
 	}
 
 	private static ArrayList<String> getPTagsFromContent(String content) {
@@ -83,6 +83,20 @@ public class SnippetsController extends Controller {
 		return matches;
 	}
 
+	/**
+	 * The controller method for getting a tag
+	 * 
+	 * This method retrieves a tag from within a body of text. It determines
+	 * which words in the content are tags by using regex to parse the words
+	 * found in the note body and see which ones start with a hash sign. Once it
+	 * finds a words that is is prefixed with a hash, it replaces the hash with
+	 * an empty character and adds the word in to a String Array list. The
+	 * method then returns this String array list.
+	 * 
+	 * @param content
+	 *            The block of text the tag is located in
+	 * @return
+	 */
 	private static ArrayList<String> getTagsFromContent(String content) {
 
 		Pattern tagPattern = Pattern.compile("#[^ \t\n\b<]+");
@@ -97,7 +111,3 @@ public class SnippetsController extends Controller {
 	}
 
 }
-
-
-
-

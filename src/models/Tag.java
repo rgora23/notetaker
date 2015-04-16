@@ -17,7 +17,7 @@ public class Tag {
 	public Tag(String title) {
 		this.title = title;
 	}
-	
+
 	public Tag(CSVRecord r) {
 		this.id = r.getId();
 		this.title = r.getValueAtField("title");
@@ -47,7 +47,8 @@ public class Tag {
 		// Create tag in tags_table if it doesn't already exist
 		CSVWriter writer = constructWriter();
 		for (Tag t : snippet.getTags()) {
-			CSVReader tagTitleMatches = writer.where("title").isIgnoreCase(t.getTitle());
+			CSVReader tagTitleMatches = writer.where("title").isIgnoreCase(
+					t.getTitle());
 			if (tagTitleMatches.getTable().isEmpty()) {
 				writer.append(t.getTitle());
 			}
@@ -58,19 +59,39 @@ public class Tag {
 		writer.parse();
 
 		for (Tag t : snippet.getTags()) {
-			CSVReader tagTitleMatches = writer.where("title").isIgnoreCase(t.getTitle());
+			CSVReader tagTitleMatches = writer.where("title").isIgnoreCase(
+					t.getTitle());
 			String tagId = tagTitleMatches.getTable().get(0).getId();
 			// add this snippet and tag relation in the tags_snippets_table
 			TaggedSnippet.write(snippetId, tagId);
 		}
 	}
-	
-	public static TagTitleSearchRequest searchTagsByTitle(TagTitleSearchRequest request) {
+
+	/**
+	 * The method that searches the database for tags
+	 * 
+	 * This method searches the tags_table for tags that match the query string
+	 * provided by the TagTitleSearchRequest object that is passed as a
+	 * parameter. It uses a CSVReader object to parse the tags_table for records
+	 * that contain values in their title fields that match the query string
+	 * provided by the search request TagTitleSearchRequest object. It does this
+	 * case insensitively by converting both the query string and the title
+	 * field value to lower case form. It then populates an ArrayList object
+	 * with the matches that have been found.
+	 * 
+	 * @param request
+	 *            The request helper that provides the data needed for a tag
+	 *            search
+	 * @return The TagTitleSearchRequest object
+	 */
+	public static TagTitleSearchRequest searchTagsByTitle(
+			TagTitleSearchRequest request) {
 		ArrayList<Tag> matchingTags = new ArrayList<Tag>();
 		CSVReader reader = constructReader();
-		for ( CSVRecord record : reader.getTable() ) {
+		for (CSVRecord record : reader.getTable()) {
 			String recordTitle = record.getValueAtField("title");
-			boolean queryMatches = recordTitle.toLowerCase().contains(request.getQuery().toLowerCase());
+			boolean queryMatches = recordTitle.toLowerCase().contains(
+					request.getQuery().toLowerCase());
 			if (queryMatches) {
 				Tag thisTag = new Tag(record);
 				request.addMatch(thisTag);
@@ -97,7 +118,3 @@ public class Tag {
 	}
 
 }
-
-
-
-
