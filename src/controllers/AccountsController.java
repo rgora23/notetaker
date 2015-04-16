@@ -11,7 +11,6 @@ import requestHelpers.RegistrationRequest;
 
 public class AccountsController extends Controller {
 
-
 	/**
 	 * The method that handles registration logic
 	 * 
